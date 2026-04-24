@@ -14,7 +14,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
           {/* Brand */}
           <div>
-            <Link href="/" aria-label="AWSM — на главную" className="inline-block mb-3">
+            <Link href="/" aria-label="AWSM — на главную" className="inline-block mb-3 rounded-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/40">
               <span className="font-display font-bold text-heading-s text-text-primary">
                 AW<span className="text-cta">S</span>M
               </span>

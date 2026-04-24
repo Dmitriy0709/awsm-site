@@ -38,7 +38,7 @@ const variants: Record<ButtonVariant, string> = {
   primary: [
     'bg-gradient-cta text-white',
     'shadow-glow-cta-sm',
-    'hover:opacity-92 hover:shadow-glow-cta hover:-translate-y-px',
+    'hover:opacity-90 hover:shadow-glow-cta hover:-translate-y-px',
     'active:translate-y-0 active:opacity-85 active:scale-[0.98]',
   ].join(' '),
 

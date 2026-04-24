@@ -33,6 +33,8 @@ export function PageLoader() {
       {show && (
         <motion.div
           key="page-loader"
+          aria-hidden="true"
+          role="presentation"
           style={{
             position:        'fixed',
             inset:            0,

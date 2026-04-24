@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowRight, Image as ImageIcon } from '@phosphor-icons/react'
 import { FadeIn } from '@/components/motion/FadeIn'
@@ -104,79 +105,64 @@ export function CasesPreviewSection() {
 
 function CaseCard({ item }: { item: Case }) {
   const badgeVariant = CATEGORY_BADGE_VARIANT[item.category] ?? 'muted'
-  const mainMetric = item.metrics[0]
+  const mainMetric   = item.metrics[0]
   const secondMetric = item.metrics[1]
 
   return (
-    <motion.article
-      className="glass-card overflow-hidden flex flex-col h-full"
-      whileHover={{ y: -6 }}
-      transition={{ duration: 0.22, ease: 'easeOut' }}
-    >
-      {/* Image placeholder — 16:9 */}
-      <div
-        className="relative w-full overflow-hidden"
-        style={{ paddingBottom: '56.25%' }}
-        aria-label={`Фото — ${item.title}`}
+    <Link href="/cases" className="group block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-xl">
+      <motion.article
+        className="glass-card overflow-hidden flex flex-col h-full cursor-pointer"
+        whileHover={{ y: -6 }}
+        transition={{ duration: 0.22, ease: 'easeOut' }}
       >
+        {/* Image placeholder — 16:9 */}
         <div
-          className="absolute inset-0 flex flex-col items-center justify-center gap-3"
-          style={{
-            background: '#111827',
-            border: 'none',
-            borderBottom: '1px dashed rgba(79,110,247,0.25)',
-          }}
+          className="relative w-full overflow-hidden"
+          style={{ paddingBottom: '56.25%' }}
           aria-hidden="true"
         >
-          {/* Category label overlay */}
           <div
-            className="absolute top-3 left-3"
+            className="absolute inset-0 flex items-center justify-center bg-surface-elevated"
+            style={{ borderBottom: '1px dashed rgba(79,110,247,0.25)' }}
           >
-            <Badge variant={badgeVariant} size="sm">
-              {CATEGORY_LABELS[item.category]}
-            </Badge>
+            <div className="absolute top-3 left-3">
+              <Badge variant={badgeVariant} size="sm">
+                {CATEGORY_LABELS[item.category]}
+              </Badge>
+            </div>
+            <ImageIcon size={32} color="rgba(79,110,247,0.25)" weight="thin" />
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="p-6 flex flex-col flex-1 gap-4">
+          <div>
+            <h3 className="font-display font-bold text-heading-s text-text-primary mb-1">
+              {item.title}
+            </h3>
+            <p className="font-body text-body-s text-text-muted">{item.city}</p>
           </div>
 
-          {/* Placeholder icon */}
-          <ImageIcon size={32} color="rgba(79,110,247,0.25)" weight="thin" />
-          <span className="font-mono text-[10px] text-text-disabled uppercase tracking-widest px-4 text-center">
-            {item.imageSrc}
-          </span>
-        </div>
-      </div>
+          <div className="grid grid-cols-2 gap-3 py-4 border-y border-border">
+            <MetricCell value={mainMetric.value} label={mainMetric.label} primary />
+            {secondMetric && (
+              <MetricCell value={secondMetric.value} label={secondMetric.label} />
+            )}
+          </div>
 
-      {/* Content */}
-      <div className="p-6 flex flex-col flex-1 gap-4">
-        {/* Title + city */}
-        <div>
-          <h3 className="font-display font-bold text-heading-s text-text-primary mb-1">
-            {item.title}
-          </h3>
-          <p className="font-body text-body-s text-text-muted">{item.city}</p>
-        </div>
+          <p className="font-body text-body-s text-text-secondary leading-relaxed flex-1">
+            {item.description}
+          </p>
 
-        {/* Metrics */}
-        <div className="grid grid-cols-2 gap-3 py-4 border-y border-border">
-          <MetricCell value={mainMetric.value} label={mainMetric.label} primary />
-          {secondMetric && (
-            <MetricCell value={secondMetric.value} label={secondMetric.label} />
-          )}
+          <div className="mt-auto pt-1">
+            <span className="inline-flex items-center gap-1.5 font-body text-body-s text-primary font-medium group-hover:gap-2.5 transition-all duration-200">
+              Читать кейс
+              <ArrowRight size={14} weight="bold" aria-hidden="true" />
+            </span>
+          </div>
         </div>
-
-        {/* Description */}
-        <p className="font-body text-body-s text-text-secondary leading-relaxed flex-1">
-          {item.description}
-        </p>
-
-        {/* Read more */}
-        <div className="mt-auto pt-1">
-          <span className="inline-flex items-center gap-1.5 font-body text-body-s text-primary font-medium group-hover:gap-2.5 transition-all">
-            Читать кейс
-            <ArrowRight size={14} weight="bold" aria-hidden="true" />
-          </span>
-        </div>
-      </div>
-    </motion.article>
+      </motion.article>
+    </Link>
   )
 }
 
@@ -187,22 +173,16 @@ function MetricCell({
   label,
   primary = false,
 }: {
-  value: string
-  label: string
+  value:   string
+  label:   string
   primary?: boolean
 }) {
   return (
     <div>
-      <p
-        className="font-mono font-bold leading-none mb-1"
-        style={{
-          fontSize: 'clamp(20px, 2.5vw, 28px)',
-          color: primary ? '#00E5C4' : '#4F6EF7',
-        }}
-      >
+      <p className={`font-mono font-bold text-metric-sm leading-none mb-1 ${primary ? 'text-secondary' : 'text-primary'}`}>
         {value}
       </p>
-      <p className="font-body text-[11px] text-text-muted leading-snug">{label}</p>
+      <p className="font-body text-caption text-text-muted leading-snug">{label}</p>
     </div>
   )
 }

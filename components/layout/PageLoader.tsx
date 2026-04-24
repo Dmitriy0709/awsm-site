@@ -18,12 +18,15 @@ export function PageLoader() {
     if (sessionStorage.getItem('awsm-loaded')) return
     sessionStorage.setItem('awsm-loaded', '1')
     setShow(true)
+  }, [])
 
+  useEffect(() => {
+    if (!show) return
     // last letter starts at 360ms, takes 450ms → visible at 810ms, hold 400ms
-    const total = reduced ? 300 : 1210
+    const total = reduced ? 80 : 1210
     const timer = setTimeout(() => setShow(false), total)
     return () => clearTimeout(timer)
-  }, [reduced])
+  }, [show, reduced])
 
   return (
     <AnimatePresence>

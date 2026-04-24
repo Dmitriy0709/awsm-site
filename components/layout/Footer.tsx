@@ -14,12 +14,12 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
           {/* Brand */}
           <div>
-            <Link href="/" className="inline-block mb-3">
-              <span className="font-display font-bold text-2xl text-text-primary">
+            <Link href="/" aria-label="AWSM — на главную" className="inline-block mb-3">
+              <span className="font-display font-bold text-heading-s text-text-primary">
                 AW<span className="text-cta">S</span>M
               </span>
             </Link>
-            <p className="text-text-muted text-sm font-body leading-relaxed max-w-xs">
+            <p className="text-text-muted text-body-s font-body leading-relaxed max-w-xs">
               Агентство гео-продвижения локального бизнеса.
               Выводим карточки в ТОП Яндекс.Карт, Google Maps и 2GIS.
             </p>
@@ -27,7 +27,7 @@ export function Footer() {
 
           {/* Navigation */}
           <div>
-            <p className="text-text-muted text-xs font-mono uppercase tracking-widest mb-4">
+            <p className="text-text-muted text-label font-mono uppercase tracking-widest mb-4">
               Навигация
             </p>
             <ul className="flex flex-col gap-3">
@@ -35,7 +35,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-text-secondary hover:text-text-primary text-sm font-body transition-colors"
+                    className="text-text-secondary hover:text-text-primary text-body-s font-body transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/40 rounded-sm"
                   >
                     {link.label}
                   </Link>
@@ -44,7 +44,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/audit"
-                  className="text-cta hover:text-cta-hover text-sm font-body font-medium transition-colors"
+                  className="text-cta hover:text-cta-hover text-body-s font-body font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/40 rounded-sm"
                 >
                   Получить аудит →
                 </Link>
@@ -54,21 +54,27 @@ export function Footer() {
 
           {/* Contacts */}
           <div>
-            <p className="text-text-muted text-xs font-mono uppercase tracking-widest mb-4">
+            <p className="text-text-muted text-label font-mono uppercase tracking-widest mb-4">
               Контакты
             </p>
-            <ul className="flex flex-col gap-3 text-sm font-body text-text-secondary">
-              <li>{PLACEHOLDERS.phone}</li>
-              <li>{PLACEHOLDERS.telegram}</li>
-              <li>{PLACEHOLDERS.email}</li>
-              <li className="text-text-muted text-xs pt-2">Пн–Пт 9:00–18:00 МСК</li>
+            <ul className="flex flex-col gap-3 text-body-s font-body text-text-secondary">
+              <li className="opacity-50 select-none" title="Контакт добавляется позже">
+                {PLACEHOLDERS.phone}
+              </li>
+              <li className="opacity-50 select-none" title="Контакт добавляется позже">
+                {PLACEHOLDERS.telegram}
+              </li>
+              <li className="opacity-50 select-none" title="Контакт добавляется позже">
+                {PLACEHOLDERS.email}
+              </li>
+              <li className="text-text-muted text-caption pt-2">Пн–Пт 9:00–18:00 МСК</li>
             </ul>
           </div>
         </div>
 
         {/* Bottom */}
         <div className="pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <p className="text-text-muted text-xs font-body">
+          <p className="text-text-muted text-caption font-body">
             © 2026 AWSM. Все права защищены. {PLACEHOLDERS.requisites}
           </p>
           <div className="flex gap-6">
@@ -76,7 +82,7 @@ export function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-text-muted hover:text-text-secondary text-xs font-body transition-colors"
+                className="text-text-muted hover:text-text-secondary text-caption font-body transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/40 rounded-sm"
               >
                 {link.label}
               </Link>

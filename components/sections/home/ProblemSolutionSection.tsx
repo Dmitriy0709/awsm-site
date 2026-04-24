@@ -36,6 +36,7 @@ function AlgorithmSpherePlaceholder() {
       {/* Outer ring */}
       <motion.div
         className="absolute w-40 h-40 md:w-56 md:h-56 rounded-full border border-border-strong"
+        style={{ willChange: 'transform' }}
         animate={inView
           ? { opacity: [0, 0.4], scale: [0.8, 1], rotate: 360 }
           : { opacity: 0, scale: 0.8 }}
@@ -49,6 +50,7 @@ function AlgorithmSpherePlaceholder() {
       {/* Middle ring */}
       <motion.div
         className="absolute w-28 h-28 md:w-40 md:h-40 rounded-full border border-primary/20"
+        style={{ willChange: 'transform' }}
         animate={inView
           ? { opacity: [0, 0.6], scale: [0.85, 1], rotate: -360 }
           : { opacity: 0, scale: 0.85 }}

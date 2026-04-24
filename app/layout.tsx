@@ -4,6 +4,7 @@ import { NavigationBar } from '@/components/layout/NavigationBar'
 import { Footer } from '@/components/layout/Footer'
 import { LenisProvider } from '@/components/providers/LenisProvider'
 import { CustomCursor } from '@/components/layout/CustomCursor'
+import { PageLoader } from '@/components/layout/PageLoader'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -39,6 +40,7 @@ export default function RootLayout({
     >
       <body className="bg-base text-text-primary font-body antialiased">
         <LenisProvider>
+          <PageLoader />
           <CustomCursor />
           <NavigationBar />
           <main>{children}</main>

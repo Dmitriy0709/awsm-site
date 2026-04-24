@@ -111,7 +111,7 @@ function CaseCard({ item }: { item: Case }) {
   return (
     <Link href="/cases" className="group block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-xl">
       <motion.article
-        className="glass-card overflow-hidden flex flex-col h-full cursor-pointer"
+        className="glass-card overflow-hidden flex flex-col h-full"
         whileHover={{ y: -6 }}
         transition={{ duration: 0.22, ease: 'easeOut' }}
       >

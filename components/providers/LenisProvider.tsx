@@ -20,7 +20,7 @@ export function LenisProvider({ children }: { children: ReactNode }) {
       const LenisClass = (await import('@studio-freight/lenis')).default
       lenis = new LenisClass({
         lerp: 0.10,
-        normalizeWheel: true,
+        smoothWheel: true,
       })
 
       function raf(time: number) {

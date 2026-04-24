@@ -1,0 +1,140 @@
+<style>
+  .exit-demo {
+    background: #080C14;
+    border-radius: 12px;
+    border: 1px solid #1A2035;
+    overflow: hidden;
+    position: relative;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  .awsm-word {
+    font-family: 'Syne', 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 48px;
+    letter-spacing: -2px;
+    line-height: 1;
+    display: flex;
+  }
+  .awsm-word span { display: inline-block; }
+  .l1 { color: #F0F2FF; }
+  .l2 { color: #4F6EF7; }
+  .l3 { color: #00E5C4; }
+  .l4 { color: #FF6B35; }
+
+  /* Exit A: curtain wipe up */
+  .curtain {
+    position: absolute;
+    inset: 0;
+    background: #080C14;
+    transform: translateY(100%);
+    animation: curtainUp 0.55s cubic-bezier(0.16,1,0.3,1) 1.2s forwards;
+    z-index: 2;
+    border-radius: 12px;
+  }
+  @keyframes curtainUp {
+    to { transform: translateY(-100%); }
+  }
+
+  /* Exit B: fade + scale down */
+  .demo-b .awsm-word {
+    animation: fadeScale 0.5s ease 1.2s forwards;
+  }
+  @keyframes fadeScale {
+    to { opacity: 0; transform: scale(0.88); }
+  }
+
+  /* Exit C: split wipe (top+bottom) */
+  .curtain-top {
+    position: absolute;
+    left: 0; right: 0; top: 0;
+    height: 50%;
+    background: #080C14;
+    transform: translateY(-100%);
+    animation: splitTop 0.45s cubic-bezier(0.16,1,0.3,1) 1.2s forwards;
+    z-index: 2;
+    border-radius: 12px 12px 0 0;
+  }
+  .curtain-bottom {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 50%;
+    background: #080C14;
+    transform: translateY(100%);
+    animation: splitBottom 0.45s cubic-bezier(0.16,1,0.3,1) 1.2s forwards;
+    z-index: 2;
+    border-radius: 0 0 12px 12px;
+  }
+  @keyframes splitTop    { to { transform: translateY(0); } }
+  @keyframes splitBottom { to { transform: translateY(0); } }
+
+  .tag {
+    display: inline-block;
+    background: #1A2035;
+    border: 1px solid #4F6EF7;
+    border-radius: 6px;
+    font-size: 11px;
+    padding: 2px 8px;
+    color: #8B9DBF;
+    margin-top: 4px;
+    font-family: monospace;
+  }
+</style>
+
+<h2>Как лоадер уходит с экрана?</h2>
+<p class="subtitle">Анимация запускается через 1.2 сек. Обновите страницу чтобы повторить.</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:0">
+      <div class="exit-demo demo-a">
+        <div class="awsm-word">
+          <span class="l1">A</span><span class="l2">W</span><span class="l3">S</span><span class="l4">M</span>
+        </div>
+        <div class="curtain"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Шторка вверх</h3>
+      <p>Экран накрывается тёмной шторкой снизу вверх. Сайт появляется из-под неё.</p>
+      <span class="tag">Согласовано с curtain wipe в template.tsx</span>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:0">
+      <div class="exit-demo demo-b">
+        <div class="awsm-word">
+          <span class="l1">A</span><span class="l2">W</span><span class="l3">S</span><span class="l4">M</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Fade + Scale down</h3>
+      <p>Логотип уменьшается и тает. Сайт проявляется fade-in за лоадером.</p>
+      <span class="tag">Мягкий выход, нет резкого движения</span>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:0">
+      <div class="exit-demo demo-c">
+        <div class="awsm-word">
+          <span class="l1">A</span><span class="l2">W</span><span class="l3">S</span><span class="l4">M</span>
+        </div>
+        <div class="curtain-top"></div>
+        <div class="curtain-bottom"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Разрыв посередине</h3>
+      <p>Экран раскрывается как книга: верхняя половина уходит вверх, нижняя — вниз.</p>
+      <span class="tag">Театральный эффект, уникально</span>
+    </div>
+  </div>
+
+</div>

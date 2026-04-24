@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" role="img" aria-label="AWSM">
+  <!-- Badge -->
+  <rect width="32" height="32" rx="8" fill="#FF6B35"/>
+  <!-- Pin icon -->
+  <path d="M16 4C11.029 4 7 8.029 7 13C7 19.25 16 28 16 28C16 28 25 19.25 25 13C25 8.029 20.971 4 16 4Z" fill="#F0F2FF"/>
+  <circle cx="16" cy="13" r="3.5" fill="#FF6B35"/>
+</svg>

@@ -1,0 +1,187 @@
+<style>
+  .preview-box {
+    background: #080C14;
+    border-radius: 12px;
+    padding: 32px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 12px;
+    min-height: 100px;
+    border: 1px solid #1A2035;
+    overflow: hidden;
+    position: relative;
+  }
+  .letter {
+    font-family: 'Syne', 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 52px;
+    line-height: 1;
+    letter-spacing: -2px;
+    color: #F0F2FF;
+  }
+  .letter.a { animation: none; }
+
+  /* Style A: Scale + Fade stagger */
+  .style-a .letter {
+    opacity: 0;
+    transform: scale(0.5);
+    animation: scaleIn 0.4s ease forwards;
+  }
+  .style-a .l1 { animation-delay: 0.0s; }
+  .style-a .l2 { animation-delay: 0.15s; }
+  .style-a .l3 { animation-delay: 0.30s; }
+  .style-a .l4 { animation-delay: 0.45s; }
+  @keyframes scaleIn {
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  /* Style B: Slide up stagger + accent colors */
+  .style-b .letter {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideUp 0.45s cubic-bezier(0.16,1,0.3,1) forwards;
+  }
+  .style-b .l1 { animation-delay: 0.0s;  color: #F0F2FF; }
+  .style-b .l2 { animation-delay: 0.12s; color: #4F6EF7; }
+  .style-b .l3 { animation-delay: 0.24s; color: #00E5C4; }
+  .style-b .l4 { animation-delay: 0.36s; color: #FF6B35; }
+  @keyframes slideUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Style C: Typewriter + underline bar */
+  .style-c .letter {
+    opacity: 0;
+    animation: appear 0.01s ease forwards;
+  }
+  .style-c .l1 { animation-delay: 0.0s;  color: #F0F2FF; }
+  .style-c .l2 { animation-delay: 0.18s; color: #F0F2FF; }
+  .style-c .l3 { animation-delay: 0.36s; color: #F0F2FF; }
+  .style-c .l4 { animation-delay: 0.54s; color: #F0F2FF; }
+  @keyframes appear {
+    to { opacity: 1; }
+  }
+  .cursor-bar {
+    width: 4px;
+    height: 52px;
+    background: #4F6EF7;
+    margin-left: 3px;
+    animation: blink 0.8s step-end infinite, moveCursor 0.72s steps(4) forwards;
+    position: absolute;
+    left: calc(50% - 70px);
+  }
+  @keyframes blink { 0%,100% { opacity:1 } 50% { opacity:0 } }
+  @keyframes moveCursor {
+    0%   { left: calc(50% - 72px); }
+    25%  { left: calc(50% - 38px); }
+    50%  { left: calc(50% - 4px);  }
+    75%  { left: calc(50% + 30px); }
+    100% { left: calc(50% + 64px); opacity: 0; }
+  }
+
+  .exit-badge {
+    display: inline-block;
+    background: #1A2035;
+    border: 1px solid #4F6EF7;
+    border-radius: 6px;
+    font-size: 11px;
+    padding: 2px 8px;
+    color: #8B9DBF;
+    margin-top: 6px;
+  }
+  .preview-label {
+    font-size: 12px;
+    color: #8B9DBF;
+    margin-bottom: 4px;
+    font-family: monospace;
+  }
+
+  /* Replay button */
+  .replay {
+    font-size: 11px;
+    color: #4F6EF7;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    text-decoration: underline;
+  }
+</style>
+
+<h2>Стиль появления букв A→W→S→M</h2>
+<p class="subtitle">Выбери анимацию для лоадера. Нажми на карточку для выбора.</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding: 0;">
+      <div class="preview-box style-a" id="pA">
+        <span class="letter l1">A</span>
+        <span class="letter l2">W</span>
+        <span class="letter l3">S</span>
+        <span class="letter l4">M</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Scale + Fade</h3>
+      <p>Каждая буква «вырастает» из точки. Чисто, минималистично.</p>
+      <span class="exit-badge">Выход: шторка вверх (как page transition)</span>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding: 0;">
+      <div class="preview-box style-b" id="pB">
+        <span class="letter l1">A</span>
+        <span class="letter l2">W</span>
+        <span class="letter l3">S</span>
+        <span class="letter l4">M</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Slide Up + цвета бренда</h3>
+      <p>Буквы вылетают снизу, каждая — своим цветом (indigo → teal → coral). Энергично.</p>
+      <span class="exit-badge">Выход: шторка вверх (как page transition)</span>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding: 0;">
+      <div class="preview-box style-c" id="pC">
+        <span class="letter l1">A</span>
+        <span class="letter l2">W</span>
+        <span class="letter l3">S</span>
+        <span class="letter l4">M</span>
+        <div class="cursor-bar"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Typewriter + курсор</h3>
+      <p>Буквы «печатаются» с мигающим курсором. Отсылка к code/terminal.</p>
+      <span class="exit-badge">Выход: fade out</span>
+    </div>
+  </div>
+
+</div>
+
+<p style="font-size:12px; color:#8B9DBF; margin-top:16px;">
+  Анимации повторяются каждые 3 сек. Можно перезагрузить страницу чтобы сбросить.
+</p>
+
+<script>
+  // Auto-restart animations every 3s
+  function restartAnim(id, cls) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove(cls);
+    void el.offsetWidth;
+    el.classList.add(cls);
+  }
+  setInterval(() => {
+    restartAnim('pA', 'style-a');
+    restartAnim('pB', 'style-b');
+    restartAnim('pC', 'style-c');
+  }, 3000);
+</script>

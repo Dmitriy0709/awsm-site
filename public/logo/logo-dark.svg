@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 72" fill="none" role="img" aria-label="AWSM — Геомаркетинг. Результат.">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Syne:wght@800&amp;family=Plus+Jakarta+Sans:wght@600&amp;display=swap');
+    </style>
+  </defs>
+  <!-- Badge -->
+  <rect width="72" height="72" rx="18" fill="#FF6B35"/>
+  <!-- Pin icon -->
+  <path d="M36 9C25.507 9 17 17.507 17 28C17 41.5 36 63 36 63C36 63 55 41.5 55 28C55 17.507 46.493 9 36 9Z" fill="#F0F2FF"/>
+  <circle cx="36" cy="28" r="7.5" fill="#FF6B35"/>
+  <!-- Wordmark (dark text for light backgrounds) -->
+  <text x="88" y="51" font-family="Syne, sans-serif" font-weight="800" font-size="52" letter-spacing="-1" fill="#080C14">AWSM</text>
+  <!-- Tagline -->
+  <text x="89" y="66" font-family="Plus Jakarta Sans, sans-serif" font-weight="600" font-size="10.5" letter-spacing="1.3" fill="#4F6EF7">ГЕОМАРКЕТИНГ. РЕЗУЛЬТАТ.</text>
+</svg>

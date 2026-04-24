@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" fill="none">
+  <!-- Badge: coral rounded square -->
+  <rect width="64" height="64" rx="16" fill="#FF6B35"/>
+  <!-- Pin icon: filled white + coral hole -->
+  <path d="M32 10C23.716 10 17 16.716 17 25C17 35.5 32 54 32 54C32 54 47 35.5 47 25C47 16.716 40.284 10 32 10Z" fill="#F0F2FF"/>
+  <circle cx="32" cy="25" r="6" fill="#FF6B35"/>
+  <!-- Wordmark: AWSM -->
+  <text x="80" y="41" font-family="Syne, sans-serif" font-weight="800" font-size="40" letter-spacing="-0.8" fill="#F0F2FF">AWSM</text>
+  <!-- Tagline -->
+  <text x="81" y="57" font-family="Plus Jakarta Sans, sans-serif" font-weight="600" font-size="10" letter-spacing="1.2" fill="#4F6EF7">ГЕОМАРКЕТИНГ. РЕЗУЛЬТАТ.</text>
+</svg>

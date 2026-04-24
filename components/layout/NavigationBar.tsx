@@ -67,10 +67,10 @@ export function NavigationBar() {
       <nav className="container flex items-center justify-between h-16 md:h-20">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group" aria-label="AWSM — на главную">
-          <span className="font-display font-bold text-xl text-text-primary tracking-tight">
+          <span className="font-display font-bold text-heading-s text-text-primary tracking-tight">
             AW<span className="text-cta">S</span>M
           </span>
-          <span className="hidden sm:block text-text-muted text-xs font-body mt-0.5">
+          <span className="hidden sm:block text-text-muted text-caption font-body mt-0.5">
             Геомаркетинг. Результат.
           </span>
         </Link>
@@ -81,7 +81,7 @@ export function NavigationBar() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="text-text-secondary hover:text-text-primary text-sm font-body font-medium transition-colors duration-200 relative group"
+                className="text-text-secondary hover:text-text-primary text-body-s font-body font-medium transition-colors duration-200 relative group rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-base"
               >
                 {link.label}
                 <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
@@ -99,7 +99,8 @@ export function NavigationBar() {
           </MagneticButton>
 
           <motion.button
-            className="md:hidden text-text-secondary hover:text-text-primary p-2 transition-colors"
+            type="button"
+            className="md:hidden text-text-secondary hover:text-text-primary p-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
             onClick={() => setMobileOpen((v) => !v)}
             aria-label={mobileOpen ? 'Закрыть меню' : 'Открыть меню'}
             aria-expanded={mobileOpen}
@@ -124,7 +125,7 @@ export function NavigationBar() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="md:hidden bg-base/97 backdrop-blur-xl border-t border-border overflow-hidden"
+            className="md:hidden bg-base/95 backdrop-blur-xl border-t border-border overflow-hidden"
             role="navigation"
             aria-label="Мобильное меню"
           >
@@ -134,7 +135,7 @@ export function NavigationBar() {
                   <Link
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="block text-text-primary text-lg font-body font-medium py-3 border-b border-border/40 last:border-0 hover:text-primary transition-colors"
+                    className="block text-text-primary text-body-l font-body font-medium py-3 border-b border-border/40 last:border-0 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-inset rounded-sm"
                   >
                     {link.label}
                   </Link>

@@ -1,0 +1,9 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "next build",
+  "installCommand": "npm install",
+  "outputDirectory": ".next",
+  "env": {
+    "TELEGRAM_WEBHOOK_URL": "@telegram-webhook-url"
+  }
+}

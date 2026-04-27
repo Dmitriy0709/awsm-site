@@ -1,7 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { useEffect, useRef } from 'react'
 
 type CursorState = 'default' | 'hover' | 'expand' | 'text'
 
@@ -14,105 +13,95 @@ function resolveCursorState(el: Element): CursorState {
   return 'default'
 }
 
-interface RingConfig {
-  size:        number
-  borderColor: string
-  bg:          string
-  dotColor:    string
-  dotW:        number
-  dotH:        number
-  dotRadius:   string
-}
-
-const RING: Record<CursorState, RingConfig> = {
-  default: { size: 30, borderColor: 'rgba(240,242,255,0.30)', bg: 'transparent',           dotColor: '#F0F2FF', dotW: 5, dotH: 5,  dotRadius: '50%' },
-  hover:   { size: 42, borderColor: 'rgba(79,110,247,0.75)',  bg: 'rgba(79,110,247,0.07)', dotColor: '#4F6EF7', dotW: 5, dotH: 5,  dotRadius: '50%' },
-  expand:  { size: 56, borderColor: 'rgba(255,107,53,0.75)',  bg: 'rgba(255,107,53,0.07)', dotColor: '#FF6B35', dotW: 5, dotH: 5,  dotRadius: '50%' },
-  text:    { size: 6,  borderColor: 'rgba(240,242,255,0.50)', bg: 'transparent',           dotColor: '#F0F2FF', dotW: 2, dotH: 16, dotRadius: '1px'  },
-}
-
 export function CustomCursor() {
-  const [mounted,     setMounted]     = useState(false)
-  const [cursorState, setCursorState] = useState<CursorState>('default')
-  const [pressed,     setPressed]     = useState(false)
-
-  const mouseX = useMotionValue(-200)
-  const mouseY = useMotionValue(-200)
-
-  const ringX = useSpring(mouseX, { stiffness: 260, damping: 28, mass: 0.5  })
-  const ringY = useSpring(mouseY, { stiffness: 260, damping: 28, mass: 0.5  })
-  const dotX  = useSpring(mouseX, { stiffness: 800, damping: 48, mass: 0.15 })
-  const dotY  = useSpring(mouseY, { stiffness: 800, damping: 48, mass: 0.15 })
+  const ringRef = useRef<HTMLDivElement>(null)
+  const dotRef  = useRef<HTMLDivElement>(null)
+  const rafRef  = useRef<number>(0)
 
   useEffect(() => {
     if (!window.matchMedia('(pointer: fine)').matches) return
-    setMounted(true)
 
-    const onMove  = (e: MouseEvent) => { mouseX.set(e.clientX); mouseY.set(e.clientY) }
-    const onOver  = (e: MouseEvent) => { setCursorState(resolveCursorState(e.target as Element)) }
-    const onDown  = () => setPressed(true)
-    const onUp    = () => setPressed(false)
-    const onLeave = () => { mouseX.set(-200); mouseY.set(-200) }
+    if (!ringRef.current || !dotRef.current) return
+    const ring = ringRef.current as HTMLDivElement
+    const dot  = dotRef.current as HTMLDivElement
 
-    document.addEventListener('mousemove',  onMove)
-    document.addEventListener('mouseover',  onOver)
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const LERP    = reduced ? 1.0 : 0.18
+
+    ring.style.display = 'block'
+    dot.style.display  = 'block'
+
+    let mouseX = -200, mouseY = -200
+    let ringX  = -200, ringY  = -200
+
+    function tick() {
+      ringX += (mouseX - ringX) * LERP
+      ringY += (mouseY - ringY) * LERP
+      ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`
+      dot.style.transform  = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`
+      rafRef.current = requestAnimationFrame(tick)
+    }
+
+    rafRef.current = requestAnimationFrame(tick)
+
+    const onMove = (e: MouseEvent) => {
+      mouseX = e.clientX
+      mouseY = e.clientY
+    }
+
+    const onOver = (e: MouseEvent) => {
+      if (!(e.target instanceof Element)) return
+      const state = resolveCursorState(e.target)
+      ring.dataset.cursorState = state
+      dot.dataset.cursorState  = state
+    }
+
+    const onDown = () => {
+      ring.dataset.pressed = 'true'
+      dot.dataset.pressed  = 'true'
+    }
+
+    const onUp = () => {
+      delete ring.dataset.pressed
+      delete dot.dataset.pressed
+    }
+
+    const onLeave = () => {
+      mouseX = -200
+      mouseY = -200
+      delete ring.dataset.pressed
+      delete dot.dataset.pressed
+    }
+
+    document.addEventListener('mousemove',  onMove,  { passive: true })
+    document.addEventListener('mouseover',  onOver,  { passive: true })
     document.addEventListener('mousedown',  onDown)
     document.addEventListener('mouseup',    onUp)
     document.addEventListener('mouseleave', onLeave)
 
     return () => {
+      cancelAnimationFrame(rafRef.current)
       document.removeEventListener('mousemove',  onMove)
       document.removeEventListener('mouseover',  onOver)
       document.removeEventListener('mousedown',  onDown)
       document.removeEventListener('mouseup',    onUp)
       document.removeEventListener('mouseleave', onLeave)
     }
-  }, [mouseX, mouseY])
-
-  if (!mounted) return null
-
-  const cfg      = RING[cursorState]
-  const ringSize = pressed ? Math.max(cfg.size - 8, 6) : cfg.size
+  }, [])
 
   return (
     <>
-      {/* Ring — lagging spring */}
-      <motion.div
+      <div
+        ref={ringRef}
         aria-hidden="true"
-        style={{
-          position:      'fixed',
-          top: 0, left: 0,
-          x: ringX, y: ringY,
-          translateX: '-50%', translateY: '-50%',
-          borderRadius:   '50%',
-          pointerEvents:  'none',
-          zIndex:          9999,
-          width:           ringSize,
-          height:          ringSize,
-          border:         `1.5px solid ${cfg.borderColor}`,
-          backgroundColor: cfg.bg,
-          transition: 'width 0.18s ease, height 0.18s ease, border-color 0.18s ease, background-color 0.18s ease',
-        }}
+        data-cursor-el="ring"
+        style={{ display: 'none' }}
       />
-
-      {/* Dot — tight spring */}
-      <motion.div
+      <div
+        ref={dotRef}
         aria-hidden="true"
-        style={{
-          position:      'fixed',
-          top: 0, left: 0,
-          x: dotX, y: dotY,
-          translateX: '-50%', translateY: '-50%',
-          width:           cfg.dotW,
-          height:          cfg.dotH,
-          borderRadius:    cfg.dotRadius,
-          backgroundColor: cfg.dotColor,
-          pointerEvents:  'none',
-          zIndex:          9999,
-          opacity: pressed ? 0.5 : 1,
-          scale:   pressed ? 0.6 : 1,
-          transition: 'width 0.15s ease, height 0.15s ease, border-radius 0.15s ease, background-color 0.15s ease, opacity 0.1s ease, scale 0.1s ease',
-        }}
+        data-cursor-el="dot"
+        style={{ display: 'none' }}
       />
     </>
   )

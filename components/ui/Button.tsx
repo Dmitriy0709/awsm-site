@@ -4,9 +4,7 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react'
 
-// ─── Types ───────────────────────────────────────────────────────────────────
-
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'link' | 'danger'
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'link' | 'danger' | 'ctaLight' | 'ghostWhite'
 export type ButtonSize    = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
 type BaseProps = {
@@ -21,37 +19,34 @@ type BaseProps = {
 
 type AsButton = BaseProps & ButtonHTMLAttributes<HTMLButtonElement> & { href?: never; external?: never }
 type AsLink   = BaseProps & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> & { href: string; external?: boolean; disabled?: boolean }
-
 export type ButtonProps = AsButton | AsLink
-
-// ─── Styles ──────────────────────────────────────────────────────────────────
 
 const base = [
   'relative inline-flex items-center justify-center gap-2 shrink-0',
-  'font-body font-semibold tracking-[-0.01em] select-none',
+  'font-display font-semibold tracking-[-0.01em] select-none',
   'transition-all duration-200 ease-out',
-  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-base',
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-2 focus-visible:ring-offset-surface',
   'disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none',
 ].join(' ')
 
 const variants: Record<ButtonVariant, string> = {
   primary: [
-    'bg-gradient-cta text-white',
+    'bg-cta text-white',
     'shadow-glow-cta-sm',
-    'hover:opacity-90 hover:shadow-glow-cta hover:-translate-y-px',
-    'active:translate-y-0 active:opacity-85 active:scale-[0.98]',
+    'hover:bg-cta-hover hover:shadow-glow-cta hover:-translate-y-px',
+    'active:translate-y-0 active:scale-[0.98]',
   ].join(' '),
 
   secondary: [
-    'border border-primary text-primary bg-transparent',
-    'hover:bg-primary-muted hover:shadow-glow-primary-sm hover:-translate-y-px',
-    'active:translate-y-0 active:scale-[0.98]',
+    'border border-border-strong text-text-secondary bg-transparent',
+    'hover:border-primary hover:text-primary hover:bg-primary-muted',
+    'active:scale-[0.98]',
   ].join(' '),
 
   ghost: [
     'text-text-secondary bg-transparent',
-    'hover:text-text-primary hover:bg-white/[0.06]',
-    'active:bg-white/[0.04]',
+    'hover:text-text-primary hover:bg-surface-mid',
+    'active:bg-surface-elevated',
   ].join(' '),
 
   link: [
@@ -66,33 +61,37 @@ const variants: Record<ButtonVariant, string> = {
     'hover:opacity-90 hover:-translate-y-px',
     'active:translate-y-0 active:scale-[0.98]',
   ].join(' '),
+
+  ctaLight: [
+    'bg-white text-cta',
+    'shadow-[0_4px_20px_rgba(0,0,0,0.20)]',
+    'hover:bg-white/90 hover:-translate-y-px',
+    'active:translate-y-0 active:scale-[0.98]',
+  ].join(' '),
+
+  ghostWhite: [
+    'border border-white/20 text-white/70 bg-transparent',
+    'hover:text-white hover:border-white/40',
+    'active:scale-[0.98]',
+  ].join(' '),
 }
 
 const sizes: Record<ButtonSize, string> = {
-  xs: 'h-8  px-3  text-xs  rounded-md gap-1.5',
-  sm: 'h-9  px-4  text-sm  rounded-md',
+  xs: 'h-8  px-3  text-xs   rounded-md gap-1.5',
+  sm: 'h-9  px-4  text-body-s rounded-md',
   md: 'h-11 px-6  text-body-m rounded-lg',
-  lg: 'h-13 px-8  text-body-l rounded-xl',
-  xl: 'h-16 px-10 text-body-xl rounded-xl',
+  lg: 'h-12 px-7  text-body-l rounded-xl',
+  xl: 'h-14 px-9  text-body-xl rounded-xl',
 }
-
-// ─── Loading spinner ──────────────────────────────────────────────────────────
 
 function Spinner() {
   return (
-    <svg
-      className="animate-spin w-4 h-4 shrink-0"
-      viewBox="0 0 24 24"
-      fill="none"
-      aria-hidden
-    >
+    <svg className="animate-spin w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden>
       <circle className="opacity-20" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
       <path className="opacity-80" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.4 0 0 5.4 0 12h4z" />
     </svg>
   )
 }
-
-// ─── Component ───────────────────────────────────────────────────────────────
 
 export function Button(props: ButtonProps) {
   const {
@@ -126,12 +125,8 @@ export function Button(props: ButtonProps) {
     const { href, external, disabled } = props as AsLink
     if (external) {
       return (
-        <a
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={cn(classes, disabled && 'opacity-40 pointer-events-none')}
-        >
+        <a href={href} target="_blank" rel="noopener noreferrer"
+          className={cn(classes, disabled && 'opacity-40 pointer-events-none')}>
           {content}
         </a>
       )

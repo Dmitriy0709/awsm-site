@@ -1,12 +1,11 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { ArrowRight, Image as ImageIcon } from '@phosphor-icons/react'
 import { FadeIn } from '@/components/motion/FadeIn'
 import { StaggerContainer, StaggerItem } from '@/components/motion/StaggerContainer'
 import { Badge } from '@/components/ui/Badge'
-import { Button } from '@/components/ui/Button'
 import { CASES } from '@/constants/cases'
 import type { Case } from '@/types/case'
 
@@ -43,7 +42,7 @@ export function CasesPreviewSection() {
       <div className="container relative">
         {/* Heading */}
         <FadeIn className="text-center mb-12 md:mb-16">
-          <p className="font-mono text-label text-text-muted uppercase tracking-widest mb-4">
+          <p className="font-display text-label text-text-muted uppercase tracking-widest mb-4">
             Кейсы
           </p>
           <h2
@@ -51,7 +50,7 @@ export function CasesPreviewSection() {
             className="font-display font-bold text-heading-l md:text-display-m text-text-primary"
           >
             Результаты{' '}
-            <span className="bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
+            <span className="text-secondary">
               говорят громче слов
             </span>
           </h2>
@@ -85,17 +84,6 @@ export function CasesPreviewSection() {
           </StaggerContainer>
         </div>
 
-        {/* CTA */}
-        <FadeIn delay={0.4} className="text-center">
-          <Button
-            variant="secondary"
-            size="lg"
-            href="/cases"
-            iconRight={<ArrowRight size={18} weight="bold" aria-hidden="true" />}
-          >
-            Смотреть все кейсы
-          </Button>
-        </FadeIn>
       </div>
     </section>
   )
@@ -111,26 +99,26 @@ function CaseCard({ item }: { item: Case }) {
   return (
     <Link href="/cases" className="group block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-xl">
       <motion.article
-        className="glass-card overflow-hidden flex flex-col h-full"
+        className="card-glass overflow-hidden flex flex-col h-full"
         whileHover={{ y: -6 }}
         transition={{ duration: 0.22, ease: 'easeOut' }}
       >
-        {/* Image placeholder — 16:9 */}
+        {/* Image — 16:9 */}
         <div
           className="relative w-full overflow-hidden"
           style={{ paddingBottom: '56.25%' }}
-          aria-hidden="true"
         >
-          <div
-            className="absolute inset-0 flex items-center justify-center bg-surface-elevated"
-            style={{ borderBottom: '1px dashed rgba(79,110,247,0.25)' }}
-          >
-            <div className="absolute top-3 left-3">
-              <Badge variant={badgeVariant} size="sm">
-                {CATEGORY_LABELS[item.category]}
-              </Badge>
-            </div>
-            <ImageIcon size={32} color="rgba(79,110,247,0.25)" weight="thin" />
+          <Image
+            src={item.imageSrc}
+            alt={item.title}
+            fill
+            sizes="(max-width: 768px) 300px, (max-width: 1280px) 33vw, 400px"
+            className="object-cover"
+          />
+          <div className="absolute top-3 left-3 z-10">
+            <Badge variant={badgeVariant} size="sm">
+              {CATEGORY_LABELS[item.category]}
+            </Badge>
           </div>
         </div>
 
@@ -154,12 +142,6 @@ function CaseCard({ item }: { item: Case }) {
             {item.description}
           </p>
 
-          <div className="mt-auto pt-1">
-            <span className="inline-flex items-center gap-1.5 font-body text-body-s text-primary font-medium group-hover:gap-2.5 transition-all duration-200">
-              Читать кейс
-              <ArrowRight size={14} weight="bold" aria-hidden="true" />
-            </span>
-          </div>
         </div>
       </motion.article>
     </Link>
@@ -179,7 +161,7 @@ function MetricCell({
 }) {
   return (
     <div>
-      <p className={`font-mono font-bold text-metric-sm leading-none mb-1 ${primary ? 'text-secondary' : 'text-primary'}`}>
+      <p className={`font-display font-bold text-metric-sm leading-none mb-1 ${primary ? 'text-secondary' : 'text-primary'}`}>
         {value}
       </p>
       <p className="font-body text-caption text-text-muted leading-snug">{label}</p>

@@ -4,11 +4,13 @@ export interface NavLink {
 }
 
 export const NAV_LINKS: NavLink[] = [
-  { label: 'Услуги', href: '/services' },
-  { label: 'Кейсы', href: '/cases' },
+  { label: 'Кому подходит',   href: '/#audience'     },
+  { label: 'Как работаем',    href: '/#how-we-work'  },
+  { label: 'Тарифы',          href: '/#pricing'      },
+  { label: 'Кейсы',           href: '/#cases'        },
 ]
 
 export const CTA_LINK: NavLink = {
-  label: 'Получить аудит →',
+  label: 'Получить аудит',
   href: '/audit',
 }

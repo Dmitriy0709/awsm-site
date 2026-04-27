@@ -37,7 +37,7 @@ const variants: Record<CardVariant, string> = {
   glow: [
     'bg-[rgba(13,18,32,0.70)]',
     'border border-primary/20 rounded-xl',
-    'shadow-[0_0_60px_rgba(79,110,247,0.08),inset_0_1px_0_rgba(240,242,255,0.04)]',
+    'shadow-[0_0_60px_rgba(94,117,230,0.08),inset_0_1px_0_rgba(240,242,255,0.04)]',
   ].join(' '),
 
   metric: [

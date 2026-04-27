@@ -1,4 +1,4 @@
-export type PricingType = 'once' | 'monthly'
+export type PricingType = 'once' | 'monthly' | 'package'
 
 export interface PricingPlan {
   id: string

@@ -1,11 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { CASES } from '@/constants/cases'
 import type { CaseCategory } from '@/types/case'
 import { Badge } from '@/components/ui/Badge'
 import { Chip, ChipGroup } from '@/components/ui/Chip'
-import { PlaceholderBlock } from '@/components/ui/PlaceholderBlock'
 
 type Filter = CaseCategory | 'all'
 
@@ -60,11 +60,15 @@ export function CasesGrid() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((item) => (
             <article key={item.id} className="glass-card overflow-hidden hover:-translate-y-1 transition-all duration-300">
-              <PlaceholderBlock
-                label={`[ФОТО] ${item.title}`}
-                minHeight="220px"
-                className="rounded-none border-0 border-b border-border"
-              />
+              <div className="relative h-[220px] overflow-hidden border-b border-border">
+                <Image
+                  src={item.imageSrc}
+                  alt={item.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                  className="object-cover"
+                />
+              </div>
               <div className="p-6">
                 <div className="flex gap-2 mb-3">
                   <Badge variant="muted">{CATEGORY_LABELS[item.category]}</Badge>

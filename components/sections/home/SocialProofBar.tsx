@@ -9,7 +9,7 @@ import { METRICS, type Metric } from '@/constants/metrics'
 function formatThousands(n: number): string {
   return Math.round(n)
     .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
 }
 
 // ─── Анимированный счётчик ────────────────────────────────────────────────────
@@ -62,7 +62,10 @@ function AnimatedCounter({
       ref={ref}
       aria-label={[metric.value, metric.label, metric.sublabel].filter(Boolean).join(' ')}
     >
-      <span className="font-mono font-bold text-secondary leading-none tracking-tight text-3xl sm:text-4xl lg:text-[48px]">
+      <span
+        className="font-display font-bold leading-none tracking-tight text-3xl sm:text-4xl lg:text-[48px]"
+        style={{ color: metric.color }}
+      >
         {display}
       </span>
     </div>

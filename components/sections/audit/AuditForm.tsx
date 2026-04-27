@@ -84,7 +84,7 @@ export function AuditForm() {
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.1, type: 'spring', stiffness: 200, damping: 15 }}
                     className="w-16 h-16 rounded-full flex items-center justify-center"
-                    style={{ background: 'rgba(0,208,132,0.12)', border: '1px solid rgba(0,208,132,0.25)' }}
+                    style={{ background: 'rgba(0,196,122,0.12)', border: '1px solid rgba(0,196,122,0.25)' }}
                   >
                     <CheckCircle size={32} weight="duotone" color="#00D084" aria-hidden="true" />
                   </motion.div>

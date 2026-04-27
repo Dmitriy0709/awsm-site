@@ -1,6 +1,7 @@
 'use client'
 
-import { motion, useReducedMotion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { Play } from '@phosphor-icons/react'
 import { FadeIn } from '@/components/motion/FadeIn'
 
@@ -10,7 +11,7 @@ function VideoPlaceholder({ reducedMotion = false }: { reducedMotion?: boolean }
   return (
     <div
       className="relative aspect-video w-full rounded-xl overflow-hidden"
-      style={{ border: '1px dashed rgba(79,110,247,0.4)' }}
+      style={{ border: '1px dashed rgba(94,117,230,0.4)' }}
     >
       {/* Тёмный фон + dot-grid текстура */}
       <div
@@ -34,7 +35,7 @@ function VideoPlaceholder({ reducedMotion = false }: { reducedMotion?: boolean }
           {/* Внешнее пульсирующее кольцо */}
           <motion.div
             className="absolute rounded-full"
-            style={{ width: 120, height: 120, border: '1px solid rgba(79,110,247,0.25)' }}
+            style={{ width: 120, height: 120, border: '1px solid rgba(94,117,230,0.25)' }}
             animate={
               reducedMotion
                 ? { opacity: 0.25 }
@@ -45,7 +46,7 @@ function VideoPlaceholder({ reducedMotion = false }: { reducedMotion?: boolean }
           {/* Среднее пульсирующее кольцо */}
           <motion.div
             className="absolute rounded-full"
-            style={{ width: 88, height: 88, border: '1px solid rgba(79,110,247,0.45)' }}
+            style={{ width: 88, height: 88, border: '1px solid rgba(94,117,230,0.45)' }}
             animate={
               reducedMotion
                 ? { opacity: 0.4 }
@@ -59,17 +60,17 @@ function VideoPlaceholder({ reducedMotion = false }: { reducedMotion?: boolean }
             style={{
               width: 64,
               height: 64,
-              background: 'rgba(79,110,247,0.18)',
-              border: '1px solid rgba(79,110,247,0.65)',
+              background: 'rgba(94,117,230,0.18)',
+              border: '1px solid rgba(94,117,230,0.65)',
               backdropFilter: 'blur(10px)',
-              boxShadow: '0 0 28px rgba(79,110,247,0.28), inset 0 1px 0 rgba(240,242,255,0.06)',
+              boxShadow: '0 0 28px rgba(94,117,230,0.28), inset 0 1px 0 rgba(240,242,255,0.06)',
             }}
           >
             <div
               className="absolute inset-0 rounded-full"
               style={{
                 background:
-                  'radial-gradient(circle, rgba(79,110,247,0.25) 0%, transparent 70%)',
+                  'radial-gradient(circle, rgba(94,117,230,0.25) 0%, transparent 70%)',
               }}
             />
             <Play size={22} weight="fill" color="#F0F2FF" className="relative ml-1" />
@@ -96,29 +97,41 @@ function VideoPlaceholder({ reducedMotion = false }: { reducedMotion?: boolean }
 
 export function VideoSection() {
   const reduceMotion = useReducedMotion() ?? false
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start end', 'end start'],
+  })
+
+  const scale     = useTransform(scrollYProgress, [0, 0.35], reduceMotion ? [1, 1] : [0.94, 1])
+  const opacity   = useTransform(scrollYProgress, [0, 0.25], reduceMotion ? [1, 1] : [0, 1])
+  const translateY = useTransform(scrollYProgress, [0, 0.35], reduceMotion ? [0, 0] : [32, 0])
 
   return (
-    <section id="video" className="section-padding bg-base">
+    <section id="video" className="section-padding bg-surface-mid">
       <div className="container">
         {/* Заголовок */}
         <FadeIn className="text-center mb-4">
           <h2 className="font-display font-bold text-display-m text-text-primary">
-            Почему ваш бизнес невидим для клиентов?
+            Почему ваш бизнес не виден для клиентов
           </h2>
         </FadeIn>
 
         {/* Подзаголовок */}
         <FadeIn delay={0.15} className="text-center mb-10 md:mb-14">
           <p className="text-text-secondary font-body text-body-l max-w-[560px] mx-auto leading-relaxed">
-            2-минутное видео о том, как на самом деле работают алгоритмы
-            геосервисов в 2026 году и где вы теряете деньги.
+            Посмотрите двухминутное видео о том, как на самом деле работают алгоритмы
+            сервисов в 2026 году и где вы теряете деньги.
           </p>
         </FadeIn>
 
-        {/* Видео / плашка */}
-        <FadeIn delay={0.3} direction="up" className="max-w-3xl mx-auto">
-          <VideoPlaceholder reducedMotion={reduceMotion} />
-        </FadeIn>
+        {/* Видео / плашка — scroll animation */}
+        <div ref={containerRef} className="max-w-3xl mx-auto">
+          <motion.div style={{ scale, opacity, y: translateY }}>
+            <VideoPlaceholder reducedMotion={reduceMotion} />
+          </motion.div>
+        </div>
       </div>
     </section>
   )

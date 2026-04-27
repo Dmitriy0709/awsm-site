@@ -5,9 +5,9 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 
 const LETTERS = [
   { char: 'A', color: '#F0F2FF' },
-  { char: 'W', color: '#4F6EF7' },
-  { char: 'S', color: '#00E5C4' },
-  { char: 'M', color: '#FF6B35' },
+  { char: 'W', color: '#5E75E6' },
+  { char: 'S', color: '#00BFA8' },
+  { char: 'M', color: '#E47040' },
 ] as const
 
 export function PageLoader() {

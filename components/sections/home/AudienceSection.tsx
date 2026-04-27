@@ -5,15 +5,15 @@ import { FadeIn } from '@/components/motion/FadeIn'
 import { StaggerContainer, StaggerItem } from '@/components/motion/StaggerContainer'
 import { AUDIENCE } from '@/constants/audience'
 
-// CSS filter: черный → Electric Indigo #4F6EF7
+// CSS filter: чёрный → Electric Indigo #5A50DF
 const ICON_FILTER =
-  'brightness(0) saturate(100%) invert(33%) sepia(89%) saturate(1222%) hue-rotate(214deg) brightness(103%) contrast(94%)'
+  'brightness(0) saturate(100%) invert(28%) sepia(80%) saturate(1000%) hue-rotate(226deg) brightness(98%) contrast(95%)'
 
 export function AudienceSection() {
   return (
     <section
       id="audience"
-      className="section-padding bg-surface relative overflow-hidden"
+      className="section-padding bg-surface-mid relative overflow-hidden"
       aria-labelledby="audience-heading"
     >
       {/* Dot-grid texture */}
@@ -22,14 +22,14 @@ export function AudienceSection() {
       {/* Glow top-center */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at center top, rgba(79,110,247,0.08) 0%, transparent 70%)' }}
+        style={{ background: 'radial-gradient(ellipse at center top, rgba(90,80,223,0.06) 0%, transparent 70%)' }}
         aria-hidden="true"
       />
 
       <div className="container relative">
         {/* Heading */}
         <FadeIn className="text-center mb-12 md:mb-16">
-          <p className="font-mono text-label text-text-muted uppercase tracking-widest mb-4">
+          <p className="font-display text-label text-text-muted uppercase tracking-widest mb-4">
             Целевая аудитория
           </p>
           <h2
@@ -37,7 +37,7 @@ export function AudienceSection() {
             className="font-display font-bold text-heading-l md:text-display-m text-text-primary mb-4"
           >
             Кому необходим ТОП{' '}
-            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            <span className="text-primary">
               в геосервисах?
             </span>
           </h2>
@@ -66,12 +66,12 @@ export function AudienceSection() {
             {/* Fade edges */}
             <div
               className="absolute left-0 top-0 bottom-4 w-12 z-10 pointer-events-none"
-              style={{ background: 'linear-gradient(to right, #0D1220, transparent)' }}
+              style={{ background: 'linear-gradient(to right, #F4F4FA, transparent)' }}
               aria-hidden="true"
             />
             <div
               className="absolute right-0 top-0 bottom-4 w-12 z-10 pointer-events-none"
-              style={{ background: 'linear-gradient(to left, #0D1220, transparent)' }}
+              style={{ background: 'linear-gradient(to left, #F4F4FA, transparent)' }}
               aria-hidden="true"
             />
 
@@ -115,15 +115,15 @@ interface AudienceCardProps {
 function AudienceCard({ item }: AudienceCardProps) {
   return (
     <motion.div
-      className="glass-card p-5 md:p-6 text-center flex flex-col items-center gap-3 cursor-default h-full"
-      whileHover={{ y: -4, borderColor: 'rgba(79,110,247,0.35)' }}
+      className="card-glass p-5 md:p-6 text-center flex flex-col items-center gap-3 cursor-default h-full"
+      whileHover={{ y: -4, borderColor: 'rgba(90,80,223,0.35)' }}
       transition={{ duration: 0.2, ease: 'easeOut' }}
     >
       {/* Icon wrapper */}
       <motion.div
         className="w-12 h-12 rounded-lg flex items-center justify-center"
-        style={{ background: 'rgba(79,110,247,0.08)' }}
-        whileHover={{ background: 'rgba(79,110,247,0.16)' }}
+        style={{ background: 'rgba(90,80,223,0.07)' }}
+        whileHover={{ background: 'rgba(90,80,223,0.14)' }}
         transition={{ duration: 0.2 }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}

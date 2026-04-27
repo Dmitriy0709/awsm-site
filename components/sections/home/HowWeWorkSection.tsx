@@ -16,10 +16,10 @@ import { STEPS } from '@/constants/steps'
 const STEP_ICONS = [MagnifyingGlass, Rocket, TrendUp, ShieldCheck] as const
 
 const STEP_COLORS = [
-  { bg: 'rgba(79,110,247,0.08)',  border: 'rgba(79,110,247,0.20)',  icon: '#4F6EF7' },
-  { bg: 'rgba(0,229,196,0.08)',   border: 'rgba(0,229,196,0.20)',   icon: '#00E5C4' },
-  { bg: 'rgba(0,229,196,0.08)',   border: 'rgba(0,229,196,0.20)',   icon: '#00E5C4' },
-  { bg: 'rgba(79,110,247,0.08)',  border: 'rgba(79,110,247,0.20)',  icon: '#4F6EF7' },
+  { bg: 'rgba(90,80,223,0.07)',  border: 'rgba(90,80,223,0.20)',  icon: '#5A50DF' },
+  { bg: 'rgba(14,168,136,0.07)', border: 'rgba(14,168,136,0.20)', icon: '#0EA888' },
+  { bg: 'rgba(14,168,136,0.07)', border: 'rgba(14,168,136,0.20)', icon: '#0EA888' },
+  { bg: 'rgba(90,80,223,0.07)',  border: 'rgba(90,80,223,0.20)',  icon: '#5A50DF' },
 ] as const
 
 export function HowWeWorkSection() {
@@ -62,7 +62,7 @@ export function HowWeWorkSection() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start:   'top 65%',
-          end:     'bottom 35%',
+          end:     'center 50%',
           scrub:   1,
         },
       })
@@ -91,27 +91,28 @@ export function HowWeWorkSection() {
     <section
       ref={sectionRef}
       id="how-we-work"
-      className="section-padding bg-base relative overflow-hidden"
+      className="section-padding bg-surface-mid relative overflow-hidden"
       aria-labelledby="how-we-work-heading"
     >
       <div className="dot-grid absolute inset-0 pointer-events-none" aria-hidden="true" />
 
       <div
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[200px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at center bottom, rgba(79,110,247,0.07) 0%, transparent 70%)' }}
+        style={{ background: 'radial-gradient(ellipse at center bottom, rgba(90,80,223,0.05) 0%, transparent 70%)' }}
         aria-hidden="true"
       />
 
       <div className="container relative">
         <FadeIn className="text-center mb-14 md:mb-18">
-          <p className="font-mono text-label text-text-muted uppercase tracking-widest mb-4">
+          <p className="font-display text-label text-text-muted uppercase tracking-widest mb-4">
             Как мы работаем
           </p>
           <h2
             id="how-we-work-heading"
             className="font-display font-bold text-heading-l md:text-display-m text-text-primary mb-4"
           >
-            Простая схема работы
+            Простая схема —{' '}
+            <span className="text-primary">понятный результат</span>
           </h2>
           <p className="font-body text-body-l text-text-secondary max-w-xl mx-auto">
             Чёткий процесс без лишних встреч. Первые результаты — через 2–3 недели после старта.
@@ -128,7 +129,7 @@ export function HowWeWorkSection() {
               ref={progressFillRef}
               className="absolute left-[calc(100%/8)] h-px"
               style={{
-                background:      'linear-gradient(90deg, #4F6EF7, #00E5C4)',
+                background:      'linear-gradient(90deg, #5A50DF, #0EA888)',
                 right:           'calc(100%/8)',
                 transform:       'scaleX(0)',
                 transformOrigin: 'left center',
@@ -162,48 +163,58 @@ export function HowWeWorkSection() {
           </div>
         </div>
 
-        {/* Cards — Framer Motion stagger (без изменений) */}
+        {/* Cards — Framer Motion stagger */}
         <StaggerContainer
           stagger={0.15}
           delay={0.2}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
         >
           {STEPS.map((step, index) => {
-            const Icon   = STEP_ICONS[index]
-            const color  = STEP_COLORS[index]
-            const isLast = index === STEPS.length - 1
+            const Icon     = STEP_ICONS[index]
+            const color    = STEP_COLORS[index]
+            const isLast   = index === STEPS.length - 1
+            const isBurst  = index === 2
 
             return (
               <StaggerItem key={step.number}>
                 <motion.article
-                  className="glass-card p-6 md:p-7 h-full flex flex-col gap-5 relative overflow-hidden"
+                  className="card-glass p-6 md:p-7 h-full flex flex-col gap-5 relative overflow-hidden"
+                  style={isBurst ? {
+                    borderColor: 'rgba(14,168,136,0.35)',
+                    background: 'rgba(14,168,136,0.03)',
+                  } : undefined}
                   whileHover={{ y: -4, borderColor: color.border }}
                   transition={{ duration: 0.2, ease: 'easeOut' }}
                 >
-                  <header className="flex items-center justify-between">
+                  {/* Иконка — правый верхний угол */}
+                  <div
+                    className="absolute top-5 right-5 w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0"
+                    style={{ background: color.bg, border: `1px solid ${color.border}` }}
+                    aria-hidden="true"
+                  >
+                    <Icon size={22} color={color.icon} weight="duotone" />
+                  </div>
+
+                  <header className="flex items-center gap-2">
                     <span
-                      className="font-mono font-bold leading-none select-none"
+                      className="font-display font-bold leading-none select-none"
                       style={{ fontSize: 'clamp(40px,4vw,56px)', color: `${color.icon}30` }}
                       aria-label={`Шаг ${step.number}`}
                     >
                       {step.number}
                     </span>
-                    <div className="flex items-center gap-2">
-                      {step.badge && (
-                        <Badge variant="secondary" size="sm" dot>{step.badge}</Badge>
-                      )}
-                      {isLast && (
-                        <Badge variant="primary" size="sm" dot>Навсегда</Badge>
-                      )}
-                    </div>
                   </header>
 
-                  <div
-                    className="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ background: color.bg, border: `1px solid ${color.border}` }}
-                    aria-hidden="true"
-                  >
-                    <Icon size={22} color={color.icon} weight="duotone" />
+                  <div className="flex flex-wrap items-center gap-2">
+                    {step.badge && (
+                      <Badge variant="secondary" size="sm" dot>{step.badge}</Badge>
+                    )}
+                    {isBurst && (
+                      <Badge variant="secondary" size="sm" dot>Взрывной рост</Badge>
+                    )}
+                    {isLast && (
+                      <Badge variant="primary" size="sm" dot>Навсегда</Badge>
+                    )}
                   </div>
 
                   <div className="flex flex-col gap-2 flex-1">
@@ -231,7 +242,7 @@ export function HowWeWorkSection() {
           {STEPS.map((step, i) => (
             <div key={step.number} className="flex items-center gap-2">
               <div
-                className="w-6 h-6 rounded-full flex items-center justify-center font-mono text-[10px] font-bold"
+                className="w-6 h-6 rounded-full flex items-center justify-center font-display text-[10px] font-bold"
                 style={{
                   background:  STEP_COLORS[i].bg,
                   border:      `1px solid ${STEP_COLORS[i].border}`,

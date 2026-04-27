@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
-import { syne, jakarta, instrument, jetbrains } from '@/lib/fonts'
+import { spaceGrotesk, inter } from '@/lib/fonts'
 import { NavigationBar } from '@/components/layout/NavigationBar'
 import { Footer } from '@/components/layout/Footer'
 import { LenisProvider } from '@/components/providers/LenisProvider'
-import { CustomCursor } from '@/components/layout/CustomCursor'
 import { PageLoader } from '@/components/layout/PageLoader'
 import './globals.css'
 
@@ -36,12 +35,11 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${syne.variable} ${jakarta.variable} ${instrument.variable} ${jetbrains.variable}`}
+      className={`${spaceGrotesk.variable} ${inter.variable}`}
     >
       <body className="bg-base text-text-primary font-body antialiased">
         <LenisProvider>
           <PageLoader />
-          <CustomCursor />
           <NavigationBar />
           <main>{children}</main>
           <Footer />

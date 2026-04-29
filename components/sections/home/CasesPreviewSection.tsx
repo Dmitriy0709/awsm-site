@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { FadeIn } from '@/components/motion/FadeIn'
@@ -33,11 +32,12 @@ export function CasesPreviewSection() {
   return (
     <section
       id="cases"
-      className="section-padding bg-base relative overflow-hidden"
+      className="section-padding bg-base relative"
       aria-labelledby="cases-heading"
     >
-      {/* Dot-grid */}
-      <div className="dot-grid absolute inset-0 pointer-events-none" aria-hidden="true" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <div className="dot-grid absolute inset-0" />
+      </div>
 
       <div className="container relative">
         {/* Heading */}
@@ -97,7 +97,7 @@ function CaseCard({ item }: { item: Case }) {
   const secondMetric = item.metrics[1]
 
   return (
-    <Link href="/cases" className="group block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-xl">
+    <div className="group block h-full rounded-xl">
       <motion.article
         className="card-glass overflow-hidden flex flex-col h-full"
         whileHover={{ y: -6 }}
@@ -144,7 +144,7 @@ function CaseCard({ item }: { item: Case }) {
 
         </div>
       </motion.article>
-    </Link>
+    </div>
   )
 }
 

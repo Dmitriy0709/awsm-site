@@ -146,7 +146,7 @@
     border: 1px solid var(--bg-border);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
-    transition: box-shadow var(--duration-slow), transform var(--duration-slow), border-color var(--duration-slow);
+    transition: box-shadow var(--duration-base) var(--ease-out-expo), transform var(--duration-slow), border-color var(--duration-slow);
   }
 
   .card-glass:hover {
@@ -266,9 +266,11 @@
   .scroll-x {
     display: flex;
     overflow-x: auto;
+    overflow-y: visible; /* prevents vertical clipping of hover transforms */
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     gap: 12px;
+    padding-top: 8px;    /* buffer so y:-4..y:-6 hover stays inside scroll container */
     padding-bottom: 4px;
   }
   .scroll-x::-webkit-scrollbar { display: none; }

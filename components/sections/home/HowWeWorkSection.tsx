@@ -91,16 +91,16 @@ export function HowWeWorkSection() {
     <section
       ref={sectionRef}
       id="how-we-work"
-      className="section-padding bg-surface-mid relative overflow-hidden"
+      className="section-padding bg-surface-mid relative"
       aria-labelledby="how-we-work-heading"
     >
-      <div className="dot-grid absolute inset-0 pointer-events-none" aria-hidden="true" />
-
-      <div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[200px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at center bottom, rgba(90,80,223,0.05) 0%, transparent 70%)' }}
-        aria-hidden="true"
-      />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <div className="dot-grid absolute inset-0" />
+        <div
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[200px]"
+          style={{ background: 'radial-gradient(ellipse at center bottom, rgba(90,80,223,0.05) 0%, transparent 70%)' }}
+        />
+      </div>
 
       <div className="container relative">
         <FadeIn className="text-center mb-14 md:mb-18">
@@ -170,10 +170,9 @@ export function HowWeWorkSection() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
         >
           {STEPS.map((step, index) => {
-            const Icon     = STEP_ICONS[index]
-            const color    = STEP_COLORS[index]
-            const isLast   = index === STEPS.length - 1
-            const isBurst  = index === 2
+            const Icon    = STEP_ICONS[index]
+            const color   = STEP_COLORS[index]
+            const isBurst = index === 2
 
             return (
               <StaggerItem key={step.number}>
@@ -195,7 +194,7 @@ export function HowWeWorkSection() {
                     <Icon size={22} color={color.icon} weight="duotone" />
                   </div>
 
-                  <header className="flex items-center gap-2">
+                  <header className="flex items-center gap-3">
                     <span
                       className="font-display font-bold leading-none select-none"
                       style={{ fontSize: 'clamp(40px,4vw,56px)', color: `${color.icon}30` }}
@@ -203,22 +202,13 @@ export function HowWeWorkSection() {
                     >
                       {step.number}
                     </span>
-                  </header>
-
-                  <div className="flex flex-wrap items-center gap-2">
                     {step.badge && (
                       <Badge variant="secondary" size="sm" dot>{step.badge}</Badge>
                     )}
-                    {isBurst && (
-                      <Badge variant="secondary" size="sm" dot>Взрывной рост</Badge>
-                    )}
-                    {isLast && (
-                      <Badge variant="primary" size="sm" dot>Навсегда</Badge>
-                    )}
-                  </div>
+                  </header>
 
                   <div className="flex flex-col gap-2 flex-1">
-                    <h3 className="font-display font-bold text-heading-s text-text-primary">
+                    <h3 className="font-display font-bold text-heading-s text-text-primary min-h-[2.5rem] flex items-center">
                       {step.title}
                     </h3>
                     <p className="font-body text-body-s text-text-secondary leading-relaxed">

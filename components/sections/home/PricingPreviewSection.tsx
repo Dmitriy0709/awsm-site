@@ -7,6 +7,7 @@ import { StaggerContainer, StaggerItem } from '@/components/motion/StaggerContai
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { PRICING_PLANS, COMBO_OFFER } from '@/constants/pricing'
+import { useLeadModal } from '@/hooks/useLeadModal'
 import { cn } from '@/lib/utils'
 import type { PricingPlan } from '@/types/pricing'
 
@@ -37,15 +38,15 @@ export function PricingPreviewSection() {
   return (
     <section
       id="pricing"
-      className="section-padding bg-surface-mid relative overflow-hidden"
+      className="section-padding bg-surface-mid relative"
       aria-labelledby="pricing-heading"
     >
-      {/* Center glow */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at center, rgba(90,80,223,0.04) 0%, transparent 65%)' }}
-        aria-hidden="true"
-      />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px]"
+          style={{ background: 'radial-gradient(ellipse at center, rgba(90,80,223,0.04) 0%, transparent 65%)' }}
+        />
+      </div>
 
       <div className="container relative">
         {/* Heading */}
@@ -63,33 +64,42 @@ export function PricingPreviewSection() {
         </FadeIn>
 
         {/* 4-card grid */}
-        <StaggerContainer
-          stagger={0.10}
-          delay={0.1}
-          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5"
-        >
-          {ALL_PLANS.map((plan) => (
-            <StaggerItem key={plan.id}>
-              <PricingCard plan={plan} typeLabel={TYPE_LABEL[plan.type]} />
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
+        <PricingGrid plans={ALL_PLANS} />
 
       </div>
     </section>
   )
 }
 
+// ─── Pricing Grid (needs hook) ───────────────────────────────────────────────
+
+function PricingGrid({ plans }: { plans: PricingPlan[] }) {
+  const { openModal } = useLeadModal()
+  return (
+    <StaggerContainer
+      stagger={0.10}
+      delay={0.1}
+      className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5"
+    >
+      {plans.map((plan) => (
+        <StaggerItem key={plan.id}>
+          <PricingCard plan={plan} typeLabel={TYPE_LABEL[plan.type]} onCta={openModal} />
+        </StaggerItem>
+      ))}
+    </StaggerContainer>
+  )
+}
+
 // ─── Pricing Card ────────────────────────────────────────────────────────────
 
-function PricingCard({ plan, typeLabel }: { plan: PricingPlan; typeLabel: string }) {
+function PricingCard({ plan, typeLabel, onCta }: { plan: PricingPlan; typeLabel: string; onCta: () => void }) {
   const isCombo = plan.id === 'combo'
 
   return (
     <motion.article
       className={cn(
         'card-glass p-6 flex flex-col h-full relative overflow-hidden',
-        plan.featured && 'card-featured',
+        plan.featured && 'card-featured scale-[1.03]',
       )}
       style={plan.featured ? {
         background: 'rgba(90,80,223,0.04)',
@@ -131,25 +141,35 @@ function PricingCard({ plan, typeLabel }: { plan: PricingPlan; typeLabel: string
         )}
       </div>
 
-      {/* Name + tagline */}
-      <h3 className="font-display font-bold text-heading-m text-text-primary mb-1">
-        {plan.name}
-      </h3>
-      <p className="font-body text-body-s text-text-secondary mb-6">
-        {plan.tagline}
-      </p>
+      {/* Name + tagline — min-h aligns price row across all cards */}
+      <div className="min-h-[5.5rem] mb-4">
+        <h3 className="font-display font-bold text-heading-m text-text-primary mb-1">
+          {plan.name}
+        </h3>
+        <p className="font-body text-body-s text-text-secondary">
+          {plan.tagline}
+        </p>
+      </div>
 
-      {/* Price */}
-      <div className="flex items-baseline gap-1.5 mb-6">
-        <span
-          className="font-display font-bold text-metric-sm"
-          style={{ color: plan.featured ? 'var(--color-primary)' : 'var(--text-primary)' }}
-        >
-          {plan.price.toLocaleString('ru-RU')}
-        </span>
-        <span className="font-body text-body-s text-text-secondary">
-          {plan.priceUnit}
-        </span>
+      {/* Price — invisible spacer keeps non-combo prices on same line as combo */}
+      <div className="mb-6">
+        <p className={cn(
+          'font-body text-body-s text-text-muted line-through mb-1',
+          !isCombo && 'invisible',
+        )}>
+          118 500 ₽
+        </p>
+        <div className="flex items-baseline gap-1.5">
+          <span
+            className="font-display font-bold text-metric-sm"
+            style={{ color: plan.featured ? 'var(--color-primary)' : 'var(--text-primary)' }}
+          >
+            {plan.price.toLocaleString('ru-RU')}
+          </span>
+          <span className="font-body text-body-s text-text-secondary">
+            {plan.priceUnit}
+          </span>
+        </div>
       </div>
 
       {/* Features */}
@@ -183,10 +203,10 @@ function PricingCard({ plan, typeLabel }: { plan: PricingPlan; typeLabel: string
       {/* CTA */}
       <div className="mt-auto">
         <Button
-          variant={plan.featured ? 'primary' : isCombo ? 'secondary' : 'secondary'}
+          variant={plan.featured ? 'primary' : 'secondary'}
           size="md"
           className="w-full"
-          href="/audit"
+          onClick={onCta}
         >
           {plan.ctaLabel}
         </Button>

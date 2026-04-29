@@ -13,18 +13,17 @@ export function AudienceSection() {
   return (
     <section
       id="audience"
-      className="section-padding bg-surface-mid relative overflow-hidden"
+      className="section-padding bg-surface-mid relative"
       aria-labelledby="audience-heading"
     >
-      {/* Dot-grid texture */}
-      <div className="dot-grid absolute inset-0 pointer-events-none" aria-hidden="true" />
-
-      {/* Glow top-center */}
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at center top, rgba(90,80,223,0.06) 0%, transparent 70%)' }}
-        aria-hidden="true"
-      />
+      {/* Decorative layer — clipped separately so card hover isn't cut off */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <div className="dot-grid absolute inset-0" />
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px]"
+          style={{ background: 'radial-gradient(ellipse at center top, rgba(90,80,223,0.06) 0%, transparent 70%)' }}
+        />
+      </div>
 
       <div className="container relative">
         {/* Heading */}
@@ -52,7 +51,7 @@ export function AudienceSection() {
           <StaggerContainer
             stagger={0.08}
             delay={0.1}
-            className="grid grid-cols-2 gap-4 md:hidden"
+            className="grid grid-cols-2 sm:grid-cols-3 gap-4 md:hidden pt-2 -mt-2"
           >
             {AUDIENCE.map((item) => (
               <StaggerItem key={item.id}>
@@ -89,20 +88,6 @@ export function AudienceSection() {
           </div>
         </div>
 
-        {/* Quote */}
-        <FadeIn delay={0.4} className="mt-14 md:mt-18">
-          <blockquote className="text-center max-w-2xl mx-auto">
-            <p className="font-serif italic text-quote text-text-primary leading-relaxed">
-              <span className="text-secondary font-serif not-italic mr-1" aria-hidden="true">
-                &ldquo;
-              </span>
-              Работает для всех: от ремонта обуви без вывески до федеральной сети
-              <span className="text-secondary font-serif not-italic ml-1" aria-hidden="true">
-                &rdquo;
-              </span>
-            </p>
-          </blockquote>
-        </FadeIn>
       </div>
     </section>
   )

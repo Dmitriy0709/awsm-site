@@ -7,6 +7,7 @@ import { List, X } from '@phosphor-icons/react'
 import { cn } from '@/lib/utils'
 import { NAV_LINKS, CTA_LINK } from '@/constants/navigation'
 import { Button } from '@/components/ui/Button'
+import { useLeadModal } from '@/hooks/useLeadModal'
 
 const menuVariants = {
   hidden:  { opacity: 0, height: 0, y: -8 },
@@ -29,6 +30,7 @@ const linkVariants = {
 export function NavigationBar() {
   const [scrolled,   setScrolled]   = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const { openModal } = useLeadModal()
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 60)
@@ -92,7 +94,7 @@ export function NavigationBar() {
             <Button
               variant="primary"
               size="sm"
-              href={CTA_LINK.href}
+              onClick={openModal}
               className="!bg-text-primary !text-white !shadow-none hover:!opacity-80 hover:!translate-y-0 !rounded-full"
             >
               {CTA_LINK.label}
@@ -143,7 +145,7 @@ export function NavigationBar() {
                 </motion.div>
               ))}
               <motion.div variants={linkVariants} className="pt-2">
-                <Button variant="primary" size="md" className="w-full !bg-text-primary !text-white !shadow-none hover:!opacity-80 hover:!translate-y-0 !rounded-full" href={CTA_LINK.href} onClick={() => setMobileOpen(false)}>
+                <Button variant="primary" size="md" className="w-full !bg-text-primary !text-white !shadow-none hover:!opacity-80 hover:!translate-y-0 !rounded-full" onClick={() => { setMobileOpen(false); openModal() }}>
                   {CTA_LINK.label}
                 </Button>
               </motion.div>

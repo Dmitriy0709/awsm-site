@@ -4,6 +4,8 @@ import { NavigationBar } from '@/components/layout/NavigationBar'
 import { Footer } from '@/components/layout/Footer'
 import { LenisProvider } from '@/components/providers/LenisProvider'
 import { PageLoader } from '@/components/layout/PageLoader'
+import { LeadModalProvider } from '@/hooks/useLeadModal'
+import { LeadModal } from '@/components/ui/LeadModal'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -39,10 +41,13 @@ export default function RootLayout({
     >
       <body className="bg-base text-text-primary font-body antialiased">
         <LenisProvider>
-          <PageLoader />
-          <NavigationBar />
-          <main>{children}</main>
-          <Footer />
+          <LeadModalProvider>
+            <PageLoader />
+            <NavigationBar />
+            <LeadModal />
+            <main>{children}</main>
+            <Footer />
+          </LeadModalProvider>
         </LenisProvider>
       </body>
     </html>

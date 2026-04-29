@@ -1,6 +1,9 @@
+'use client'
+
 import Link from 'next/link'
 import { PLACEHOLDERS } from '@/constants/placeholders'
 import { NAV_LINKS } from '@/constants/navigation'
+import { useLeadModal } from '@/hooks/useLeadModal'
 
 const LEGAL_LINKS = [
   { label: 'Политика конфиденциальности', href: '/privacy' },
@@ -8,6 +11,7 @@ const LEGAL_LINKS = [
 ]
 
 export function Footer() {
+  const { openModal } = useLeadModal()
   return (
     <footer className="bg-surface border-t border-border">
       <div className="container py-12 md:py-16">
@@ -42,12 +46,13 @@ export function Footer() {
                 </li>
               ))}
               <li>
-                <Link
-                  href="/audit"
+                <button
+                  type="button"
+                  onClick={openModal}
                   className="text-cta hover:text-cta-hover text-body-s font-body font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/40 rounded-sm"
                 >
                   Получить аудит →
-                </Link>
+                </button>
               </li>
             </ul>
           </div>

@@ -104,7 +104,7 @@ export function ProblemSolutionSection() {
             >
               <header className="mb-6">
                 <p className="font-display text-label uppercase tracking-widest text-primary mb-4">
-                  Решение AWSM
+                  РЕШЕНИЕ
                 </p>
                 <h3 className="font-display font-bold text-heading-l text-text-primary">
                   Мы превращаем карточку в источник постоянного трафика

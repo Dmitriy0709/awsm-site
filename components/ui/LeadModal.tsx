@@ -82,7 +82,7 @@ export function LeadModal() {
         <>
           <motion.div
             key="backdrop"
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-50 bg-black/40 backdrop-blur-md"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -98,7 +98,7 @@ export function LeadModal() {
             aria-labelledby="lead-modal-title"
           >
             <motion.div
-              className="relative bg-surface rounded-2xl shadow-2xl w-full max-w-md p-8 border border-border"
+              className="relative bg-white/80 backdrop-blur-2xl rounded-[28px] shadow-[var(--shadow-card-hover),inset_0_1px_1px_rgba(255,255,255,1)] w-full max-w-md p-8 border border-white/20"
               initial={{ opacity: 0, scale: 0.96, y: 12 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 12 }}
@@ -115,8 +115,8 @@ export function LeadModal() {
 
               {submitted ? (
                 <div className="text-center py-6">
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ background: 'rgba(14,168,136,0.10)' }}>
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0EA888" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ background: 'rgba(0,0,0,0.05)' }}>
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   </div>
@@ -155,7 +155,7 @@ export function LeadModal() {
                         })}
                       />
                       {errors.name && (
-                        <p className="mt-1.5 font-body text-caption" style={{ color: 'var(--color-error)' }}>
+                        <p className="mt-1.5 font-body text-caption text-text-muted">
                           {errors.name.message}
                         </p>
                       )}
@@ -186,14 +186,14 @@ export function LeadModal() {
                         )}
                       />
                       {errors.phone && (
-                        <p className="mt-1.5 font-body text-caption" style={{ color: 'var(--color-error)' }}>
+                        <p className="mt-1.5 font-body text-caption text-text-muted">
                           {errors.phone.message}
                         </p>
                       )}
                     </div>
 
                     {submitError && (
-                      <p className="font-body text-body-s text-center" style={{ color: 'var(--color-error)' }}>
+                      <p className="font-body text-body-s text-center text-text-muted">
                         {submitError}
                       </p>
                     )}

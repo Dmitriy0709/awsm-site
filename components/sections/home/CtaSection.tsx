@@ -58,19 +58,12 @@ export function CtaSection() {
   return (
     <section
       id="cta"
-      className="section-padding relative overflow-hidden"
-      style={{ background: '#17152E' }}
+      className="section-padding relative overflow-hidden bg-black"
       aria-labelledby="cta-heading"
     >
-      {/* Radial glows */}
+      {/* Subtle neutral radial glow */}
       <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: [
-            'radial-gradient(ellipse 50% 80% at 80% 50%, rgba(90,80,223,0.15) 0%, transparent 60%)',
-            'radial-gradient(ellipse 40% 60% at 10% 50%, rgba(14,168,136,0.10) 0%, transparent 60%)',
-          ].join(', '),
-        }}
+        className="absolute inset-0 pointer-events-none bg-white/[0.03] blur-3xl rounded-full"
         aria-hidden="true"
       />
 
@@ -86,7 +79,7 @@ export function CtaSection() {
             </h2>
             <p
               className="font-body text-body-xl leading-relaxed mb-8"
-              style={{ color: 'rgba(255,255,255,0.55)' }}
+              style={{ color: 'rgba(255,255,255,0.50)' }}
             >
               Бесплатный экспресс-аудит за 24 часа. Покажем, где вы теряете
               клиентов прямо сейчас.
@@ -94,14 +87,14 @@ export function CtaSection() {
 
             {submitted ? (
               <div className="flex items-center gap-3 py-4">
-                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(14,168,136,0.20)' }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0EA888" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(255,255,255,0.10)' }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </div>
                 <div>
                   <p className="font-display font-semibold text-white">Заявка принята!</p>
-                  <p className="font-body text-body-s" style={{ color: 'rgba(255,255,255,0.55)' }}>
+                  <p className="font-body text-body-s" style={{ color: 'rgba(255,255,255,0.50)' }}>
                     Свяжемся в течение 24 часов.
                   </p>
                 </div>
@@ -114,15 +107,14 @@ export function CtaSection() {
                       type="text"
                       autoComplete="name"
                       placeholder="Ваше имя"
-                      className={`w-full h-11 px-4 rounded-lg border font-body text-body-m placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-primary/40 transition-colors ${errors.name ? 'border-error/60 bg-white/5' : 'border-white/15 bg-white/8 text-white'}`}
-                      style={{ background: 'rgba(255,255,255,0.08)', color: 'white' }}
+                      className={`w-full h-11 px-4 rounded-lg border font-body text-body-m placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-white/20 transition-colors ${errors.name ? 'border-white/50 bg-white/5' : 'border-white/20 bg-white/5 text-white'}`}
                       {...register('name', {
                         required: 'Введите имя',
                         minLength: { value: 2, message: 'Минимум 2 символа' },
                       })}
                     />
                     {errors.name && (
-                      <p className="mt-1 font-body text-caption" style={{ color: 'rgba(255,120,120,0.9)' }}>
+                      <p className="mt-1 font-body text-caption text-white/80">
                         {errors.name.message}
                       </p>
                     )}
@@ -141,8 +133,7 @@ export function CtaSection() {
                           type="tel"
                           autoComplete="tel"
                           placeholder="+7 (___) ___-__-__"
-                          className={`w-full h-11 px-4 rounded-lg border font-body text-body-m placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-primary/40 transition-colors ${errors.phone ? 'border-error/60' : 'border-white/15'}`}
-                          style={{ background: 'rgba(255,255,255,0.08)', color: 'white' }}
+                          className={`w-full h-11 px-4 rounded-lg border font-body text-body-m placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-white/20 transition-colors ${errors.phone ? 'border-white/50 bg-white/5' : 'border-white/20 bg-white/5 text-white'}`}
                           value={field.value ?? ''}
                           onChange={(e) => field.onChange(formatPhone(e.target.value))}
                           onBlur={field.onBlur}
@@ -150,7 +141,7 @@ export function CtaSection() {
                       )}
                     />
                     {errors.phone && (
-                      <p className="mt-1 font-body text-caption" style={{ color: 'rgba(255,120,120,0.9)' }}>
+                      <p className="mt-1 font-body text-caption text-white/80">
                         {errors.phone.message}
                       </p>
                     )}
@@ -158,22 +149,22 @@ export function CtaSection() {
 
                   <Button
                     type="submit"
-                    variant="ctaLight"
+                    variant="outline"
                     size="md"
                     loading={isSubmitting}
-                    className="sm:flex-shrink-0"
+                    className="sm:flex-shrink-0 bg-white text-black border-white hover:bg-white/90 hover:text-black"
                   >
                     Получить аудит →
                   </Button>
                 </div>
 
                 {submitError && (
-                  <p className="font-body text-body-s" style={{ color: 'rgba(255,120,120,0.9)' }}>
+                  <p className="font-body text-body-s text-white/80">
                     {submitError}
                   </p>
                 )}
 
-                <p className="font-body text-caption" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                <p className="font-body text-caption text-white/30">
                   Нажимая кнопку, вы соглашаетесь с{' '}
                   <a href="/privacy" className="underline hover:opacity-70 transition-opacity">
                     политикой конфиденциальности

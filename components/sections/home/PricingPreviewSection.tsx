@@ -43,8 +43,7 @@ export function PricingPreviewSection() {
     >
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px]"
-          style={{ background: 'radial-gradient(ellipse at center, rgba(90,80,223,0.04) 0%, transparent 65%)' }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-surface-mid/30 rounded-full blur-3xl"
         />
       </div>
 
@@ -58,8 +57,7 @@ export function PricingPreviewSection() {
             id="pricing-heading"
             className="font-display font-bold text-heading-l md:text-display-m text-text-primary"
           >
-            Прозрачные цены,{' '}
-            <span className="text-primary">без скрытых платежей</span>
+            Прозрачные цены, без скрытых платежей
           </h2>
         </FadeIn>
 
@@ -102,11 +100,11 @@ function PricingCard({ plan, typeLabel, onCta }: { plan: PricingPlan; typeLabel:
         plan.featured && 'card-featured scale-[1.03]',
       )}
       style={plan.featured ? {
-        background: 'rgba(90,80,223,0.04)',
-        borderColor: 'rgba(90,80,223,0.35)',
+        background: 'rgba(0,0,0,0.05)',
+        borderColor: 'rgba(0,0,0,0.2)',
       } : isCombo ? {
-        background: 'rgba(14,168,136,0.03)',
-        borderColor: 'rgba(14,168,136,0.18)',
+        background: 'rgba(0,0,0,0.03)',
+        borderColor: 'rgba(0,0,0,0.1)',
       } : undefined}
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2, ease: 'easeOut' }}
@@ -114,7 +112,7 @@ function PricingCard({ plan, typeLabel, onCta }: { plan: PricingPlan; typeLabel:
       {/* Featured top accent line */}
       {plan.featured && (
         <div
-          className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-accent"
+          className="absolute top-0 left-0 right-0 h-[2px] bg-black"
           aria-hidden="true"
         />
       )}
@@ -122,8 +120,7 @@ function PricingCard({ plan, typeLabel, onCta }: { plan: PricingPlan; typeLabel:
       {/* Combo top accent line */}
       {isCombo && (
         <div
-          className="absolute top-0 left-0 right-0 h-[2px]"
-          style={{ background: 'linear-gradient(90deg, #0EA888, #5A50DF)' }}
+          className="absolute top-0 left-0 right-0 h-[2px] bg-zinc-400"
           aria-hidden="true"
         />
       )}
@@ -134,10 +131,10 @@ function PricingCard({ plan, typeLabel, onCta }: { plan: PricingPlan; typeLabel:
           {typeLabel}
         </span>
         {plan.featured && (
-          <Badge variant="cta" size="sm" dot>ХИТ</Badge>
+          <Badge variant="outline" size="sm" className="bg-black text-white border-black" dot>ХИТ</Badge>
         )}
         {isCombo && (
-          <Badge variant="secondary" size="sm" dot>Выгода</Badge>
+          <Badge variant="outline" size="sm" dot>Выгода</Badge>
         )}
       </div>
 
@@ -161,8 +158,7 @@ function PricingCard({ plan, typeLabel, onCta }: { plan: PricingPlan; typeLabel:
         </p>
         <div className="flex items-baseline gap-1.5">
           <span
-            className="font-display font-bold text-metric-sm"
-            style={{ color: plan.featured ? 'var(--color-primary)' : 'var(--text-primary)' }}
+            className="font-display font-bold text-metric-sm text-text-primary"
           >
             {plan.price.toLocaleString('ru-RU')}
           </span>
@@ -177,20 +173,13 @@ function PricingCard({ plan, typeLabel, onCta }: { plan: PricingPlan; typeLabel:
         {plan.features.map((feature) => (
           <li key={feature} className="flex items-start gap-2.5">
             <span
-              className="flex-shrink-0 mt-0.5 w-4 h-4 rounded-full flex items-center justify-center"
-              style={{
-                background: plan.featured
-                  ? 'rgba(90,80,223,0.12)'
-                  : isCombo
-                  ? 'rgba(14,168,136,0.10)'
-                  : 'rgba(10,144,96,0.08)',
-              }}
+              className="flex-shrink-0 mt-0.5 w-4 h-4 rounded-full flex items-center justify-center bg-zinc-100"
               aria-hidden="true"
             >
               <Check
                 size={10}
                 weight="bold"
-                color={plan.featured ? '#5A50DF' : isCombo ? '#0EA888' : '#0A9060'}
+                className="text-black"
               />
             </span>
             <span className="font-body text-body-s text-text-secondary leading-snug">
@@ -203,7 +192,7 @@ function PricingCard({ plan, typeLabel, onCta }: { plan: PricingPlan; typeLabel:
       {/* CTA */}
       <div className="mt-auto">
         <Button
-          variant={plan.featured ? 'primary' : 'secondary'}
+          variant={plan.featured ? 'primary' : 'outline'}
           size="md"
           className="w-full"
           onClick={onCta}

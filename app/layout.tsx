@@ -39,7 +39,13 @@ export default function RootLayout({
       lang="ru"
       className={`${spaceGrotesk.variable} ${inter.variable}`}
     >
-      <body className="bg-base text-text-primary font-body antialiased">
+      <body className="bg-base text-text-primary font-body antialiased selection:bg-black/5">
+        {/* Global Noise Texture */}
+        <div 
+          className="fixed inset-0 z-[9999] opacity-[0.03] pointer-events-none" 
+          style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }}
+        />
+        
         <LenisProvider>
           <LeadModalProvider>
             <PageLoader />

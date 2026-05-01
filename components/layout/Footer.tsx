@@ -20,7 +20,7 @@ export function Footer() {
           <div>
             <Link href="/" aria-label="AWSM — на главную" className="inline-block mb-3 rounded-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/40">
               <span className="font-display font-bold text-heading-s text-text-primary">
-                AW<span className="text-cta">S</span>M
+                AWSM
               </span>
             </Link>
             <p className="text-text-muted text-body-s font-body leading-relaxed max-w-xs">
@@ -49,7 +49,7 @@ export function Footer() {
                 <button
                   type="button"
                   onClick={openModal}
-                  className="text-cta hover:text-cta-hover text-body-s font-body font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/40 rounded-sm"
+                  className="text-text-primary hover:opacity-80 text-body-s font-body font-medium transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/40 rounded-sm"
                 >
                   Получить аудит →
                 </button>

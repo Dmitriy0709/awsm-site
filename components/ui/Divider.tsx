@@ -18,8 +18,8 @@ export function Divider({ variant = 'solid', spacing = 'md', className }: Divide
       className={cn(
         'border-none h-px w-full',
         variant === 'solid'    && 'bg-border',
-        variant === 'gradient' && 'bg-gradient-to-r from-transparent via-border to-transparent',
-        variant === 'glow'     && 'bg-gradient-to-r from-transparent via-primary/40 to-transparent',
+        variant === 'gradient' && 'bg-border/50',
+        variant === 'glow'     && 'bg-primary/20',
         spacings[spacing],
         className,
       )}

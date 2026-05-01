@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 
 const LETTERS = [
-  { char: 'A', color: '#F0F2FF' },
-  { char: 'W', color: '#5E75E6' },
-  { char: 'S', color: '#00BFA8' },
-  { char: 'M', color: '#E47040' },
+  { char: 'A', color: '#FFFFFF' },
+  { char: 'W', color: '#FFFFFF' },
+  { char: 'S', color: '#FFFFFF' },
+  { char: 'M', color: '#FFFFFF' },
 ] as const
 
 export function PageLoader() {
@@ -39,7 +39,7 @@ export function PageLoader() {
             position:        'fixed',
             inset:            0,
             zIndex:           9000,
-            backgroundColor: '#080C14',
+            backgroundColor: '#000000',
             display:         'flex',
             alignItems:      'center',
             justifyContent:  'center',

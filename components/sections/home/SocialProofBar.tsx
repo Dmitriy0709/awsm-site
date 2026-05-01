@@ -78,17 +78,13 @@ export function SocialProofBar() {
   const reduceMotion = useReducedMotion() ?? false
 
   return (
-    <section aria-label="Ключевые результаты" className="bg-base border-y border-border">
-      <div className="container py-10 md:py-12">
-        {/*
-          gap-px + bg-border = тонкие разделители между ячейками.
-          overflow-hidden не позволяет угловым зазорам выходить за радиус.
-        */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border">
+    <section aria-label="Ключевые результаты" className="py-10 md:py-12 bg-base border-y border-border relative overflow-hidden">
+      <div className="container relative">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border md:border-x border-border">
           {METRICS.map((metric, i) => (
             <div
               key={metric.value}
-              className="bg-surface flex flex-col items-center justify-center text-center gap-2 px-6 py-8 md:px-8 md:py-10"
+              className="bg-base flex flex-col items-center justify-center text-center gap-1.5 py-6 md:py-8"
             >
               <AnimatedCounter
                 metric={metric}

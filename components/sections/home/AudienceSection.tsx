@@ -1,13 +1,27 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { 
+  Car, 
+  Sparkle, 
+  FirstAid, 
+  ForkKnife, 
+  Briefcase, 
+  Baby 
+} from '@phosphor-icons/react'
 import { FadeIn } from '@/components/motion/FadeIn'
 import { StaggerContainer, StaggerItem } from '@/components/motion/StaggerContainer'
-import { AUDIENCE } from '@/constants/audience'
+import { AUDIENCE, type AudienceItem } from '@/constants/audience'
+import { fixTypography } from '@/lib/utils'
 
-// CSS filter: чёрный → Electric Indigo #5A50DF
-const ICON_FILTER =
-  'brightness(0) saturate(100%) invert(28%) sepia(80%) saturate(1000%) hue-rotate(226deg) brightness(98%) contrast(95%)'
+const ICON_MAP = {
+  auto: Car,
+  beauty: Sparkle,
+  health: FirstAid,
+  food: ForkKnife,
+  services: Briefcase,
+  kids: Baby,
+} as const
 
 export function AudienceSection() {
   return (
@@ -16,18 +30,29 @@ export function AudienceSection() {
       className="section-padding bg-base relative"
       aria-labelledby="audience-heading"
     >
-      {/* Decorative layer — clipped separately so card hover isn't cut off */}
+      {/* Decorative layer */}
+      {/* Zen Depth Blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        <div className="dot-grid absolute inset-0" />
-        <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px]"
-          style={{ background: 'radial-gradient(ellipse at center top, rgba(90,80,223,0.06) 0%, transparent 70%)' }}
+        <motion.div
+          animate={{
+            x: [0, 40, 0],
+            y: [0, 20, 0],
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[10%] right-[10%] w-[500px] h-[500px] bg-blue-50/50 rounded-full blur-[100px]"
+        />
+        <motion.div
+          animate={{
+            x: [0, -40, 0],
+            y: [0, -20, 0],
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute bottom-[10%] left-[5%] w-[600px] h-[600px] bg-sky-50/40 rounded-full blur-[120px]"
         />
       </div>
 
       <div className="container relative">
-        {/* Heading */}
-        <FadeIn className="text-center mb-12 md:mb-16">
+        <FadeIn className="text-center mb-16 md:mb-20">
           <p className="font-display text-label text-text-muted uppercase tracking-widest mb-4">
             Целевая аудитория
           </p>
@@ -35,101 +60,66 @@ export function AudienceSection() {
             id="audience-heading"
             className="font-display font-bold text-heading-l md:text-display-m text-text-primary mb-4"
           >
-            Кому необходим ТОП{' '}
-            <span className="text-primary">
-              в геосервисах?
-            </span>
+            Кому необходим ТОП в геосервисах?
           </h2>
           <p className="font-body text-body-l text-text-secondary max-w-xl mx-auto">
             Всем, чьи клиенты находятся в радиусе 2–3 км от точки продаж
           </p>
         </FadeIn>
 
-        {/* Cards — mobile: grid 2×3, desktop: horizontal scroll */}
-        <div className="relative">
-          {/* Mobile grid */}
-          <StaggerContainer
-            stagger={0.08}
-            delay={0.1}
-            className="grid grid-cols-2 sm:grid-cols-3 gap-4 md:hidden pt-2 -mt-2"
-          >
-            {AUDIENCE.map((item) => (
-              <StaggerItem key={item.id}>
-                <AudienceCard item={item} />
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-
-          {/* Desktop horizontal scroll */}
-          <div className="hidden md:block">
-            {/* Fade edges */}
-            <div
-              className="absolute left-0 top-0 bottom-4 w-12 z-10 pointer-events-none"
-              style={{ background: 'linear-gradient(to right, #FAFAFE, transparent)' }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute right-0 top-0 bottom-4 w-12 z-10 pointer-events-none"
-              style={{ background: 'linear-gradient(to left, #FAFAFE, transparent)' }}
-              aria-hidden="true"
-            />
-
-            <StaggerContainer
-              stagger={0.08}
-              delay={0.1}
-              className="scroll-x !gap-5 !pb-4 px-2"
+        <StaggerContainer
+          stagger={0.08}
+          delay={0.1}
+          className="flex lg:grid overflow-x-auto lg:overflow-visible snap-x snap-mandatory lg:snap-none gap-6 pt-2 pb-12 lg:pb-0 -mx-4 px-4 lg:mx-0 lg:px-0 scrollbar-hide grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          {AUDIENCE.map((item) => (
+            <StaggerItem
+              key={item.id}
+              className="min-w-[85%] sm:min-w-[45%] lg:min-w-0 snap-center"
             >
-              {AUDIENCE.map((item) => (
-                <StaggerItem key={item.id} className="flex-shrink-0 w-[220px]">
-                  <AudienceCard item={item} />
-                </StaggerItem>
-              ))}
-            </StaggerContainer>
-          </div>
-        </div>
-
+              <AudienceCard item={item} />
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
       </div>
     </section>
   )
 }
 
 interface AudienceCardProps {
-  item: (typeof AUDIENCE)[number]
+  item: AudienceItem
 }
 
 function AudienceCard({ item }: AudienceCardProps) {
+  const Icon = ICON_MAP[item.id as keyof typeof ICON_MAP] || Briefcase
+
   return (
     <motion.div
-      className="card-glass p-5 md:p-6 text-center flex flex-col items-center gap-3 cursor-default h-full"
-      whileHover={{ y: -4, borderColor: 'rgba(90,80,223,0.35)' }}
+      className="card-glass p-6 sm:p-8 flex flex-col gap-8 cursor-default h-full relative overflow-hidden"
+      whileHover={{ y: -6 }}
       transition={{ duration: 0.2, ease: 'easeOut' }}
     >
-      {/* Icon wrapper */}
-      <motion.div
-        className="w-12 h-12 rounded-lg flex items-center justify-center"
-        style={{ background: 'rgba(90,80,223,0.07)' }}
-        whileHover={{ background: 'rgba(90,80,223,0.14)' }}
-        transition={{ duration: 0.2 }}
+      <div
+        className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+        style={{ background: 'rgba(0,0,0,0.05)', border: '1px solid rgba(0,0,0,0.1)' }}
+        aria-hidden="true"
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={item.icon}
-          alt=""
-          width={28}
-          height={28}
-          style={{ filter: ICON_FILTER }}
-          aria-hidden="true"
-        />
-      </motion.div>
+        <Icon size={24} className="text-text-primary" />
+      </div>
 
-      <div>
-        <p className="font-display font-semibold text-body-m text-text-primary mb-1">
-          {item.title}
-        </p>
-        <p className="font-body text-body-s text-text-secondary leading-snug">
-          {item.description}
+      <div className="flex flex-col gap-3">
+        <h3 className="font-display font-bold text-heading-s text-text-primary min-h-[3rem] flex items-center">
+          {fixTypography(item.title)}
+        </h3>
+        <p className="font-body text-body-s text-text-secondary leading-relaxed">
+          {fixTypography(item.description)}
         </p>
       </div>
+
+      <div
+        className="absolute -bottom-8 -right-8 w-28 h-28 rounded-full pointer-events-none bg-surface-mid/50 blur-2xl"
+        aria-hidden="true"
+      />
     </motion.div>
   )
 }

@@ -66,7 +66,7 @@ export function AuditForm() {
           <div className="card-glow p-8 md:p-10 relative overflow-hidden">
             <div
               className="absolute top-0 left-0 right-0 h-[2px]"
-              style={{ background: 'linear-gradient(90deg, #FF6B35, #4F6EF7)' }}
+              style={{ background: '#000000' }}
               aria-hidden="true"
             />
 
@@ -84,9 +84,9 @@ export function AuditForm() {
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.1, type: 'spring', stiffness: 200, damping: 15 }}
                     className="w-16 h-16 rounded-full flex items-center justify-center"
-                    style={{ background: 'rgba(0,196,122,0.12)', border: '1px solid rgba(0,196,122,0.25)' }}
+                    style={{ background: 'rgba(0,0,0,0.05)', border: '1px solid rgba(0,0,0,0.1)' }}
                   >
-                    <CheckCircle size={32} weight="duotone" color="#00D084" aria-hidden="true" />
+                    <CheckCircle size={32} weight="duotone" color="#000000" aria-hidden="true" />
                   </motion.div>
                   <div>
                     <h3 className="font-display font-bold text-heading-m text-text-primary mb-2">
@@ -163,11 +163,11 @@ export function AuditForm() {
                           animate={{ opacity: 1, height: 'auto' }}
                           exit={{ opacity: 0, height: 0 }}
                           className="flex items-start gap-2 p-3 rounded-lg"
-                          style={{ background: 'rgba(255,77,106,0.08)', border: '1px solid rgba(255,77,106,0.20)' }}
+                          style={{ background: 'rgba(0,0,0,0.05)', border: '1px solid rgba(0,0,0,0.1)' }}
                           role="alert"
                         >
-                          <Warning size={16} color="#FF4D6A" className="flex-shrink-0 mt-0.5" aria-hidden="true" />
-                          <p className="font-body text-body-s text-error">{errorMsg}</p>
+                          <Warning size={16} color="#666666" className="flex-shrink-0 mt-0.5" aria-hidden="true" />
+                          <p className="font-body text-body-s text-text-secondary">{errorMsg}</p>
                         </motion.div>
                       )}
                     </AnimatePresence>

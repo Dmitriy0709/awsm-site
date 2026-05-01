@@ -18,11 +18,9 @@ type GradientBackgroundProps = React.ComponentProps<'div'> & {
 };
 
 const Default_Gradients = [
-    "linear-gradient(135deg, #2d1b69 0%, #11998e 100%)",
-    "linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%)",
-    "linear-gradient(135deg, #0f3460 0%, #e94560 100%)",
-    "linear-gradient(135deg, #134e5e 0%, #71b280 100%)",
-    "linear-gradient(135deg, #2d1b69 0%, #11998e 100%)",
+    "#FFFFFF",
+    "#F8F8F8",
+    "#F2F2F2",
   ]
 
 export function GradientBackground({

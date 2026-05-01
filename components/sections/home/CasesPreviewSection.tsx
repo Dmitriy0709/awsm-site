@@ -18,12 +18,12 @@ const CATEGORY_LABELS: Record<string, string> = {
 }
 
 const CATEGORY_BADGE_VARIANT = {
-  beauty:   'secondary',
-  auto:     'primary',
-  food:     'cta',
-  health:   'success',
-  services: 'muted',
-  kids:     'secondary',
+  beauty:   'outline',
+  auto:     'outline',
+  food:     'outline',
+  health:   'outline',
+  services: 'outline',
+  kids:     'outline',
 } as const
 
 export function CasesPreviewSection() {
@@ -41,7 +41,7 @@ export function CasesPreviewSection() {
 
       <div className="container relative">
         {/* Heading */}
-        <FadeIn className="text-center mb-12 md:mb-16">
+        <FadeIn className="text-center mb-20">
           <p className="font-display text-label text-text-muted uppercase tracking-widest mb-4">
             Кейсы
           </p>
@@ -49,10 +49,7 @@ export function CasesPreviewSection() {
             id="cases-heading"
             className="font-display font-bold text-heading-l md:text-display-m text-text-primary"
           >
-            Результаты{' '}
-            <span className="text-secondary">
-              говорят громче слов
-            </span>
+            Результаты говорят громче слов
           </h2>
         </FadeIn>
 
@@ -97,11 +94,11 @@ function CaseCard({ item }: { item: Case }) {
   const secondMetric = item.metrics[1]
 
   return (
-    <div className="group block h-full rounded-xl">
+    <div className="group block h-full">
       <motion.article
         className="card-glass overflow-hidden flex flex-col h-full"
         whileHover={{ y: -6 }}
-        transition={{ duration: 0.22, ease: 'easeOut' }}
+        transition={{ duration: 0.2, ease: 'easeOut' }}
       >
         {/* Image — 16:9 */}
         <div
@@ -113,25 +110,25 @@ function CaseCard({ item }: { item: Case }) {
             alt={item.title}
             fill
             sizes="(max-width: 768px) 300px, (max-width: 1280px) 33vw, 400px"
-            className="object-cover"
+            className="object-cover transition-transform duration-slow group-hover:scale-105"
           />
-          <div className="absolute top-3 left-3 z-10">
-            <Badge variant={badgeVariant} size="sm">
+          <div className="absolute top-4 left-4 z-10">
+            <Badge variant={badgeVariant} size="sm" className="bg-white/80 backdrop-blur-md border-none px-3 py-1 text-[10px] uppercase tracking-wider font-bold text-black shadow-sm">
               {CATEGORY_LABELS[item.category]}
             </Badge>
           </div>
         </div>
 
         {/* Content */}
-        <div className="p-6 flex flex-col flex-1 gap-4">
+        <div className="p-8 flex flex-col flex-1 gap-6">
           <div>
-            <h3 className="font-display font-bold text-heading-s text-text-primary mb-1">
+            <h3 className="font-display font-bold text-heading-s text-text-primary mb-2">
               {item.title}
             </h3>
             <p className="font-body text-body-s text-text-muted">{item.city}</p>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 py-4 border-y border-border">
+          <div className="grid grid-cols-2 gap-4 py-5 border-y border-border/50">
             <MetricCell value={mainMetric.value} label={mainMetric.label} primary />
             {secondMetric && (
               <MetricCell value={secondMetric.value} label={secondMetric.label} />
@@ -161,7 +158,7 @@ function MetricCell({
 }) {
   return (
     <div>
-      <p className={`font-display font-bold text-metric-sm leading-none mb-1 ${primary ? 'text-secondary' : 'text-primary'}`}>
+      <p className="font-display font-bold text-metric-sm leading-none mb-1 text-text-primary">
         {value}
       </p>
       <p className="font-body text-caption text-text-muted leading-snug">{label}</p>

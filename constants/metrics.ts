@@ -14,7 +14,7 @@ export const METRICS: Metric[] = [
     suffix:   '%',
     label:    'рост переходов',
     sublabel: 'рекорд клиента',
-    color:    'var(--color-secondary)',
+    color:    '#000000',
   },
   {
     value:    'ТОП-1',
@@ -22,7 +22,7 @@ export const METRICS: Metric[] = [
     suffix:   '',
     label:    'позиция в районе',
     sublabel: 'срок — 3 недели',
-    color:    'var(--color-primary)',
+    color:    '#000000',
   },
   {
     value:    '27 500+',
@@ -30,7 +30,7 @@ export const METRICS: Metric[] = [
     suffix:   '+',
     label:    'просмотров добавлено',
     sublabel: 'ежемесячно',
-    color:    'var(--color-cta)',
+    color:    '#000000',
   },
   {
     value:    '100+',
@@ -38,6 +38,6 @@ export const METRICS: Metric[] = [
     suffix:   '+',
     label:    'клиентов',
     sublabel: 'активных проектов',
-    color:    'var(--text-primary)',
+    color:    '#000000',
   },
 ]

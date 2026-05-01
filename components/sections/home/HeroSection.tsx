@@ -2,7 +2,8 @@
 
 import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
-import { Button, GradientBackground, MagneticButton } from '@/components/ui'
+import { Button, BackgroundGradientAnimation, MagneticButton } from '@/components/ui'
+import { ButtonColorful } from '@/components/ui/ButtonColorful'
 import { useLeadModal } from '@/hooks/useLeadModal'
 
 export function HeroSection() {
@@ -10,13 +11,10 @@ export function HeroSection() {
   const { openModal } = useLeadModal()
 
   return (
-    <GradientBackground
-      id="hero"
-      className="pt-16 md:pt-24 pb-0 overflow-hidden relative"
-      overlay
-      overlayOpacity={0.4}
+    <BackgroundGradientAnimation
+      containerClassName="pt-16 md:pt-24 pb-0 overflow-hidden relative min-h-screen"
     >
-      <div className="container relative z-20">
+      <div className="container relative z-20 pt-12 md:pt-20">
         {/* H1 */}
         <h1
           id="hero-heading"
@@ -63,7 +61,7 @@ export function HeroSection() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.3 + (i * 0.1), ease: [0.16, 1, 0.3, 1] }}
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-white flex-shrink-0" aria-hidden="true" />
+              <span className="w-1.5 h-1.5 rounded-full !bg-white flex-shrink-0" aria-hidden="true" />
               <p
                 className="text-body-xl font-display font-medium text-white/90 leading-tight"
                 dangerouslySetInnerHTML={{ __html: text }}
@@ -80,17 +78,15 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.52, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           <MagneticButton>
-            <Button
-              variant="primary"
-              size="lg"
+            <ButtonColorful
+              label="Получить экспресс-аудит бизнеса"
               onClick={openModal}
-              className="!bg-white !text-black hover:!bg-white/90 transition-colors"
-            >
-              Получить экспресс-аудит бизнеса →
-            </Button>
+              variant="dark"
+              className="h-14 px-8"
+            />
           </MagneticButton>
         </motion.div>
       </div>
-    </GradientBackground>
+    </BackgroundGradientAnimation>
   )
 }

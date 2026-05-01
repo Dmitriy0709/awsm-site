@@ -12,18 +12,18 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        primary: "bg-cta text-white shadow-glow-cta-sm hover:bg-cta-hover hover:shadow-glow-cta hover:-translate-y-px active:translate-y-0 active:scale-[0.98]",
+        default: "bg-black text-white hover:bg-black/90",
+        primary: "bg-black text-white hover:bg-black/90 hover:-translate-y-px active:translate-y-0 active:scale-[0.98]",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        danger: "bg-error text-white hover:opacity-90 hover:-translate-y-px active:translate-y-0 active:scale-[0.98]",
+          "bg-zinc-800 text-white hover:bg-zinc-800/90",
+        danger: "bg-zinc-800 text-white hover:bg-zinc-800/90 hover:-translate-y-px active:translate-y-0 active:scale-[0.98]",
         outline:
           "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+          "bg-zinc-100 text-zinc-900 hover:bg-zinc-200",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        ctaLight: "bg-white text-cta shadow-[0_4px_20px_rgba(0,0,0,0.20)] hover:bg-white/90 hover:-translate-y-px active:translate-y-0 active:scale-[0.98]",
+        ctaLight: "bg-white text-black border border-zinc-200 hover:bg-zinc-50 hover:-translate-y-px active:translate-y-0 active:scale-[0.98]",
         ghostWhite: "border border-white/20 text-white/70 bg-transparent hover:text-white hover:border-white/40 active:scale-[0.98]",
       },
       size: {

@@ -16,10 +16,10 @@ import { STEPS } from '@/constants/steps'
 const STEP_ICONS = [MagnifyingGlass, Rocket, TrendUp, ShieldCheck] as const
 
 const STEP_COLORS = [
-  { bg: 'rgba(90,80,223,0.07)',  border: 'rgba(90,80,223,0.20)',  icon: '#5A50DF' },
-  { bg: 'rgba(14,168,136,0.07)', border: 'rgba(14,168,136,0.20)', icon: '#0EA888' },
-  { bg: 'rgba(14,168,136,0.07)', border: 'rgba(14,168,136,0.20)', icon: '#0EA888' },
-  { bg: 'rgba(90,80,223,0.07)',  border: 'rgba(90,80,223,0.20)',  icon: '#5A50DF' },
+  { bg: 'var(--bg-surface-elevated)', border: 'var(--bg-border)', icon: 'var(--text-primary)' },
+  { bg: 'var(--bg-surface-elevated)', border: 'var(--bg-border)', icon: 'var(--text-primary)' },
+  { bg: 'var(--bg-surface-elevated)', border: 'var(--bg-border)', icon: 'var(--text-primary)' },
+  { bg: 'var(--bg-surface-elevated)', border: 'var(--bg-border)', icon: 'var(--text-primary)' },
 ] as const
 
 export function HowWeWorkSection() {
@@ -96,9 +96,22 @@ export function HowWeWorkSection() {
     >
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
         <div className="dot-grid absolute inset-0" />
-        <div
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[200px]"
-          style={{ background: 'radial-gradient(ellipse at center bottom, rgba(90,80,223,0.05) 0%, transparent 70%)' }}
+        {/* Zen Depth Blobs */}
+        <motion.div
+          animate={{
+            x: [0, 50, 0],
+            y: [0, -30, 0],
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[30%] left-[5%] w-[500px] h-[500px] bg-blue-50/40 rounded-full blur-[100px]"
+        />
+        <motion.div
+          animate={{
+            x: [0, -50, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+          className="absolute bottom-[20%] right-[5%] w-[600px] h-[600px] bg-sky-50/30 rounded-full blur-[120px]"
         />
       </div>
 
@@ -111,8 +124,7 @@ export function HowWeWorkSection() {
             id="how-we-work-heading"
             className="font-display font-bold text-heading-l md:text-display-m text-text-primary mb-4"
           >
-            Простая схема —{' '}
-            <span className="text-primary">понятный результат</span>
+            Простая схема — понятный результат
           </h2>
           <p className="font-body text-body-l text-text-secondary max-w-xl mx-auto">
             Чёткий процесс без лишних встреч. Первые результаты — через 2–3 недели после старта.
@@ -129,7 +141,7 @@ export function HowWeWorkSection() {
               ref={progressFillRef}
               className="absolute left-[calc(100%/8)] h-px"
               style={{
-                background:      'linear-gradient(90deg, #5A50DF, #0EA888)',
+                background:      '#000000',
                 right:           'calc(100%/8)',
                 transform:       'scaleX(0)',
                 transformOrigin: 'left center',
@@ -151,12 +163,7 @@ export function HowWeWorkSection() {
                 aria-hidden="true"
               >
                 <div
-                  className="w-3 h-3 rounded-full border-2"
-                  style={{
-                    background:  STEP_COLORS[i].icon,
-                    borderColor: STEP_COLORS[i].icon,
-                    boxShadow:   `0 0 8px ${STEP_COLORS[i].icon}60`,
-                  }}
+                  className="w-3 h-3 rounded-full border-2 bg-black border-black"
                 />
               </div>
             ))}
@@ -165,9 +172,9 @@ export function HowWeWorkSection() {
 
         {/* Cards — Framer Motion stagger */}
         <StaggerContainer
-          stagger={0.15}
-          delay={0.2}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
+          stagger={0.08}
+          delay={0.1}
+          className="flex lg:grid overflow-x-auto lg:overflow-visible snap-x snap-mandatory lg:snap-none gap-6 pt-2 pb-12 lg:pb-0 -mx-4 px-4 lg:mx-0 lg:px-0 scrollbar-hide grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
         >
           {STEPS.map((step, index) => {
             const Icon    = STEP_ICONS[index]
@@ -175,41 +182,46 @@ export function HowWeWorkSection() {
             const isBurst = index === 2
 
             return (
-              <StaggerItem key={step.number}>
+              <StaggerItem
+                key={step.number}
+                className="min-w-[85%] sm:min-w-[45%] lg:min-w-[30%] lg:min-w-0 snap-center"
+              >
                 <motion.article
-                  className="card-glass p-6 md:p-7 h-full flex flex-col gap-5 relative overflow-hidden"
+                  className="card-glass p-8 h-full flex flex-col gap-6 relative overflow-hidden"
                   style={isBurst ? {
-                    borderColor: 'rgba(14,168,136,0.35)',
-                    background: 'rgba(14,168,136,0.03)',
+                    borderColor: 'rgba(0,0,0,0.15)',
+                    background: 'rgba(0,0,0,0.02)',
                   } : undefined}
-                  whileHover={{ y: -4, borderColor: color.border }}
+                  whileHover={{ y: -6 }}
                   transition={{ duration: 0.2, ease: 'easeOut' }}
                 >
                   {/* Иконка — правый верхний угол */}
                   <div
-                    className="absolute top-5 right-5 w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0"
+                    className="absolute top-6 right-6 w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
                     style={{ background: color.bg, border: `1px solid ${color.border}` }}
                     aria-hidden="true"
                   >
-                    <Icon size={22} color={color.icon} weight="duotone" />
+                    <Icon size={24} color={color.icon} />
                   </div>
 
-                  <header className="flex items-center gap-3">
+                  <header className="flex items-center gap-4">
                     <span
                       className="font-display font-bold leading-none select-none"
-                      style={{ fontSize: 'clamp(40px,4vw,56px)', color: `${color.icon}30` }}
+                      style={{ fontSize: 'clamp(48px,5vw,64px)', color: `${color.icon}30` }}
                       aria-label={`Шаг ${step.number}`}
                     >
                       {step.number}
                     </span>
-                    {step.badge && (
-                      <Badge variant="secondary" size="sm" dot>{step.badge}</Badge>
-                    )}
                   </header>
 
-                  <div className="flex flex-col gap-2 flex-1">
-                    <h3 className="font-display font-bold text-heading-s text-text-primary min-h-[2.5rem] flex items-center">
+                  <div className="flex flex-col gap-3 flex-1">
+                    <h3 className="font-display font-bold text-heading-s text-text-primary min-h-[3rem] flex items-center gap-3">
                       {step.title}
+                      {step.badge && (
+                        <Badge variant="technical">
+                          {step.badge}
+                        </Badge>
+                      )}
                     </h3>
                     <p className="font-body text-body-s text-text-secondary leading-relaxed">
                       {step.description}
@@ -217,8 +229,7 @@ export function HowWeWorkSection() {
                   </div>
 
                   <div
-                    className="absolute -bottom-6 -right-6 w-24 h-24 rounded-full pointer-events-none"
-                    style={{ background: `radial-gradient(ellipse at center, ${color.icon}12 0%, transparent 70%)` }}
+                    className="absolute -bottom-8 -right-8 w-28 h-28 rounded-full pointer-events-none bg-surface-mid/40 blur-xl"
                     aria-hidden="true"
                   />
                 </motion.article>

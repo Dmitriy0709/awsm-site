@@ -7,6 +7,7 @@ import { List, X } from '@phosphor-icons/react'
 import { cn } from '@/lib/utils'
 import { NAV_LINKS, CTA_LINK } from '@/constants/navigation'
 import { Button } from '@/components/ui/Button'
+import { ButtonColorful } from '@/components/ui/ButtonColorful'
 import { useLeadModal } from '@/hooks/useLeadModal'
 
 const menuVariants = {
@@ -53,9 +54,9 @@ export function NavigationBar() {
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
         scrolled
-          ? 'bg-base/92 backdrop-blur-xl border-b border-border shadow-[0_1px_12px_rgba(23,21,46,0.08)]'
+          ? 'bg-white/70 backdrop-blur-md border-b border-white/20 shadow-[var(--shadow-card),inset_0_-1px_0_rgba(255,255,255,0.5)]'
           : 'bg-transparent',
       )}
     >
@@ -63,12 +64,12 @@ export function NavigationBar() {
         {/* Logo */}
         <Link href="/" className="flex items-center group" aria-label="AWSM — на главную">
           <span className={cn(
-            "font-display font-bold text-heading-s tracking-tight transition-colors duration-200",
+            "font-display font-bold text-heading-s tracking-tight transition-colors duration-300",
             scrolled ? "text-text-primary" : "text-white"
           )}>
             AWSM <span className={cn(
-              "font-medium transition-colors duration-200",
-              scrolled ? "text-text-muted" : "text-white/60"
+              "font-medium transition-colors duration-300",
+              scrolled ? "text-text-muted" : "text-white/70"
             )}>Geo</span>
           </span>
         </Link>
@@ -80,14 +81,14 @@ export function NavigationBar() {
               <Link
                 href={link.href}
                 className={cn(
-                  "text-body-s font-body font-medium transition-colors duration-200 relative group rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30",
-                  scrolled ? "text-text-muted hover:text-text-primary" : "text-white/70 hover:text-white"
+                  "text-label font-display uppercase tracking-widest transition-colors duration-300 relative group rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30",
+                  scrolled ? "text-text-muted hover:text-text-primary" : "text-white/80 hover:text-white"
                 )}
               >
                 {link.label}
                 <span className={cn(
-                  "absolute -bottom-0.5 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full",
-                  !scrolled && "bg-white"
+                  "absolute -bottom-0.5 left-0 w-0 h-px transition-all duration-300 group-hover:w-full",
+                  scrolled ? "bg-primary" : "bg-white"
                 )} />
               </Link>
             </li>
@@ -97,24 +98,19 @@ export function NavigationBar() {
         {/* Desktop CTA + Hamburger */}
         <div className="flex items-center gap-3">
           <div className="hidden md:inline-flex">
-            <Button
-              variant="primary"
-              size="sm"
+            <ButtonColorful
+              label={CTA_LINK.label}
               onClick={openModal}
-              className={cn(
-                "!shadow-none hover:!opacity-80 hover:!translate-y-0 !rounded-full",
-                scrolled ? "!bg-text-primary !text-white" : "!bg-white !text-black"
-              )}
-            >
-              {CTA_LINK.label}
-            </Button>
+              variant="dark"
+              className="h-9 px-4 rounded-full"
+            />
           </div>
 
           <motion.button
             type="button"
             className={cn(
               "md:hidden p-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30",
-              scrolled ? "text-text-muted hover:text-text-primary" : "text-white/80 hover:text-white"
+              scrolled ? "text-text-muted hover:text-text-primary" : "text-white hover:text-white"
             )}
             onClick={() => setMobileOpen((v) => !v)}
             aria-label={mobileOpen ? 'Закрыть меню' : 'Открыть меню'}
@@ -150,16 +146,19 @@ export function NavigationBar() {
                   <Link
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="block text-text-primary text-body-l font-body font-medium py-3 border-b border-border last:border-0 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-inset rounded-sm"
+                    className="block text-text-primary text-label font-display uppercase tracking-widest py-4 border-b border-border last:border-0 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-inset rounded-sm"
                   >
                     {link.label}
                   </Link>
                 </motion.div>
               ))}
               <motion.div variants={linkVariants} className="pt-2">
-                <Button variant="primary" size="md" className="w-full !bg-text-primary !text-white !shadow-none hover:!opacity-80 hover:!translate-y-0 !rounded-full" onClick={() => { setMobileOpen(false); openModal() }}>
-                  {CTA_LINK.label}
-                </Button>
+                <ButtonColorful
+                  label={CTA_LINK.label}
+                  variant="dark"
+                  className="w-full rounded-full"
+                  onClick={() => { setMobileOpen(false); openModal() }}
+                />
               </motion.div>
             </div>
           </motion.div>

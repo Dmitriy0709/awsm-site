@@ -1,10 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { ArrowRight, CircleCheck } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { ArrowRight } from "lucide-react";
+import { CheckCircle } from "@phosphor-icons/react";
+import { motion } from "framer-motion";
+import { cn, fixTypography } from "@/lib/utils";
+import { useLeadModal } from "@/hooks/useLeadModal";
 
 import { Button } from "@/components/ui/Button";
+import { ButtonColorful } from "@/components/ui/ButtonColorful";
 import {
   Card,
   CardContent,
@@ -25,6 +28,7 @@ interface PricingPlan {
   description: string;
   monthlyPrice: string;
   yearlyPrice: string;
+  oldPrice?: string;
   features: PricingFeature[];
   button: {
     text: string;
@@ -45,8 +49,8 @@ const PricingCards = ({
       id: "packaging",
       name: "Упаковка",
       description: "Для новых или пустых карточек",
-      monthlyPrice: "35 500 ₽",
-      yearlyPrice: "35 500 ₽",
+      monthlyPrice: "36 000 ₽",
+      yearlyPrice: "36 000 ₽",
       features: [
         { text: "Полное заполнение профиля" },
         { text: "SEO-оптимизация прайс-листа (до 20 позиций)" },
@@ -61,15 +65,15 @@ const PricingCards = ({
     {
       id: "yandex",
       name: "Продвижение Яндекс",
-      description: "Вывод в ТОП выдачи по району",
+      description: "Ежемесячное сопровождение",
       monthlyPrice: "27 500 ₽",
-      yearlyPrice: "22 500 ₽",
+      yearlyPrice: "27 500 ₽",
       features: [
         { text: "Вывод в ТОП выдачи по району" },
-        { text: "Работа с семантикой и активность" },
-        { text: "Нейроконтент: новости и сторис" },
-        { text: "Развёрнутые ответы на отзывы" },
-        { text: "Ежемесячный отчёт" },
+        { text: "Работа семантикой и развитие ядра (активность)" },
+        { text: "Публикация новостей и сторис (нейроконтент)" },
+        { text: "Развернутые ответы на отзывы с ключами" },
+        { text: "Ежемесячный отчет" },
       ],
       button: {
         text: "Начать работу",
@@ -81,7 +85,7 @@ const PricingCards = ({
       name: "Максимальный охват",
       description: "Яндекс + Google + 2GIS",
       monthlyPrice: "57 500 ₽",
-      yearlyPrice: "49 500 ₽",
+      yearlyPrice: "57 500 ₽",
       features: [
         { text: "Все опции тарифа «Продвижение»" },
         { text: "Синхронное ведение в 3 геосервисах" },
@@ -94,106 +98,131 @@ const PricingCards = ({
     },
     {
       id: "combo",
-      name: "Комбо 3 месяца",
-      description: "Продвижение 3 мес. + Упаковка в подарок",
-      monthlyPrice: "99 500 ₽",
-      yearlyPrice: "99 500 ₽",
+      name: "Комплекс<br /><span class='whitespace-nowrap'>на 3 месяца</span>",
+      description: "Ежемесячное сопровождение",
+      monthlyPrice: "82 500 ₽",
+      oldPrice: "118 500 ₽",
+      yearlyPrice: "82 500 ₽",
       features: [
-        { text: "Продвижение в течение 3 месяцев" },
-        { text: "Полная упаковка профиля в подарок" },
-        { text: "Гарантированная экономия 19 000 ₽" },
-        { text: "Приоритетная поддержка" },
+        { text: "Вывод в ТОП выдачи по району" },
+        { text: "Работа семантикой и развитие ядра (активность)" },
+        { text: "Публикация новостей и сторис (нейроконтент)" },
+        { text: "Развернутые ответы на отзывы с ключами" },
+        { text: "Ежемесячный отчет" },
+        { text: "Упаковка карточки в подарок" },
       ],
       button: {
-        text: "Выбрать комбо",
+        text: "Начать работу",
         url: "#",
       },
     },
   ],
 }: PricingCardsProps) => {
-  const [isYearly, setIsYearly] = useState(false);
+  const { openModal } = useLeadModal();
 
   return (
-    <section className="relative py-24 md:py-32 bg-base overflow-hidden">
-      {/* Subtle light vignette/glow */}
-      <div className="pointer-events-none absolute inset-0 [background:radial-gradient(80%_60%_at_50%_15%,rgba(90,80,223,0.03),transparent_60%)]" />
+    <section className="relative section-padding bg-base overflow-hidden">
+      {/* Zen Depth Blobs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <motion.div
+          animate={{
+            x: [0, -30, 0],
+            y: [0, 50, 0],
+          }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[5%] left-[20%] w-[500px] h-[500px] bg-blue-50/50 rounded-full blur-[100px]"
+        />
+        <motion.div
+          animate={{
+            x: [0, 30, 0],
+            y: [0, -50, 0],
+          }}
+          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          className="absolute bottom-[5%] right-[20%] w-[600px] h-[600px] bg-sky-50/40 rounded-full blur-[120px]"
+        />
+      </div>
 
-      <div className="relative container mx-auto px-4">
-        <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 text-center">
+      <div className="relative container">
+        <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 text-center mb-20">
           <h2 className="text-display-m font-bold text-text-primary">{heading}</h2>
           <p className="text-body-xl text-text-secondary max-w-2xl">{description}</p>
-
-          <div className="flex items-center gap-4 text-body-m font-medium text-text-secondary mt-2">
-            <span>Ежемесячно</span>
-            <Switch checked={isYearly} onCheckedChange={() => setIsYearly(!isYearly)} />
-            <span className={cn(isYearly && "text-primary")}>Ежегодно</span>
-          </div>
-
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 w-full max-w-7xl">
-            {plans.map((plan, i) => (
-              <Card
-                key={plan.id}
-                className={cn(
-                  "card-glass flex w-full flex-col justify-between text-left",
-                  i === 1 && "xl:translate-y-2 border-primary/20",
-                  plan.id === 'combo' && "border-success/20"
-                )}
-              >
-                <CardHeader>
-                  <div className="flex items-center justify-between mb-3">
-                    <CardTitle className="text-heading-s font-bold text-text-primary">
-                      {plan.name}
-                    </CardTitle>
-                    {plan.id === 'yandex' && (
-                      <Badge variant="cta" size="sm" dot>ХИТ</Badge>
-                    )}
-                    {plan.id === 'combo' && (
-                      <Badge variant="success" size="sm" dot>ВЫГОДА</Badge>
-                    )}
-                  </div>
-                  <p className="text-body-s text-text-muted min-h-[40px] leading-relaxed">
-                    {plan.description}
-                  </p>
-                  <div className="mt-6">
-                    <span className="text-display-m font-bold text-text-primary">
-                      {isYearly ? plan.yearlyPrice : plan.monthlyPrice}
-                    </span>
-                    <p className="text-label text-text-muted mt-1">
-                      {plan.id === 'packaging' ? 'Единоразовый платеж' : isYearly ? 'При оплате за год' : 'В месяц'}
-                    </p>
-                  </div>
-                </CardHeader>
-
-                <CardContent className="pt-0">
-                  <Separator className="mb-6 opacity-50" />
-                  <ul className="space-y-4">
-                    {plan.features.map((feature, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <CircleCheck className="size-4 text-primary mt-1 flex-shrink-0" />
-                        <span className="text-body-s text-text-secondary leading-snug">
-                          {feature.text}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-
-                <CardFooter className="mt-auto pt-6">
-                  <Button
-                    variant={plan.id === 'yandex' ? 'primary' : 'outline'}
-                    className="w-full group"
-                  >
-                    {plan.button.text}
-                    <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
         </div>
-      </div>
-    </section>
-  );
-};
+
+        <div className="flex xl:grid overflow-x-auto xl:overflow-visible snap-x snap-mandatory xl:snap-none gap-6 pt-2 pb-12 xl:pb-0 -mx-4 px-4 xl:mx-0 xl:px-0 scrollbar-hide grid-cols-1 md:grid-cols-2 xl:grid-cols-4 w-full">
+          {plans.map((plan) => (
+            <motion.div
+              key={plan.id}
+              whileHover={{ y: -6 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="flex h-full min-w-[85%] sm:min-w-[45%] lg:min-w-[30%] xl:min-w-0 snap-center"
+            >
+              <Card className="card-glass rounded-[28px] flex w-full flex-col text-left h-full overflow-hidden border-border">
+                <div className="flex flex-col h-full p-6 sm:p-8">
+                  <header className="mb-8 min-h-[160px] flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-start justify-between mb-4 min-h-[56px]">
+                        <CardTitle className="text-heading-s font-bold text-text-primary pr-2">
+                          <span dangerouslySetInnerHTML={{ __html: fixTypography(plan.name) }} />
+                        </CardTitle>
+                        <div className="flex-shrink-0 h-[1.35em] flex items-center">
+                          {plan.id === 'yandex' && (
+                            <Badge variant="technical">Хит</Badge>
+                          )}
+                          {plan.id === 'combo' && (
+                            <Badge variant="technical">Выгодно</Badge>
+                          )}
+                        </div>
+                      </div>
+                      <p className="text-body-s text-text-muted leading-relaxed">
+                        {fixTypography(plan.description)}
+                      </p>
+                    </div>
+                    <div className="mt-4 flex flex-col">
+                      {plan.oldPrice && (
+                        <span className="text-body-s text-text-muted line-through mb-1">
+                          {plan.oldPrice}
+                        </span>
+                      )}
+                      <div className="flex items-baseline gap-1.5">
+                        <span className="text-[32px] md:text-[36px] font-bold text-text-primary whitespace-nowrap">
+                          {plan.monthlyPrice}
+                        </span>
+                        {plan.id !== 'packaging' && (
+                          <span className="text-body-s text-text-muted">/ мес</span>
+                        )}
+                      </div>
+                    </div>
+                  </header>
+
+                  <div className="flex-1">
+                    <Separator className="mb-6 opacity-40" />
+                    <ul className="space-y-3.5 mb-8">
+                      {plan.features.map((feature, index) => (
+                        <li key={index} className="flex items-start gap-3">
+                          <CheckCircle className="size-5 text-text-primary flex-shrink-0 mt-[2px]" />
+                          <span className="text-body-s text-text-secondary leading-snug">
+                            {fixTypography(feature.text)}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="mt-auto">
+                    <ButtonColorful
+                      label={plan.button.text}
+                      onClick={openModal}
+                      className="w-full"
+                    />
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+        </div>
+      </section>
+    );
+  };
 
 export { PricingCards };

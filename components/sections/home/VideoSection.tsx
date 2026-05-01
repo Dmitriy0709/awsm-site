@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { Play } from '@phosphor-icons/react'
 import { FadeIn } from '@/components/motion/FadeIn'
+import { fixTypography } from '@/lib/utils'
 
 // ─── Стилизованная плашка видео с анимированным glow-play ────────────────────
 
@@ -11,22 +12,17 @@ function VideoPlaceholder({ reducedMotion = false }: { reducedMotion?: boolean }
   return (
     <div
       className="relative aspect-video w-full rounded-xl overflow-hidden"
-      style={{ border: '1px dashed rgba(94,117,230,0.4)' }}
+      style={{ border: '1px dashed rgba(0,0,0,0.2)' }}
     >
       {/* Тёмный фон + dot-grid текстура */}
       <div
-        className="absolute inset-0"
-        style={{ background: 'linear-gradient(135deg, #080C14 0%, #0F1628 55%, #080C14 100%)' }}
+        className="absolute inset-0 bg-black"
       />
-      <div className="absolute inset-0 dot-grid opacity-50" />
+      <div className="absolute inset-0 dot-grid opacity-30" />
 
       {/* Виньетка по краям */}
       <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse at center, transparent 35%, rgba(8,12,20,0.65) 100%)',
-        }}
+        className="absolute inset-0 pointer-events-none bg-black/40"
       />
 
       {/* Центр: кнопка play + glow-кольца */}
@@ -35,7 +31,7 @@ function VideoPlaceholder({ reducedMotion = false }: { reducedMotion?: boolean }
           {/* Внешнее пульсирующее кольцо */}
           <motion.div
             className="absolute rounded-full"
-            style={{ width: 120, height: 120, border: '1px solid rgba(94,117,230,0.25)' }}
+            style={{ width: 120, height: 120, border: '1px solid rgba(255,255,255,0.15)' }}
             animate={
               reducedMotion
                 ? { opacity: 0.25 }
@@ -46,7 +42,7 @@ function VideoPlaceholder({ reducedMotion = false }: { reducedMotion?: boolean }
           {/* Среднее пульсирующее кольцо */}
           <motion.div
             className="absolute rounded-full"
-            style={{ width: 88, height: 88, border: '1px solid rgba(94,117,230,0.45)' }}
+            style={{ width: 88, height: 88, border: '1px solid rgba(255,255,255,0.25)' }}
             animate={
               reducedMotion
                 ? { opacity: 0.4 }
@@ -60,25 +56,19 @@ function VideoPlaceholder({ reducedMotion = false }: { reducedMotion?: boolean }
             style={{
               width: 64,
               height: 64,
-              background: 'rgba(94,117,230,0.18)',
-              border: '1px solid rgba(94,117,230,0.65)',
-              backdropFilter: 'blur(10px)',
-              boxShadow: '0 0 28px rgba(94,117,230,0.28), inset 0 1px 0 rgba(240,242,255,0.06)',
+              background: 'rgba(255,255,255,0.15)',
+              border: '1px solid rgba(255,255,255,0.3)',
             }}
           >
             <div
-              className="absolute inset-0 rounded-full"
-              style={{
-                background:
-                  'radial-gradient(circle, rgba(94,117,230,0.25) 0%, transparent 70%)',
-              }}
+              className="absolute inset-0 rounded-full bg-white/5"
             />
-            <Play size={22} weight="fill" color="#F0F2FF" className="relative ml-1" />
+            <Play size={22} weight="fill" color="#FFFFFF" className="relative ml-1" />
           </div>
         </div>
 
         {/* Текст под кнопкой */}
-        <p className="font-body font-semibold text-text-primary text-body-m tracking-wide select-none">
+        <p className="font-body font-semibold text-white text-body-m tracking-wide select-none">
           ▶ Смотреть разбор
         </p>
       </div>
@@ -119,16 +109,17 @@ export function VideoSection() {
         </FadeIn>
 
         {/* Подзаголовок */}
-        <FadeIn delay={0.15} className="text-center mb-10 md:mb-14">
+        <FadeIn delay={0.15} className="text-center mb-20">
           <p className="text-text-secondary font-body text-body-l max-w-[560px] mx-auto leading-relaxed">
-            Посмотрите двухминутное видео о том, как на самом деле работают алгоритмы
-            сервисов в 2026 году и где вы теряете деньги.
+            Посмотрите двухминутное видео о том, как на&nbsp;самом<br className="hidden md:block" />
+            деле работают алгоритмы сервисов в&nbsp;2026&nbsp;году<br className="hidden md:block" />
+            и&nbsp;где вы&nbsp;теряете деньги.
           </p>
         </FadeIn>
 
         {/* Видео / плашка — scroll animation */}
-        <div ref={containerRef} className="max-w-3xl mx-auto">
-          <motion.div style={{ scale, opacity, y: translateY }}>
+        <div ref={containerRef} className="w-full">
+          <motion.div style={{ scale, opacity, y: translateY, willChange: 'transform, opacity' }}>
             <VideoPlaceholder reducedMotion={reduceMotion} />
           </motion.div>
         </div>

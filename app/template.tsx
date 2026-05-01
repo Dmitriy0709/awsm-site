@@ -16,7 +16,7 @@ export default function Template({ children }: { children: ReactNode }) {
             inset:          0,
             zIndex:         1000,
             pointerEvents: 'none',
-            background:    'linear-gradient(135deg, #4F6EF7 0%, #00E5C4 100%)',
+            background:    'linear-gradient(135deg, #000000 0%, #333333 100%)',
           }}
           initial={{ y: '0%' }}
           animate={{ y: '-100%' }}

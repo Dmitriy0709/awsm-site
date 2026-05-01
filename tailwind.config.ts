@@ -7,6 +7,21 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontSize: {
+        // Organic Typography System — "Quiet Luxury" Scale
+        'display-xl': ['clamp(64px, 10vw, 140px)', { lineHeight: '0.85', letterSpacing: '-0.04em' }],
+        'display-l':  ['clamp(32px, 6vw, 64px)',   { lineHeight: '0.95', letterSpacing: '-0.02em' }],
+        'display-m':  ['clamp(28px, 4vw, 48px)',   { lineHeight: '1.05', letterSpacing: '-0.02em' }],
+        'title-l':    ['clamp(24px, 3.5vw, 40px)', { lineHeight: '1.15', letterSpacing: '-0.01em' }],
+        'title-m':    ['clamp(18px, 2vw, 24px)',   { lineHeight: '1.25', letterSpacing: '-0.01em' }],
+        'body-xl':    ['20px',                    { lineHeight: '1.60' }],
+        'body-l':     ['18px',                    { lineHeight: '1.60' }],
+        'body-m':     ['16px',                    { lineHeight: '1.60' }],
+        'body-s':     ['14px',                    { lineHeight: '1.50' }],
+        'label-sm':   ['11px',                    { lineHeight: '1.40', letterSpacing: '0.12em' }],
+        'metric-xl':  ['clamp(32px, 6vw, 56px)',   { lineHeight: '1.00', letterSpacing: '-0.02em' }],
+        'metric-l':   ['clamp(20px, 4vw, 32px)',   { lineHeight: '1.00', letterSpacing: '-0.02em' }],
+      },
       colors: {
         base:               '#FFFFFF',
         surface:            '#FFFFFF',
@@ -23,48 +38,26 @@ const config: Config = {
         secondary:          '#666666',
         'secondary-muted':  'rgba(0,0,0,0.03)',
 
-        success:            '#000000',
-        'success-muted':    'rgba(0,0,0,0.05)',
-        error:              '#000000',
-        'error-muted':      'rgba(0,0,0,0.05)',
-        cta:                '#000000',
-        'cta-muted':        'rgba(0,0,0,0.05)',
-
         'text-primary':     '#000000',
         'text-secondary':   '#333333',
         'text-muted':       '#888888',
         'text-disabled':    '#CCCCCC',
-
-        // Reset Accents to Grey
-        'accent-indigo':    '#333333',
-        'accent-violet':    '#444444',
-        'accent-crimson':   '#222222',
-        'accent-teal':      '#555555',
       },
 
       fontFamily: {
-        display: ['var(--font-display)', 'sans-serif'],
-        body:    ['var(--font-body)',    'sans-serif'],
-        serif:   ['var(--font-display)', 'sans-serif'],
-        mono:    ['var(--font-body)',    'sans-serif'],
+        display: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+        body:    ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
       },
 
       fontSize: {
-        'display-xl': ['clamp(56px,7vw,104px)',  { lineHeight: '0.93', letterSpacing: '-0.04em' }],
-        'display-l':  ['clamp(44px,5.5vw,72px)', { lineHeight: '0.97', letterSpacing: '-0.035em' }],
-        'display-m':  ['clamp(32px,4vw,52px)',   { lineHeight: '1.08', letterSpacing: '-0.03em' }],
-        'heading-l':  ['clamp(26px,2.8vw,40px)', { lineHeight: '1.15', letterSpacing: '-0.025em' }],
-        'heading-m':  ['clamp(20px,2vw,28px)',   { lineHeight: '1.25', letterSpacing: '-0.015em' }],
-        'heading-s':  ['clamp(16px,1.5vw,20px)', { lineHeight: '1.35', letterSpacing: '-0.01em' }],
-        'body-xl':    ['clamp(17px,1.4vw,20px)', { lineHeight: '1.70' }],
-        'body-l':     ['17px',                   { lineHeight: '1.70' }],
-        'body-m':     ['15px',                   { lineHeight: '1.65' }],
-        'body-s':     ['13px',                   { lineHeight: '1.55' }],
-        caption:      ['12px',                   { lineHeight: '1.50', letterSpacing: '0.01em' }],
-        label:        ['11px',                   { lineHeight: '1.40', letterSpacing: '0.10em' }],
-        metric:       ['clamp(36px,5vw,64px)',   { lineHeight: '1.00', letterSpacing: '-0.03em' }],
-        'metric-sm':  ['clamp(22px,3vw,36px)',   { lineHeight: '1.05', letterSpacing: '-0.02em' }],
-        quote:        ['clamp(18px,2.5vw,28px)', { lineHeight: '1.50' }],
+        // High-Impact Typography System (Golden Ratio based)
+        'display-xl': ['clamp(80px, 16vw, 160px)', { lineHeight: '0.85', letterSpacing: '-0.05em' }],
+        'display-l':  ['clamp(40px, 8vw, 72px)',   { lineHeight: '1.00', letterSpacing: '-0.03em' }],
+        'heading-l':  ['clamp(24px, 4vw, 36px)',   { lineHeight: '1.20', letterSpacing: '-0.02em' }],
+        'body-l':     ['20px',                    { lineHeight: '1.60' }],
+        'body-s':     ['15px',                    { lineHeight: '1.50' }],
+        'label-sm':   ['12px',                    { lineHeight: '1.40', letterSpacing: '0.12em' }],
+        'metric-xl':  ['clamp(24px, 5vw, 42px)',   { lineHeight: '1.00', letterSpacing: '-0.02em' }],
       },
 
       spacing: {

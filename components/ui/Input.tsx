@@ -42,7 +42,7 @@ export function Input({
             // Floating up (focused or has value)
             (focused || hasValue || props.placeholder)
               ? 'top-2 text-[10px] tracking-widest text-text-muted font-semibold uppercase'
-              : 'top-1/2 -translate-y-1/2 text-body-m text-text-muted',
+              : 'top-1/2 -translate-y-1/2 text-body-l text-text-muted',
             // Active label color
             focused && 'text-primary',
             error && 'text-error',
@@ -84,7 +84,7 @@ export function Input({
 
       {/* Error / Hint */}
       {error && (
-        <p className="text-error text-caption font-body flex items-center gap-1.5">
+        <p className="text-error text-body-s font-body flex items-center gap-1.5">
           <svg viewBox="0 0 16 16" fill="currentColor" className="w-3 h-3 flex-shrink-0">
             <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm-.75 4a.75.75 0 0 1 1.5 0v4a.75.75 0 0 1-1.5 0V4zm.75 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
           </svg>
@@ -92,7 +92,7 @@ export function Input({
         </p>
       )}
       {!error && hint && (
-        <p className="text-text-muted text-caption font-body">{hint}</p>
+        <p className="text-text-muted text-body-s font-body">{hint}</p>
       )}
     </div>
   )

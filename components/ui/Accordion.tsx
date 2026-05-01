@@ -79,7 +79,7 @@ export function Accordion({ items, multiple = false, className }: AccordionProps
             >
               <div className="overflow-hidden">
                 <div className="px-6 pb-6 pt-0 border-t border-border">
-                  <div className="pt-4 text-text-secondary font-body text-sm leading-relaxed">
+                  <div className="pt-4 text-text-secondary font-body text-body-s leading-relaxed">
                     {item.content}
                   </div>
                 </div>

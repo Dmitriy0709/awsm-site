@@ -1,11 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
 import { CASES } from '@/constants/cases'
 import type { CaseCategory } from '@/types/case'
 import { Badge } from '@/components/ui/Badge'
 import { Chip, ChipGroup } from '@/components/ui/Chip'
+import { MapPin } from 'lucide-react'
+import { fixTypography } from '@/lib/utils'
 
 type Filter = CaseCategory | 'all'
 
@@ -59,27 +60,29 @@ export function CasesGrid() {
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((item) => (
-            <article key={item.id} className="glass-card overflow-hidden hover:-translate-y-1 transition-all duration-300">
-              <div className="relative h-[220px] overflow-hidden border-b border-border">
-                <Image
-                  src={item.imageSrc}
-                  alt={item.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="p-6">
-                <div className="flex gap-2 mb-3">
-                  <Badge variant="muted">{CATEGORY_LABELS[item.category]}</Badge>
-                  <span className="text-text-muted text-xs font-body self-center">{item.city}</span>
+            <article key={item.id} className="card-glass overflow-hidden hover:-translate-y-1 transition-all duration-300">
+              <div className="relative h-[220px] overflow-hidden border-b border-border bg-surface-mid flex items-center justify-center">
+                <div className="text-center grayscale opacity-10">
+                   <div className="text-display-l mb-1">📸</div>
+                   <p className="text-[10px] font-mono uppercase tracking-widest">{CATEGORY_LABELS[item.category]}</p>
                 </div>
-                <h3 className="font-display font-bold text-lg text-text-primary mb-3">{item.title}</h3>
-                <div className="grid grid-cols-2 gap-3">
+              </div>
+              <div className="p-6 sm:p-8 flex flex-col gap-4">
+                <div className="min-h-[80px] flex flex-col justify-start">
+                  <div className="flex gap-2 mb-3 items-center">
+                    <Badge variant="muted">{CATEGORY_LABELS[item.category]}</Badge>
+                    <div className="flex items-center gap-1 text-text-muted text-label-sm font-body">
+                      <MapPin className="size-3" />
+                      <span>{item.city}</span>
+                    </div>
+                  </div>
+                  <h3 className="font-display font-bold text-body-l text-text-primary line-clamp-2" dangerouslySetInnerHTML={{ __html: fixTypography(item.title) }} />
+                </div>
+                <div className="grid grid-cols-2 gap-4 py-4 border-t border-border/50">
                   {item.metrics.map((m) => (
                     <div key={m.label}>
-                      <p className="font-mono font-bold text-xl text-secondary">{m.value}</p>
-                      <p className="text-text-muted text-xs font-body">{m.label}</p>
+                      <p className="font-display font-bold text-heading-l text-text-primary whitespace-nowrap mb-1">{m.value}</p>
+                      <p className="text-text-muted text-body-s font-body uppercase tracking-wider min-h-[3em] leading-tight flex items-start" dangerouslySetInnerHTML={{ __html: fixTypography(m.label) }} />
                     </div>
                   ))}
                 </div>

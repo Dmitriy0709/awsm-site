@@ -36,7 +36,7 @@ const CardTitle = React.forwardRef<
   <h3
     ref={ref}
     className={cn(
-      "text-2xl font-semibold leading-none tracking-tight",
+      "text-heading-l font-semibold leading-none tracking-tight",
       className,
     )}
     {...props}
@@ -50,7 +50,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-sm text-muted-foreground", className)}
+    className={cn("text-body-s text-muted-foreground", className)}
     {...props}
   />
 ))
@@ -100,12 +100,12 @@ export function MetricCard({
   }
   return (
     <div className={cn('text-center', className)}>
-      <p className={cn('font-mono font-bold text-4xl leading-none mb-2', accentColors[accent])}>
+      <p className={cn('font-mono font-bold text-metric-xl leading-none mb-2', accentColors[accent])}>
         {value}
       </p>
-      <p className="text-muted-foreground font-body text-base leading-snug">{label}</p>
+      <p className="text-muted-foreground font-body text-body-l leading-snug">{label}</p>
       {sublabel && (
-        <p className="text-muted-foreground font-body text-xs mt-0.5">{sublabel}</p>
+        <p className="text-muted-foreground font-body text-label-sm mt-0.5">{sublabel}</p>
       )}
     </div>
   )

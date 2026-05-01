@@ -5,10 +5,7 @@ import { PLACEHOLDERS } from '@/constants/placeholders'
 import { NAV_LINKS } from '@/constants/navigation'
 import { useLeadModal } from '@/hooks/useLeadModal'
 
-const LEGAL_LINKS = [
-  { label: 'Политика конфиденциальности', href: '/privacy' },
-  { label: 'Договор-оферта', href: '/offer' },
-]
+const LEGAL_LINKS: any[] = []
 
 export function Footer() {
   const { openModal } = useLeadModal()
@@ -19,7 +16,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <Link href="/" aria-label="AWSM — на главную" className="inline-block mb-3 rounded-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/40">
-              <span className="font-display font-bold text-heading-s text-text-primary">
+              <span className="font-display font-bold text-heading-l text-text-primary">
                 AWSM
               </span>
             </Link>
@@ -31,7 +28,7 @@ export function Footer() {
 
           {/* Navigation */}
           <div>
-            <p className="text-text-muted text-label font-mono uppercase tracking-widest mb-4">
+            <p className="text-text-muted text-label-sm font-mono uppercase tracking-widest mb-4">
               Навигация
             </p>
             <ul className="flex flex-col gap-3">
@@ -59,7 +56,7 @@ export function Footer() {
 
           {/* Contacts */}
           <div>
-            <p className="text-text-muted text-label font-mono uppercase tracking-widest mb-4">
+            <p className="text-text-muted text-label-sm font-mono uppercase tracking-widest mb-4">
               Контакты
             </p>
             <ul className="flex flex-col gap-3 text-body-s font-body text-text-secondary">
@@ -72,14 +69,14 @@ export function Footer() {
               <li className="opacity-50 select-none" title="Контакт добавляется позже">
                 {PLACEHOLDERS.email}
               </li>
-              <li className="text-text-muted text-caption pt-2">Пн–Пт 9:00–18:00 МСК</li>
+              <li className="text-text-muted text-body-s pt-2">Пн–Пт 9:00–18:00 МСК</li>
             </ul>
           </div>
         </div>
 
         {/* Bottom */}
         <div className="pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <p className="text-text-muted text-caption font-body">
+          <p className="text-text-muted text-body-s font-body">
             © 2026 AWSM. Все права защищены. {PLACEHOLDERS.requisites}
           </p>
           <div className="flex gap-6">
@@ -87,7 +84,7 @@ export function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-text-muted hover:text-text-secondary text-caption font-body transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/40 rounded-sm"
+                className="text-text-muted hover:text-text-secondary text-body-s font-body transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/40 rounded-sm"
               >
                 {link.label}
               </Link>

@@ -121,78 +121,68 @@ const PricingCards = ({
   const { openModal } = useLeadModal();
 
   return (
-    <section className="relative section-padding bg-base overflow-hidden">
-      {/* Zen Depth Blobs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        <motion.div
-          animate={{
-            x: [0, -30, 0],
-            y: [0, 50, 0],
-          }}
-          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[5%] left-[20%] w-[500px] h-[500px] bg-blue-50/50 rounded-full blur-[100px]"
-        />
-        <motion.div
-          animate={{
-            x: [0, 30, 0],
-            y: [0, -50, 0],
-          }}
-          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute bottom-[5%] right-[20%] w-[600px] h-[600px] bg-sky-50/40 rounded-full blur-[120px]"
-        />
-      </div>
+    <section id="pricing" className="relative section-padding bg-base overflow-hidden">
 
       <div className="relative container">
-        <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 text-center mb-20">
-          <h2 className="text-display-m font-bold text-text-primary">{heading}</h2>
-          <p className="text-body-xl text-text-secondary max-w-2xl">{description}</p>
-        </div>
+        <header className="mb-16 md:mb-24 text-center">
+          <h2 className="text-display-l font-bold text-text-primary mb-4">{heading}</h2>
+          <p className="text-body-l text-text-secondary max-w-2xl mx-auto">
+            {fixTypography(description)}
+          </p>
+        </header>
 
         <div className="flex xl:grid overflow-x-auto xl:overflow-visible snap-x snap-mandatory xl:snap-none gap-6 pt-2 pb-12 xl:pb-0 -mx-4 px-4 xl:mx-0 xl:px-0 scrollbar-hide grid-cols-1 md:grid-cols-2 xl:grid-cols-4 w-full">
           {plans.map((plan) => (
-            <motion.div
+            <div
               key={plan.id}
-              whileHover={{ y: -6 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="flex h-full min-w-[85%] sm:min-w-[45%] lg:min-w-[30%] xl:min-w-0 snap-center"
+              className="flex h-full min-w-[85%] sm:min-w-[45%] lg:min-w-[30%] xl:min-w-0 snap-center group/card"
             >
-              <Card className="card-glass rounded-[28px] flex w-full flex-col text-left h-full overflow-hidden border-border">
+              <Card className="card-glass rounded-[28px] flex w-full flex-col text-left h-full overflow-hidden border-border transition-transform duration-300 group-hover/card:-translate-y-1">
                 <div className="flex flex-col h-full p-6 sm:p-8">
-                  <header className="mb-8 min-h-[160px] flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-start justify-between mb-4 min-h-[56px]">
-                        <CardTitle className="text-heading-s font-bold text-text-primary pr-2">
-                          <span dangerouslySetInnerHTML={{ __html: fixTypography(plan.name) }} />
-                        </CardTitle>
-                        <div className="flex-shrink-0 h-[1.35em] flex items-center">
-                          {plan.id === 'yandex' && (
-                            <Badge variant="technical">Хит</Badge>
-                          )}
-                          {plan.id === 'combo' && (
-                            <Badge variant="technical">Выгодно</Badge>
-                          )}
-                        </div>
-                      </div>
-                      <p className="text-body-s text-text-muted leading-relaxed">
-                        {fixTypography(plan.description)}
-                      </p>
-                    </div>
-                    <div className="mt-4 flex flex-col">
-                      {plan.oldPrice && (
-                        <span className="text-body-s text-text-muted line-through mb-1">
-                          {plan.oldPrice}
-                        </span>
-                      )}
-                      <div className="flex items-baseline gap-1.5">
-                        <span className="text-[32px] md:text-[36px] font-bold text-text-primary whitespace-nowrap">
-                          {plan.monthlyPrice}
-                        </span>
-                        {plan.id !== 'packaging' && (
-                          <span className="text-body-s text-text-muted">/ мес</span>
+                  {/* Title & Description — Force height for alignment */}
+                  <div className="min-h-[120px] mb-4">
+                    <div className="flex items-start justify-between mb-1">
+                      <CardTitle 
+                        className="font-bold text-text-primary pr-2 leading-tight"
+                        style={{ fontSize: 'clamp(22px, 2.5vw, 28px)' }}
+                      >
+                        <span dangerouslySetInnerHTML={{ __html: fixTypography(plan.name) }} />
+                      </CardTitle>
+                      <div className="flex-shrink-0 mt-1">
+                        {plan.id === 'yandex' && (
+                          <Badge variant="cta" className="text-[9px] px-1.5 py-0.5" dot>Хит</Badge>
+                        )}
+                        {plan.id === 'combo' && (
+                          <Badge variant="cta" className="text-[9px] px-1.5 py-0.5" dot>Выгодно</Badge>
                         )}
                       </div>
                     </div>
-                  </header>
+                    <p className="text-body-s text-text-muted leading-relaxed">
+                      {fixTypography(plan.description)}
+                    </p>
+                  </div>
+
+                  {/* Price Area — Baseline Aligned */}
+                  <div className="mb-8 h-[64px] flex flex-col justify-end">
+                    <div className="h-5 flex items-end">
+                      {plan.oldPrice && (
+                        <span className="text-label-sm text-text-muted line-through opacity-60 leading-none -mb-0.5">
+                          {plan.oldPrice}
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex items-baseline gap-1.5">
+                      <span 
+                        className="font-bold text-text-primary tracking-tight leading-none"
+                        style={{ fontSize: 'clamp(26px, 4vw, 38px)' }}
+                      >
+                        {plan.monthlyPrice}
+                      </span>
+                      {plan.id !== 'packaging' && (
+                        <span className="text-label-sm text-text-muted opacity-80">/ мес</span>
+                      )}
+                    </div>
+                  </div>
 
                   <div className="flex-1">
                     <Separator className="mb-6 opacity-40" />
@@ -217,7 +207,7 @@ const PricingCards = ({
                   </div>
                 </div>
               </Card>
-            </motion.div>
+            </div>
           ))}
         </div>
         </div>

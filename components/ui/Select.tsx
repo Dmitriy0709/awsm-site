@@ -66,8 +66,8 @@ export function Select({
         />
       </div>
 
-      {error && <p className="text-error text-caption font-body">{error}</p>}
-      {!error && hint && <p className="text-text-muted text-caption font-body">{hint}</p>}
+      {error && <p className="text-error text-body-s font-body">{error}</p>}
+      {!error && hint && <p className="text-text-muted text-body-s font-body">{hint}</p>}
     </div>
   )
 }

@@ -56,7 +56,7 @@ export function PageLoader() {
               <motion.span
                 key={char}
                 style={{
-                  fontFamily:  'var(--font-syne)',
+                  fontFamily:  "'Helvetica Neue', Helvetica, Arial, sans-serif",
                   fontWeight:   800,
                   fontSize:    'clamp(56px, 10vw, 96px)',
                   lineHeight:   1,

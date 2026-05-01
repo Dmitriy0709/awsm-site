@@ -30,7 +30,7 @@ export function Chip({
       type="button"
       className={cn(
         'inline-flex items-center gap-1.5',
-        'px-4 py-2 rounded-full text-sm font-body font-medium',
+        'px-4 py-2 rounded-full text-body-s font-body font-medium',
         'transition-all duration-200 ease-out',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40',
         'select-none cursor-pointer',

@@ -30,57 +30,32 @@ export function AudienceSection() {
       className="section-padding bg-base relative"
       aria-labelledby="audience-heading"
     >
-      {/* Decorative layer */}
-      {/* Zen Depth Blobs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        <motion.div
-          animate={{
-            x: [0, 40, 0],
-            y: [0, 20, 0],
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[10%] right-[10%] w-[500px] h-[500px] bg-blue-50/50 rounded-full blur-[100px]"
-        />
-        <motion.div
-          animate={{
-            x: [0, -40, 0],
-            y: [0, -20, 0],
-          }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute bottom-[10%] left-[5%] w-[600px] h-[600px] bg-sky-50/40 rounded-full blur-[120px]"
-        />
-      </div>
-
       <div className="container relative">
-        <FadeIn className="text-center mb-16 md:mb-20">
-          <p className="font-display text-label text-text-muted uppercase tracking-widest mb-4">
+        <div className="text-center mb-16 md:mb-20">
+          <p className="font-display text-label-sm text-text-muted uppercase tracking-widest mb-4">
             Целевая аудитория
           </p>
           <h2
             id="audience-heading"
-            className="font-display font-bold text-heading-l md:text-display-m text-text-primary mb-4"
+            className="font-display font-bold text-heading-l md:text-display-l text-text-primary mb-4"
           >
             Кому необходим ТОП в геосервисах?
           </h2>
           <p className="font-body text-body-l text-text-secondary max-w-xl mx-auto">
             Всем, чьи клиенты находятся в радиусе 2–3 км от точки продаж
           </p>
-        </FadeIn>
+        </div>
 
-        <StaggerContainer
-          stagger={0.08}
-          delay={0.1}
-          className="flex lg:grid overflow-x-auto lg:overflow-visible snap-x snap-mandatory lg:snap-none gap-6 pt-2 pb-12 lg:pb-0 -mx-4 px-4 lg:mx-0 lg:px-0 scrollbar-hide grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-        >
+        <div className="flex lg:grid overflow-x-auto lg:overflow-visible snap-x snap-mandatory lg:snap-none gap-6 pt-2 pb-12 lg:pb-0 -mx-4 px-4 lg:mx-0 lg:px-0 scrollbar-hide grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {AUDIENCE.map((item) => (
-            <StaggerItem
+            <div
               key={item.id}
               className="min-w-[85%] sm:min-w-[45%] lg:min-w-0 snap-center"
             >
               <AudienceCard item={item} />
-            </StaggerItem>
+            </div>
           ))}
-        </StaggerContainer>
+        </div>
       </div>
     </section>
   )
@@ -94,10 +69,8 @@ function AudienceCard({ item }: AudienceCardProps) {
   const Icon = ICON_MAP[item.id as keyof typeof ICON_MAP] || Briefcase
 
   return (
-    <motion.div
-      className="card-glass p-6 sm:p-8 flex flex-col gap-8 cursor-default h-full relative overflow-hidden"
-      whileHover={{ y: -6 }}
-      transition={{ duration: 0.2, ease: 'easeOut' }}
+    <div
+      className="card-glass p-6 sm:p-8 flex flex-col gap-8 cursor-default h-full relative overflow-hidden group/card transition-transform duration-300 hover:-translate-y-1"
     >
       <div
         className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
@@ -108,18 +81,13 @@ function AudienceCard({ item }: AudienceCardProps) {
       </div>
 
       <div className="flex flex-col gap-3">
-        <h3 className="font-display font-bold text-heading-s text-text-primary min-h-[3rem] flex items-center">
+        <h3 className="font-display font-bold text-heading-l text-text-primary min-h-[3rem] flex items-center">
           {fixTypography(item.title)}
         </h3>
         <p className="font-body text-body-s text-text-secondary leading-relaxed">
           {fixTypography(item.description)}
         </p>
       </div>
-
-      <div
-        className="absolute -bottom-8 -right-8 w-28 h-28 rounded-full pointer-events-none bg-surface-mid/50 blur-2xl"
-        aria-hidden="true"
-      />
-    </motion.div>
+    </div>
   )
 }

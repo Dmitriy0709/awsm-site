@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import { spaceGrotesk, inter } from '@/lib/fonts'
-import { NavigationBar } from '@/components/layout/NavigationBar'
+
+import { FloatingHeader } from '@/components/layout/FloatingHeader'
 import { Footer } from '@/components/layout/Footer'
 import { LenisProvider } from '@/components/providers/LenisProvider'
 import { PageLoader } from '@/components/layout/PageLoader'
@@ -37,19 +37,13 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${spaceGrotesk.variable} ${inter.variable}`}
     >
       <body className="bg-base text-text-primary font-body antialiased selection:bg-black/5">
-        {/* Global Noise Texture */}
-        <div 
-          className="fixed inset-0 z-[9999] opacity-[0.03] pointer-events-none" 
-          style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }}
-        />
         
         <LenisProvider>
           <LeadModalProvider>
             <PageLoader />
-            <NavigationBar />
+            <FloatingHeader />
             <LeadModal />
             <main>{children}</main>
             <Footer />

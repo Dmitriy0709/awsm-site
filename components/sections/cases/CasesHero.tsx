@@ -13,15 +13,15 @@ export function CasesHero() {
       <div className="container text-center">
         <h1
           id="cases-hero-heading"
-          className="font-display font-bold text-4xl md:text-6xl text-text-primary mb-6"
+          className="font-display font-bold text-metric-xl md:text-display-l text-text-primary mb-6"
         >
           Наши результаты
         </h1>
         <div className="flex flex-wrap justify-center gap-8 text-center">
           {CASES_STATS.map((stat) => (
             <div key={stat.label}>
-              <p className="font-mono font-bold text-3xl text-secondary">{stat.value}</p>
-              <p className="text-text-muted text-sm font-body">{stat.label}</p>
+              <p className="font-mono font-bold text-display-l text-secondary">{stat.value}</p>
+              <p className="text-text-muted text-body-s font-body">{stat.label}</p>
             </div>
           ))}
         </div>

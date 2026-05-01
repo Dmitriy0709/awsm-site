@@ -14,11 +14,11 @@ export function clamp(value: number, min: number, max: number): number {
 }
 export function fixTypography(text: string): string {
   if (!text) return text
-  // List of prepositions and short words (1-3 chars) to bind with a non-breaking space
+  // Comprehensive list of Russian prepositions, conjunctions, and short particles
   const shortWords = [
-    'в', 'на', 'с', 'и', 'к', 'у', 'о', 'за', 'от', 'до', 'из', 'по', 'об', 'а', 'но', 'да', 'же', 'ли', 'бы', 'что', 'как', 'где', 'вы', 'ты', 'мы', 'он'
+    'в', 'во', 'на', 'с', 'со', 'и', 'к', 'ко', 'у', 'о', 'об', 'за', 'от', 'до', 'из', 'по', 'над', 'под', 'через', 'а', 'но', 'да', 'же', 'ли', 'бы', 'что', 'как', 'где', 'кто', 'чем', 'при', 'тут', 'там', 'ваш', 'наш', 'все', 'всё', 'эта', 'это', 'эти', 'тот', 'та', 'те', 'для', 'без', 'через', 'между', 'перед', 'около', 'вокруг', 'не', 'ни'
   ]
-  // Use lookahead to avoid consuming the trailing space, allowing consecutive matches
-  const pattern = new RegExp(`(^|\\s)(${shortWords.join('|')})(?=\\s)`, 'gi')
+  // Bind short words followed by a space with a non-breaking space
+  const pattern = new RegExp(`(^|\\s|\\()(${shortWords.join('|')})(\\s+)`, 'gi')
   return text.replace(pattern, '$1$2\u00A0')
 }

@@ -21,10 +21,10 @@ interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
 const headingVariants: Record<HeadingVariant, string> = {
   'display-xl': 'text-display-xl font-display font-bold tracking-tight leading-[0.92]',
   'display-l':  'text-display-l  font-display font-bold tracking-tight leading-[0.97]',
-  'display-m':  'text-display-m  font-display font-bold tracking-tight leading-[1.08]',
+  'display-m':  'text-display-l  font-display font-bold tracking-tight leading-[1.08]',
   'heading-l':  'text-heading-l  font-display font-bold tracking-tight leading-[1.15]',
-  'heading-m':  'text-heading-m  font-display font-semibold leading-[1.25]',
-  'heading-s':  'text-heading-s  font-display font-semibold leading-[1.35]',
+  'heading-m':  'text-heading-l  font-display font-semibold leading-[1.25]',
+  'heading-s':  'text-heading-l  font-display font-semibold leading-[1.35]',
 }
 
 // level → default variant mapping
@@ -76,12 +76,12 @@ interface TextProps extends HTMLAttributes<HTMLElement> {
 }
 
 const textVariants: Record<TextVariant, string> = {
-  'body-xl': 'text-body-xl font-body leading-relaxed',
-  'body-l':  'text-body-l  font-body leading-[1.70]',
-  'body-m':  'text-body-m  font-body leading-[1.60]',
+  'body-xl': 'text-body-l font-body leading-relaxed',
+  'body-l':  'text-body-l  font-body leading-[1.65]',
+  'body-m':  'text-body-l  font-body leading-[1.60]',
   'body-s':  'text-body-s  font-body leading-[1.55]',
-  'caption': 'text-caption font-body leading-[1.50] tracking-wide',
-  'label':   'text-label   font-body font-semibold leading-[1.40] tracking-[0.12em] uppercase',
+  'caption': 'text-body-s font-body leading-[1.50] tracking-wide',
+  'label':   'text-label-sm   font-body font-semibold leading-[1.40] tracking-[0.12em] uppercase',
 }
 
 export function Text({
@@ -117,15 +117,15 @@ interface MetricProps {
 }
 
 const metricSizes = {
-  sm: 'text-metric-sm',
-  md: 'text-metric',
+  sm: 'text-metric-xl',
+  md: 'text-metric-xl',
   lg: 'text-display-l',
 }
 
 const metricAccents = {
   primary:   'text-primary',
   secondary: 'text-secondary',
-  cta:       'text-cta',
+  cta:       'text-black',
   white:     'text-text-primary',
 }
 
@@ -138,7 +138,7 @@ export function Metric({
   return (
     <span
       className={cn(
-        'font-mono font-bold leading-none',
+        'font-display font-bold leading-none',
         metricSizes[size],
         metricAccents[accent],
         className,
@@ -160,13 +160,13 @@ interface QuoteProps {
 export function Quote({ children, author, className }: QuoteProps) {
   return (
     <blockquote className={cn('relative', className)}>
-      <p className="font-serif italic text-quote text-text-primary leading-[1.45]">
+      <p className="font-display italic text-heading-l text-text-primary leading-[1.45]">
         <span className="text-secondary not-italic">&ldquo;</span>
         {children}
         <span className="text-secondary not-italic">&rdquo;</span>
       </p>
       {author && (
-        <footer className="mt-4 text-text-muted text-caption tracking-wide uppercase font-body">
+        <footer className="mt-4 text-text-muted text-body-s tracking-wide uppercase font-body">
           — {author}
         </footer>
       )}
@@ -185,7 +185,7 @@ export function Overline({ children, className }: OverlineProps) {
   return (
     <p
       className={cn(
-        'font-mono text-label uppercase tracking-[0.14em] text-text-muted',
+        'font-display text-label-sm uppercase tracking-[0.14em] text-text-muted',
         className,
       )}
     >

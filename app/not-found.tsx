@@ -13,7 +13,7 @@ export default function NotFound() {
         <p className="font-mono font-bold text-[96px] leading-none text-primary/20 mb-4" aria-hidden="true">
           404
         </p>
-        <h1 className="font-display font-bold text-heading-l md:text-display-m text-text-primary mb-4">
+        <h1 className="font-display font-bold text-heading-l md:text-display-l text-text-primary mb-4">
           Страница не найдена
         </h1>
         <p className="font-body text-body-l text-text-secondary mb-8 max-w-sm mx-auto">

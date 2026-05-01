@@ -9,7 +9,7 @@ export function PricingTable() {
       <div className="container">
         <h2
           id="pricing-table-heading"
-          className="font-display font-bold text-heading-l md:text-display-m text-text-primary mb-10 text-center"
+          className="font-display font-bold text-heading-l md:text-display-l text-text-primary mb-10 text-center"
         >
           Тарифы
         </h2>
@@ -18,12 +18,12 @@ export function PricingTable() {
             <div
               key={plan.id}
               className={cn(
-                'glass-card p-7 flex flex-col transition-all duration-300 hover:-translate-y-1',
+                'card-glass p-7 flex flex-col transition-all duration-300 hover:-translate-y-1',
                 plan.featured && 'border-primary/40 animate-pulse-border',
               )}
             >
               <div className="flex justify-between items-start mb-4">
-                <h3 className="font-display font-bold text-heading-s text-text-primary">
+                <h3 className="font-display font-bold text-heading-l text-text-primary">
                   {plan.name}
                 </h3>
                 {plan.featured && <Badge variant="cta">ХИТ</Badge>}
@@ -37,9 +37,9 @@ export function PricingTable() {
                   </li>
                 ))}
               </ul>
-              <p className="font-display font-bold text-metric-sm text-text-primary mb-4">
+              <p className="font-display font-bold text-metric-xl text-text-primary mb-4">
                 {plan.price.toLocaleString('ru-RU')}{' '}
-                <span className="text-text-secondary text-body-m font-body font-normal">
+                <span className="text-text-secondary text-body-l font-body font-normal">
                   {plan.priceUnit}
                 </span>
               </p>
@@ -55,12 +55,12 @@ export function PricingTable() {
           ))}
         </div>
 
-        <div className="glass-card p-6 text-center border-secondary/20">
+        <div className="card-glass p-6 text-center border-secondary/20">
           <p className="text-secondary font-mono text-body-s mb-1">
             <span role="img" aria-label="Подарок">🎁</span>{' '}
             {COMBO_OFFER.description}
           </p>
-          <p className="text-text-primary font-body font-semibold text-body-m">
+          <p className="text-text-primary font-body font-semibold text-body-l">
             {COMBO_OFFER.price.toLocaleString('ru-RU')}{' '}
             {COMBO_OFFER.priceUnit} · {COMBO_OFFER.saving}
           </p>

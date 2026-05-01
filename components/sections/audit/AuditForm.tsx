@@ -8,6 +8,7 @@ import { CheckCircle, Warning, User, Phone, Link as LinkIcon } from '@phosphor-i
 import { FadeIn } from '@/components/motion/FadeIn'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
+import { ArrowRight } from 'lucide-react'
 import { PLACEHOLDERS } from '@/constants/placeholders'
 import type { AuditFormData } from '@/types/form'
 
@@ -53,16 +54,16 @@ export function AuditForm() {
   return (
     <section className="section-padding bg-base" aria-labelledby="audit-form-heading">
       <div className="container max-w-xl">
-        <FadeIn className="text-center mb-8">
+        <div className="text-center mb-8">
           <h2
             id="audit-form-heading"
-            className="font-display font-bold text-3xl text-text-primary"
+            className="font-display font-bold text-display-l text-text-primary"
           >
             Оставить заявку на аудит
           </h2>
-        </FadeIn>
+        </div>
 
-        <FadeIn delay={0.1}>
+        <div>
           <div className="card-glow p-8 md:p-10 relative overflow-hidden">
             <div
               className="absolute top-0 left-0 right-0 h-[2px]"
@@ -89,10 +90,10 @@ export function AuditForm() {
                     <CheckCircle size={32} weight="duotone" color="#000000" aria-hidden="true" />
                   </motion.div>
                   <div>
-                    <h3 className="font-display font-bold text-heading-m text-text-primary mb-2">
+                    <h3 className="font-display font-bold text-heading-l text-text-primary mb-2">
                       Заявка принята!
                     </h3>
-                    <p className="font-body text-body-m text-text-secondary leading-relaxed">
+                    <p className="font-body text-body-l text-text-secondary leading-relaxed">
                       Свяжемся с вами в течение рабочего дня.
                       <br />
                       Подготовим разбор вашей карточки бесплатно.
@@ -106,7 +107,7 @@ export function AuditForm() {
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <p className="font-mono text-label uppercase tracking-widest text-text-muted mb-6">
+                  <p className="font-mono text-label-sm uppercase tracking-widest text-text-muted mb-6">
                     Заявка на аудит
                   </p>
 
@@ -176,14 +177,15 @@ export function AuditForm() {
                       type="submit"
                       variant="primary"
                       size="lg"
-                      className="w-full mt-1"
+                      className="w-full mt-1 items-center justify-center gap-2 group"
                       loading={formState === 'submitting'}
                       disabled={formState === 'submitting'}
                     >
-                      Получить разбор бесплатно →
+                      Получить разбор бесплатно
+                      <ArrowRight className="size-5 transition-transform duration-300 group-hover:translate-x-1" />
                     </Button>
 
-                    <p className="font-body text-caption text-text-muted text-center">
+                    <p className="font-body text-body-s text-text-muted text-center">
                       Отправляя форму, вы соглашаетесь с{' '}
                       <Link
                         href="/privacy"
@@ -197,23 +199,23 @@ export function AuditForm() {
               )}
             </AnimatePresence>
           </div>
-        </FadeIn>
+        </div>
 
         {/* Contact cards */}
-        <FadeIn delay={0.2} className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
           {[
             { label: 'Телефон',  value: PLACEHOLDERS.phone },
             { label: 'Telegram', value: PLACEHOLDERS.telegram },
             { label: 'Email',    value: PLACEHOLDERS.email },
           ].map((item) => (
-            <div key={item.label} className="glass-card p-5">
-              <p className="text-text-muted text-xs font-mono uppercase tracking-widest mb-2">
+            <div key={item.label} className="card-glass p-5">
+              <p className="text-text-muted text-label-sm font-mono uppercase tracking-widest mb-2">
                 {item.label}
               </p>
               <p className="text-text-primary font-body font-medium">{item.value}</p>
             </div>
           ))}
-        </FadeIn>
+        </div>
       </div>
     </section>
   )

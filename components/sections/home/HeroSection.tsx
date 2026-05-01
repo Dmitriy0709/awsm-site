@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
-import { Button, BackgroundGradientAnimation, MagneticButton } from '@/components/ui'
+import { Button, MagneticButton } from '@/components/ui'
 import { ButtonColorful } from '@/components/ui/ButtonColorful'
 import { useLeadModal } from '@/hooks/useLeadModal'
 
@@ -11,15 +11,19 @@ export function HeroSection() {
   const { openModal } = useLeadModal()
 
   return (
-    <BackgroundGradientAnimation
-      containerClassName="pt-16 md:pt-24 pb-0 overflow-hidden relative min-h-screen"
-    >
-      <div className="container relative z-20 pt-12 md:pt-20">
-        {/* H1 */}
+    <section className="pt-32 md:pt-40 pb-20 overflow-hidden relative min-h-[90vh] bg-base">
+      {/* Clean Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none bg-base" aria-hidden="true" />
+
+      <div className="container relative z-20">
         <h1
           id="hero-heading"
-          className="font-display font-bold text-white mb-6"
-          style={{ fontSize: 'clamp(40px, 9vw, 88px)', lineHeight: 1.05, letterSpacing: '-0.03em' }}
+          className="font-display font-bold text-text-primary mb-12"
+          style={{ 
+            fontSize: 'clamp(64px, 10vw, 140px)', 
+            lineHeight: '0.85', 
+            letterSpacing: '-0.04em' 
+          }}
         >
           <motion.span
             className="block"
@@ -54,19 +58,16 @@ export function HeroSection() {
             "Выводим карточку предприятия в&nbsp;топ выдачи по&nbsp;району.",
             "Гарантированный рост просмотров, звонков и&nbsp;построенных маршрутов."
           ].map((text, i) => (
-            <motion.div
+            <div
               key={i}
               className="flex items-center gap-3"
-              initial={{ opacity: 0, x: reduceMotion ? 0 : -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 + (i * 0.1), ease: [0.16, 1, 0.3, 1] }}
             >
-              <span className="w-1.5 h-1.5 rounded-full !bg-white flex-shrink-0" aria-hidden="true" />
+              <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" aria-hidden="true" />
               <p
-                className="text-body-xl font-display font-medium text-white/90 leading-tight"
+                className="text-body-l font-display font-medium text-text-secondary leading-tight"
                 dangerouslySetInnerHTML={{ __html: text }}
               />
-            </motion.div>
+            </div>
           ))}
         </div>
 
@@ -87,6 +88,6 @@ export function HeroSection() {
           </MagneticButton>
         </motion.div>
       </div>
-    </BackgroundGradientAnimation>
+    </section>
   )
 }

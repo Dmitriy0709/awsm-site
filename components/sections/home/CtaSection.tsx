@@ -3,7 +3,9 @@
 import { useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { FadeIn } from '@/components/motion/FadeIn'
+import { fixTypography } from '@/lib/utils'
 import { Button } from '@/components/ui/Button'
+import { ArrowRight, CheckCircle2 } from 'lucide-react'
 
 interface FormValues {
   name: string
@@ -72,25 +74,19 @@ export function CtaSection() {
           <div className="max-w-[600px]">
             <h2
               id="cta-heading"
-              className="font-display font-bold text-white mb-5"
-              style={{ fontSize: 'clamp(32px,4vw,52px)', letterSpacing: '-0.04em', lineHeight: '1.05' }}
-            >
-              Готовы вывести бизнес в ТОП?
-            </h2>
+              className="font-display font-bold text-white text-display-l mb-5"
+              dangerouslySetInnerHTML={{ __html: fixTypography('Готовы вывести бизнес в ТОП?') }}
+            />
             <p
-              className="font-body text-body-xl leading-relaxed mb-8"
+              className="font-body text-body-l leading-relaxed mb-8"
               style={{ color: 'rgba(255,255,255,0.50)' }}
-            >
-              Бесплатный экспресс-аудит за 24 часа. Покажем, где вы теряете
-              клиентов прямо сейчас.
-            </p>
+              dangerouslySetInnerHTML={{ __html: fixTypography('Бесплатный экспресс-аудит за 24 часа. Покажем, где вы теряете клиентов прямо сейчас.') }}
+            />
 
             {submitted ? (
               <div className="flex items-center gap-3 py-4">
                 <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(255,255,255,0.10)' }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
+                  <CheckCircle2 className="size-6 text-white" />
                 </div>
                 <div>
                   <p className="font-display font-semibold text-white">Заявка принята!</p>
@@ -107,14 +103,14 @@ export function CtaSection() {
                       type="text"
                       autoComplete="name"
                       placeholder="Ваше имя"
-                      className={`w-full h-11 px-4 rounded-lg border font-body text-body-m placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-white/20 transition-colors ${errors.name ? 'border-white/50 bg-white/5' : 'border-white/20 bg-white/5 text-white'}`}
+                      className={`w-full h-11 px-4 rounded-lg border font-body text-body-l placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-white/20 transition-colors ${errors.name ? 'border-white/50 bg-white/5' : 'border-white/20 bg-white/5 text-white'}`}
                       {...register('name', {
                         required: 'Введите имя',
                         minLength: { value: 2, message: 'Минимум 2 символа' },
                       })}
                     />
                     {errors.name && (
-                      <p className="mt-1 font-body text-caption text-white/80">
+                      <p className="mt-1 font-body text-body-s text-white/80">
                         {errors.name.message}
                       </p>
                     )}
@@ -133,7 +129,7 @@ export function CtaSection() {
                           type="tel"
                           autoComplete="tel"
                           placeholder="+7 (___) ___-__-__"
-                          className={`w-full h-11 px-4 rounded-lg border font-body text-body-m placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-white/20 transition-colors ${errors.phone ? 'border-white/50 bg-white/5' : 'border-white/20 bg-white/5 text-white'}`}
+                          className={`w-full h-11 px-4 rounded-lg border font-body text-body-l placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-white/20 transition-colors ${errors.phone ? 'border-white/50 bg-white/5' : 'border-white/20 bg-white/5 text-white'}`}
                           value={field.value ?? ''}
                           onChange={(e) => field.onChange(formatPhone(e.target.value))}
                           onBlur={field.onBlur}
@@ -141,7 +137,7 @@ export function CtaSection() {
                       )}
                     />
                     {errors.phone && (
-                      <p className="mt-1 font-body text-caption text-white/80">
+                      <p className="mt-1 font-body text-body-s text-white/80">
                         {errors.phone.message}
                       </p>
                     )}
@@ -152,9 +148,10 @@ export function CtaSection() {
                     variant="outline"
                     size="md"
                     loading={isSubmitting}
-                    className="sm:flex-shrink-0 bg-white text-black border-white hover:bg-white/90 hover:text-black"
+                    className="sm:flex-shrink-0 bg-white text-black border-white hover:bg-white/90 hover:text-black items-center gap-2 group"
                   >
-                    Получить аудит →
+                    Получить аудит
+                    <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </Button>
                 </div>
 
@@ -164,7 +161,7 @@ export function CtaSection() {
                   </p>
                 )}
 
-                <p className="font-body text-caption text-white/30">
+                <p className="font-body text-body-s text-white/30">
                   Нажимая кнопку, вы соглашаетесь с{' '}
                   <a href="/privacy" className="underline hover:opacity-70 transition-opacity">
                     политикой конфиденциальности

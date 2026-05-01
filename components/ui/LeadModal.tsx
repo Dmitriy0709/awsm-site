@@ -120,7 +120,7 @@ export function LeadModal() {
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   </div>
-                  <h3 className="font-display font-bold text-heading-m text-text-primary mb-2">
+                  <h3 className="font-display font-bold text-heading-l text-text-primary mb-2">
                     Заявка принята!
                   </h3>
                   <p className="font-body text-body-s text-text-secondary">
@@ -130,7 +130,7 @@ export function LeadModal() {
               ) : (
                 <>
                   <div className="mb-7">
-                    <h2 id="lead-modal-title" className="font-display font-bold text-heading-m text-text-primary mb-2">
+                    <h2 id="lead-modal-title" className="font-display font-bold text-heading-l text-text-primary mb-2">
                       Получить бесплатный аудит
                     </h2>
                     <p className="font-body text-body-s text-text-secondary">
@@ -155,7 +155,7 @@ export function LeadModal() {
                         })}
                       />
                       {errors.name && (
-                        <p className="mt-1.5 font-body text-caption text-text-muted">
+                        <p className="mt-1.5 font-body text-body-s text-text-muted">
                           {errors.name.message}
                         </p>
                       )}
@@ -186,7 +186,7 @@ export function LeadModal() {
                         )}
                       />
                       {errors.phone && (
-                        <p className="mt-1.5 font-body text-caption text-text-muted">
+                        <p className="mt-1.5 font-body text-body-s text-text-muted">
                           {errors.phone.message}
                         </p>
                       )}
@@ -208,7 +208,7 @@ export function LeadModal() {
                       Получить аудит бесплатно →
                     </Button>
 
-                    <p className="text-center font-body text-caption text-text-muted">
+                    <p className="text-center font-body text-body-s text-text-muted">
                       Нажимая кнопку, вы соглашаетесь с{' '}
                       <a href="/privacy" className="underline hover:text-text-secondary transition-colors">
                         политикой конфиденциальности

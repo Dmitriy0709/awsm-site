@@ -63,8 +63,13 @@ function AnimatedCounter({
       aria-label={[metric.value, metric.label, metric.sublabel].filter(Boolean).join(' ')}
     >
       <span
-        className="font-display font-bold leading-none tracking-tight text-3xl sm:text-4xl lg:text-[48px]"
-        style={{ color: metric.color }}
+        className="font-display font-bold"
+        style={{ 
+          color: metric.color,
+          fontSize: 'clamp(32px, 5vw, 52px)',
+          lineHeight: '1',
+          letterSpacing: '-0.02em'
+        }}
       >
         {display}
       </span>
@@ -97,7 +102,7 @@ export function SocialProofBar() {
                   {metric.label}
                 </p>
                 {metric.sublabel && (
-                  <p className="font-body text-caption text-text-muted leading-snug mt-0.5">
+                  <p className="font-body text-body-s text-text-muted leading-snug mt-0.5">
                     {metric.sublabel}
                   </p>
                 )}

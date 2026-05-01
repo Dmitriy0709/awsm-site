@@ -18,7 +18,7 @@ export const CASES: Case[] = [
   {
     id: 'autoservice-bmw-msk',
     category: 'auto',
-    title: 'Автосервис BMW',
+    title: 'Автосервис <br />BMW',
     city: 'Москва',
     metrics: [
       { value: 'Полная', label: 'запись на 2 недели вперёд' },

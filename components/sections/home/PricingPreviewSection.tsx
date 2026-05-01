@@ -35,56 +35,35 @@ const TYPE_LABEL: Record<string, string> = {
 }
 
 export function PricingPreviewSection() {
+  const { openModal } = useLeadModal()
   return (
     <section
       id="pricing"
       className="section-padding bg-base relative"
       aria-labelledby="pricing-heading"
     >
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-surface-mid/30 rounded-full blur-3xl"
-        />
-      </div>
-
       <div className="container relative">
         {/* Heading */}
-        <FadeIn className="text-center mb-12 md:mb-16">
-          <p className="font-display text-label text-text-muted uppercase tracking-widest mb-4">
+        <div className="text-center mb-12 md:mb-16">
+          <p className="font-display text-label-sm text-text-muted uppercase tracking-widest mb-4">
             Тарифы
           </p>
           <h2
             id="pricing-heading"
-            className="font-display font-bold text-heading-l md:text-display-m text-text-primary"
+            className="font-display font-bold text-heading-l md:text-display-l text-text-primary"
           >
             Прозрачные цены, без скрытых платежей
           </h2>
-        </FadeIn>
+        </div>
 
         {/* 4-card grid */}
-        <PricingGrid plans={ALL_PLANS} />
-
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+          {ALL_PLANS.map((plan) => (
+            <PricingCard key={plan.id} plan={plan} typeLabel={TYPE_LABEL[plan.type]} onCta={openModal} />
+          ))}
+        </div>
       </div>
     </section>
-  )
-}
-
-// ─── Pricing Grid (needs hook) ───────────────────────────────────────────────
-
-function PricingGrid({ plans }: { plans: PricingPlan[] }) {
-  const { openModal } = useLeadModal()
-  return (
-    <StaggerContainer
-      stagger={0.10}
-      delay={0.1}
-      className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5"
-    >
-      {plans.map((plan) => (
-        <StaggerItem key={plan.id}>
-          <PricingCard plan={plan} typeLabel={TYPE_LABEL[plan.type]} onCta={openModal} />
-        </StaggerItem>
-      ))}
-    </StaggerContainer>
   )
 }
 
@@ -94,9 +73,9 @@ function PricingCard({ plan, typeLabel, onCta }: { plan: PricingPlan; typeLabel:
   const isCombo = plan.id === 'combo'
 
   return (
-    <motion.article
+    <article
       className={cn(
-        'card-glass p-6 flex flex-col h-full relative overflow-hidden',
+        'card-glass p-6 flex flex-col h-full relative overflow-hidden group/card transition-transform duration-300 hover:-translate-y-1',
         plan.featured && 'card-featured scale-[1.03]',
       )}
       style={plan.featured ? {
@@ -106,8 +85,6 @@ function PricingCard({ plan, typeLabel, onCta }: { plan: PricingPlan; typeLabel:
         background: 'rgba(0,0,0,0.03)',
         borderColor: 'rgba(0,0,0,0.1)',
       } : undefined}
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.2, ease: 'easeOut' }}
     >
       {/* Featured top accent line */}
       {plan.featured && (
@@ -127,7 +104,7 @@ function PricingCard({ plan, typeLabel, onCta }: { plan: PricingPlan; typeLabel:
 
       {/* Header row */}
       <div className="flex items-center justify-between mb-4">
-        <span className="font-display text-label uppercase tracking-widest text-text-muted">
+        <span className="font-display text-label-sm uppercase tracking-widest text-text-muted">
           {typeLabel}
         </span>
         {plan.featured && (
@@ -140,7 +117,7 @@ function PricingCard({ plan, typeLabel, onCta }: { plan: PricingPlan; typeLabel:
 
       {/* Name + tagline — min-h aligns price row across all cards */}
       <div className="min-h-[5.5rem] mb-4">
-        <h3 className="font-display font-bold text-heading-m text-text-primary mb-1">
+        <h3 className="font-display font-bold text-heading-l text-text-primary mb-1">
           {plan.name}
         </h3>
         <p className="font-body text-body-s text-text-secondary">
@@ -158,7 +135,7 @@ function PricingCard({ plan, typeLabel, onCta }: { plan: PricingPlan; typeLabel:
         </p>
         <div className="flex items-baseline gap-1.5">
           <span
-            className="font-display font-bold text-metric-sm text-text-primary"
+            className="font-display font-bold text-metric-xl text-text-primary"
           >
             {plan.price.toLocaleString('ru-RU')}
           </span>
@@ -200,6 +177,6 @@ function PricingCard({ plan, typeLabel, onCta }: { plan: PricingPlan; typeLabel:
           {plan.ctaLabel}
         </Button>
       </div>
-    </motion.article>
+    </article>
   )
 }

@@ -1,7 +1,8 @@
 'use client'
 
-import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { MapPin } from 'lucide-react'
+import { fixTypography } from '@/lib/utils'
 import { FadeIn } from '@/components/motion/FadeIn'
 import { StaggerContainer, StaggerItem } from '@/components/motion/StaggerContainer'
 import { Badge } from '@/components/ui/Badge'
@@ -18,150 +19,112 @@ const CATEGORY_LABELS: Record<string, string> = {
 }
 
 const CATEGORY_BADGE_VARIANT = {
-  beauty:   'outline',
-  auto:     'outline',
-  food:     'outline',
-  health:   'outline',
-  services: 'outline',
-  kids:     'outline',
+  beauty:   'technical',
+  auto:     'technical',
+  food:     'technical',
+  health:   'technical',
+  services: 'technical',
+  kids:     'technical',
 } as const
 
 export function CasesPreviewSection() {
+  // Показываем только первые 3 кейса на главной
   const previewCases = CASES.slice(0, 3)
 
   return (
     <section
       id="cases"
-      className="section-padding bg-base relative"
+      className="section-padding bg-base relative overflow-hidden"
       aria-labelledby="cases-heading"
     >
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        <div className="dot-grid absolute inset-0" />
-      </div>
-
       <div className="container relative">
-        {/* Heading */}
-        <FadeIn className="text-center mb-20">
-          <p className="font-display text-label text-text-muted uppercase tracking-widest mb-4">
-            Кейсы
+        <div className="text-center mb-16 md:mb-20">
+          <p className="font-display text-label-sm text-text-muted uppercase tracking-widest mb-4">
+            Наши кейсы
           </p>
           <h2
             id="cases-heading"
-            className="font-display font-bold text-heading-l md:text-display-m text-text-primary"
+            className="font-display font-bold text-heading-l md:text-display-l text-text-primary mb-4"
           >
-            Результаты говорят громче слов
+            Результаты, которые говорят сами за себя
           </h2>
-        </FadeIn>
-
-        {/* Desktop grid */}
-        <StaggerContainer
-          stagger={0.14}
-          delay={0.1}
-          className="hidden md:grid grid-cols-3 gap-6 mb-10"
-        >
-          {previewCases.map((item) => (
-            <StaggerItem key={item.id}>
-              <CaseCard item={item} />
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
-
-        {/* Mobile horizontal scroll */}
-        <div className="md:hidden mb-8">
-          <StaggerContainer
-            stagger={0.1}
-            delay={0.1}
-            className="scroll-x !gap-4 px-1"
-          >
-            {previewCases.map((item) => (
-              <StaggerItem key={item.id} className="flex-shrink-0 w-[300px]">
-                <CaseCard item={item} />
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+          <p className="font-body text-body-l text-text-secondary max-w-xl mx-auto">
+            Реальные цифры и живые профили компаний после нашей работы
+          </p>
         </div>
 
+        <div className="flex lg:grid overflow-x-auto lg:overflow-visible snap-x snap-mandatory lg:snap-none gap-6 pt-2 pb-12 lg:pb-0 -mx-4 px-4 lg:mx-0 lg:px-0 scrollbar-hide grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          {previewCases.map((item) => (
+            <div
+              key={item.id}
+              className="min-w-[85%] sm:min-w-[45%] lg:min-w-0 snap-center"
+            >
+              <CaseCard item={item} />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )
 }
 
-// ─── Case Card ───────────────────────────────────────────────────────────────
-
 function CaseCard({ item }: { item: Case }) {
-  const badgeVariant = CATEGORY_BADGE_VARIANT[item.category] ?? 'muted'
-  const mainMetric   = item.metrics[0]
+  const mainMetric = item.metrics[0]
   const secondMetric = item.metrics[1]
 
   return (
-    <div className="group block h-full">
-      <motion.article
-        className="card-glass overflow-hidden flex flex-col h-full"
-        whileHover={{ y: -6 }}
-        transition={{ duration: 0.2, ease: 'easeOut' }}
-      >
-        {/* Image — 16:9 */}
-        <div
-          className="relative w-full overflow-hidden"
-          style={{ paddingBottom: '56.25%' }}
-        >
-          <Image
-            src={item.imageSrc}
-            alt={item.title}
-            fill
-            sizes="(max-width: 768px) 300px, (max-width: 1280px) 33vw, 400px"
-            className="object-cover transition-transform duration-slow group-hover:scale-105"
-          />
-          <div className="absolute top-4 left-4 z-10">
-            <Badge variant={badgeVariant} size="sm" className="bg-white/80 backdrop-blur-md border-none px-3 py-1 text-[10px] uppercase tracking-wider font-bold text-black shadow-sm">
-              {CATEGORY_LABELS[item.category]}
-            </Badge>
+    <article
+      className="card-glass flex flex-col h-full cursor-default group/card transition-transform duration-300 hover:-translate-y-1"
+    >
+      {/* Image / Banner */}
+      <div className="aspect-[16/10] bg-zinc-100 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
+        <div className="absolute top-4 left-4 z-20">
+          <Badge variant={CATEGORY_BADGE_VARIANT[item.category as keyof typeof CATEGORY_BADGE_VARIANT] || 'technical'}>
+            {CATEGORY_LABELS[item.category] || item.category}
+          </Badge>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="p-6 sm:p-8 flex flex-col flex-1 gap-4">
+        <div className="min-h-[70px] flex flex-col justify-start">
+          <h3 className="font-display font-bold text-text-primary mb-2 line-clamp-2" style={{ fontSize: '26px', lineHeight: '1.2' }} dangerouslySetInnerHTML={{ __html: fixTypography(item.title) }} />
+          <div className="flex items-center gap-1.5 text-text-muted">
+            <MapPin className="size-3.5" />
+            <p className="font-body text-body-s">{item.city}</p>
           </div>
         </div>
 
-        {/* Content */}
-        <div className="p-8 flex flex-col flex-1 gap-6">
-          <div>
-            <h3 className="font-display font-bold text-heading-s text-text-primary mb-2">
-              {item.title}
-            </h3>
-            <p className="font-body text-body-s text-text-muted">{item.city}</p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 py-5 border-y border-border/50">
-            <MetricCell value={mainMetric.value} label={mainMetric.label} primary />
-            {secondMetric && (
-              <MetricCell value={secondMetric.value} label={secondMetric.label} />
-            )}
-          </div>
-
-          <p className="font-body text-body-s text-text-secondary leading-relaxed flex-1">
-            {item.description}
-          </p>
-
+        <div className="grid grid-cols-2 gap-8 py-4 border-y border-border/50">
+          <MetricCell value={mainMetric.value} label={mainMetric.label} primary />
+          {secondMetric && (
+            <MetricCell value={secondMetric.value} label={secondMetric.label} />
+          )}
         </div>
-      </motion.article>
-    </div>
+
+        <p className="font-body text-body-s text-text-secondary leading-relaxed flex-1" dangerouslySetInnerHTML={{ __html: fixTypography(item.description) }} />
+
+      </div>
+    </article>
   )
 }
-
-// ─── Metric Cell ─────────────────────────────────────────────────────────────
 
 function MetricCell({
   value,
   label,
-  primary = false,
+  primary = false
 }: {
-  value:   string
-  label:   string
+  value: string
+  label: string
   primary?: boolean
 }) {
   return (
     <div>
-      <p className="font-display font-bold text-metric-sm leading-none mb-1 text-text-primary">
+      <p className="font-display font-bold leading-none mb-1 text-text-primary tracking-tight" style={{ fontSize: '28px' }}>
         {value}
       </p>
-      <p className="font-body text-caption text-text-muted leading-snug">{label}</p>
+      <p className="font-body text-[11px] text-text-muted leading-tight min-h-[2.5em] flex items-start" dangerouslySetInnerHTML={{ __html: fixTypography(label) }} />
     </div>
   )
 }

@@ -68,14 +68,14 @@ function VideoPlaceholder({ reducedMotion = false }: { reducedMotion?: boolean }
         </div>
 
         {/* Текст под кнопкой */}
-        <p className="font-body font-semibold text-white text-body-m tracking-wide select-none">
-          ▶ Смотреть разбор
+        <p className="font-body font-semibold text-white text-body-l tracking-wide select-none flex items-center gap-2">
+          <Play size={14} weight="fill" /> Смотреть разбор
         </p>
       </div>
 
       {/* Метка плашки внизу */}
       <div className="absolute bottom-4 inset-x-0 flex justify-center">
-        <span className="font-body text-caption text-text-muted/60 text-center px-4">
+        <span className="font-body text-body-s text-text-muted/60 text-center px-4">
           [ВИДЕО_ТИЗЕР] — демонстрация продукта, ~2 мин
         </span>
       </div>
@@ -103,7 +103,7 @@ export function VideoSection() {
       <div className="container">
         {/* Заголовок */}
         <FadeIn className="text-center mb-4">
-          <h2 className="font-display font-bold text-display-m text-text-primary">
+          <h2 className="font-display font-bold text-display-l text-text-primary">
             Почему ваш бизнес не виден для клиентов
           </h2>
         </FadeIn>

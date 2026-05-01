@@ -64,7 +64,7 @@ export function NavigationBar() {
         {/* Logo */}
         <Link href="/" className="flex items-center group" aria-label="AWSM — на главную">
           <span className={cn(
-            "font-display font-bold text-heading-s tracking-tight transition-colors duration-300",
+            "font-display font-bold text-heading-l tracking-tight transition-colors duration-300",
             scrolled ? "text-text-primary" : "text-white"
           )}>
             AWSM <span className={cn(
@@ -81,7 +81,7 @@ export function NavigationBar() {
               <Link
                 href={link.href}
                 className={cn(
-                  "text-label font-display uppercase tracking-widest transition-colors duration-300 relative group rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30",
+                  "text-label-sm font-display uppercase tracking-widest transition-colors duration-300 relative group rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30",
                   scrolled ? "text-text-muted hover:text-text-primary" : "text-white/80 hover:text-white"
                 )}
               >
@@ -146,7 +146,7 @@ export function NavigationBar() {
                   <Link
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="block text-text-primary text-label font-display uppercase tracking-widest py-4 border-b border-border last:border-0 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-inset rounded-sm"
+                    className="block text-text-primary text-label-sm font-display uppercase tracking-widest py-4 border-b border-border last:border-0 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-inset rounded-sm"
                   >
                     {link.label}
                   </Link>

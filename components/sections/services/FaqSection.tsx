@@ -13,10 +13,10 @@ export function FaqSection() {
     <section id="faq" className="section-padding bg-surface">
       <div className="container max-w-3xl">
         <FadeIn className="text-center mb-12">
-          <p className="font-mono text-label uppercase tracking-[0.14em] text-text-muted mb-3">
+          <p className="font-mono text-label-sm uppercase tracking-[0.14em] text-text-muted mb-3">
             Вопросы и ответы
           </p>
-          <h2 className="font-display font-bold text-3xl md:text-4xl text-text-primary">
+          <h2 className="font-display font-bold text-display-l md:text-metric-xl text-text-primary">
             Частые вопросы
           </h2>
         </FadeIn>

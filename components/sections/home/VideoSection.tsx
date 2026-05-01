@@ -109,7 +109,7 @@ export function VideoSection() {
   const translateY = useTransform(scrollYProgress, [0, 0.35], reduceMotion ? [0, 0] : [32, 0])
 
   return (
-    <section id="video" className="section-padding bg-surface-mid">
+    <section id="video" className="section-padding bg-base">
       <div className="container">
         {/* Заголовок */}
         <FadeIn className="text-center mb-4">

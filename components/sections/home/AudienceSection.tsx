@@ -13,7 +13,7 @@ export function AudienceSection() {
   return (
     <section
       id="audience"
-      className="section-padding bg-surface-mid relative"
+      className="section-padding bg-base relative"
       aria-labelledby="audience-heading"
     >
       {/* Decorative layer — clipped separately so card hover isn't cut off */}
@@ -65,12 +65,12 @@ export function AudienceSection() {
             {/* Fade edges */}
             <div
               className="absolute left-0 top-0 bottom-4 w-12 z-10 pointer-events-none"
-              style={{ background: 'linear-gradient(to right, #F4F4FA, transparent)' }}
+              style={{ background: 'linear-gradient(to right, #FAFAFE, transparent)' }}
               aria-hidden="true"
             />
             <div
               className="absolute right-0 top-0 bottom-4 w-12 z-10 pointer-events-none"
-              style={{ background: 'linear-gradient(to left, #F4F4FA, transparent)' }}
+              style={{ background: 'linear-gradient(to left, #FAFAFE, transparent)' }}
               aria-hidden="true"
             />
 

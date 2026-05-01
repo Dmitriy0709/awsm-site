@@ -1,147 +1,90 @@
 'use client'
 
+import * as React from "react"
 import Link from 'next/link'
-import { cn } from '@/lib/utils'
-import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react'
+import { Slot } from "@radix-ui/react-slot"
+import { cva, type VariantProps } from "class-variance-authority"
 
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'link' | 'danger' | 'ctaLight' | 'ghostWhite'
-export type ButtonSize    = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+import { cn } from "@/lib/utils"
 
-type BaseProps = {
-  variant?:  ButtonVariant
-  size?:     ButtonSize
-  children:  ReactNode
-  className?: string
-  loading?:  boolean
-  iconLeft?:  ReactNode
-  iconRight?: ReactNode
+const buttonVariants = cva(
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        primary: "bg-cta text-white shadow-glow-cta-sm hover:bg-cta-hover hover:shadow-glow-cta hover:-translate-y-px active:translate-y-0 active:scale-[0.98]",
+        destructive:
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        danger: "bg-error text-white hover:opacity-90 hover:-translate-y-px active:translate-y-0 active:scale-[0.98]",
+        outline:
+          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+        secondary:
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
+        ctaLight: "bg-white text-cta shadow-[0_4px_20px_rgba(0,0,0,0.20)] hover:bg-white/90 hover:-translate-y-px active:translate-y-0 active:scale-[0.98]",
+        ghostWhite: "border border-white/20 text-white/70 bg-transparent hover:text-white hover:border-white/40 active:scale-[0.98]",
+      },
+      size: {
+        default: "h-10 px-4 py-2",
+        sm: "h-9 rounded-md px-3",
+        lg: "h-11 rounded-md px-8",
+        icon: "h-10 w-10",
+        md: "h-11 px-6 text-base rounded-lg",
+        xl: "h-14 px-9 text-lg rounded-xl",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  },
+)
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean
+  loading?: boolean
+  href?: string
+  external?: boolean
 }
 
-type AsButton = BaseProps & ButtonHTMLAttributes<HTMLButtonElement> & { href?: never; external?: never }
-type AsLink   = BaseProps & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> & { href: string; external?: boolean; disabled?: boolean }
-export type ButtonProps = AsButton | AsLink
-
-const base = [
-  'relative inline-flex items-center justify-center gap-2 shrink-0',
-  'font-display font-semibold tracking-[-0.01em] select-none',
-  'transition-all duration-200 ease-out',
-  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-2 focus-visible:ring-offset-surface',
-  'disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none',
-].join(' ')
-
-const variants: Record<ButtonVariant, string> = {
-  primary: [
-    'bg-cta text-white',
-    'shadow-glow-cta-sm',
-    'hover:bg-cta-hover hover:shadow-glow-cta hover:-translate-y-px',
-    'active:translate-y-0 active:scale-[0.98]',
-  ].join(' '),
-
-  secondary: [
-    'border border-border-strong text-text-secondary bg-transparent',
-    'hover:border-primary hover:text-primary hover:bg-primary-muted',
-    'active:scale-[0.98]',
-  ].join(' '),
-
-  ghost: [
-    'text-text-secondary bg-transparent',
-    'hover:text-text-primary hover:bg-surface-mid',
-    'active:bg-surface-elevated',
-  ].join(' '),
-
-  link: [
-    'text-primary bg-transparent',
-    'underline-offset-4 decoration-primary/40',
-    'hover:underline hover:decoration-primary',
-    'p-0 h-auto rounded-none shadow-none',
-  ].join(' '),
-
-  danger: [
-    'bg-error text-white',
-    'hover:opacity-90 hover:-translate-y-px',
-    'active:translate-y-0 active:scale-[0.98]',
-  ].join(' '),
-
-  ctaLight: [
-    'bg-white text-cta',
-    'shadow-[0_4px_20px_rgba(0,0,0,0.20)]',
-    'hover:bg-white/90 hover:-translate-y-px',
-    'active:translate-y-0 active:scale-[0.98]',
-  ].join(' '),
-
-  ghostWhite: [
-    'border border-white/20 text-white/70 bg-transparent',
-    'hover:text-white hover:border-white/40',
-    'active:scale-[0.98]',
-  ].join(' '),
-}
-
-const sizes: Record<ButtonSize, string> = {
-  xs: 'h-8  px-3  text-xs   rounded-md gap-1.5',
-  sm: 'h-9  px-4  text-body-s rounded-md',
-  md: 'h-11 px-6  text-body-m rounded-lg',
-  lg: 'h-12 px-7  text-body-l rounded-xl',
-  xl: 'h-14 px-9  text-body-xl rounded-xl',
-}
-
-function Spinner() {
-  return (
-    <svg className="animate-spin w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <circle className="opacity-20" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
-      <path className="opacity-80" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.4 0 0 5.4 0 12h4z" />
-    </svg>
-  )
-}
-
-export function Button(props: ButtonProps) {
-  const {
-    variant  = 'primary',
-    size     = 'md',
-    children,
-    className,
-    loading  = false,
-    iconLeft,
-    iconRight,
-    ...rest
-  } = props
-
-  const classes = cn(
-    base,
-    variant !== 'link' && sizes[size],
-    variants[variant],
-    loading && 'opacity-60 pointer-events-none',
-    className,
-  )
-
-  const content = (
-    <>
-      {loading ? <Spinner /> : iconLeft}
-      <span>{children}</span>
-      {!loading && iconRight}
-    </>
-  )
-
-  if ('href' in props && props.href) {
-    const { href, external, disabled } = props as AsLink
-    if (external) {
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, loading, href, external, ...props }, ref) => {
+    const classes = cn(buttonVariants({ variant, size, className }), loading && "opacity-60 pointer-events-none")
+    
+    if (href) {
+      if (external) {
+        return (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={classes}
+          >
+            {props.children}
+          </a>
+        )
+      }
       return (
-        <a href={href} target="_blank" rel="noopener noreferrer"
-          className={cn(classes, disabled && 'opacity-40 pointer-events-none')}>
-          {content}
-        </a>
+        <Link href={href} className={classes}>
+          {props.children}
+        </Link>
       )
     }
-    return (
-      <Link href={href} className={cn(classes, disabled && 'opacity-40 pointer-events-none')}>
-        {content}
-      </Link>
-    )
-  }
 
-  const { disabled, ...buttonRest } = rest as AsButton
-  return (
-    <button className={classes} disabled={disabled || loading} {...buttonRest}>
-      {content}
-    </button>
-  )
-}
+    const Comp = asChild ? Slot : "button"
+    return (
+      <Comp
+        className={classes}
+        ref={ref}
+        {...props}
+      />
+    )
+  },
+)
+Button.displayName = "Button"
+
+export { Button, buttonVariants }

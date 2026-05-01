@@ -61,15 +61,15 @@ export function NavigationBar() {
     >
       <nav className="container flex items-center justify-between h-16 md:h-18">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5 group" aria-label="AWSM — на главную">
-          <span
-            className="w-9 h-9 rounded-full bg-text-primary flex items-center justify-center flex-shrink-0 transition-opacity duration-200 group-hover:opacity-80"
-            aria-hidden="true"
-          >
-            <span className="font-display font-bold text-sm text-white leading-none">A</span>
-          </span>
-          <span className="font-display font-bold text-heading-s text-text-primary tracking-tight">
-            AWSM <span className="text-text-muted font-medium">{'// Geo'}</span>
+        <Link href="/" className="flex items-center group" aria-label="AWSM — на главную">
+          <span className={cn(
+            "font-display font-bold text-heading-s tracking-tight transition-colors duration-200",
+            scrolled ? "text-text-primary" : "text-white"
+          )}>
+            AWSM <span className={cn(
+              "font-medium transition-colors duration-200",
+              scrolled ? "text-text-muted" : "text-white/60"
+            )}>Geo</span>
           </span>
         </Link>
 
@@ -79,10 +79,16 @@ export function NavigationBar() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="text-text-muted hover:text-text-primary text-body-s font-body font-medium transition-colors duration-200 relative group rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30"
+                className={cn(
+                  "text-body-s font-body font-medium transition-colors duration-200 relative group rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30",
+                  scrolled ? "text-text-muted hover:text-text-primary" : "text-white/70 hover:text-white"
+                )}
               >
                 {link.label}
-                <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
+                <span className={cn(
+                  "absolute -bottom-0.5 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full",
+                  !scrolled && "bg-white"
+                )} />
               </Link>
             </li>
           ))}
@@ -95,7 +101,10 @@ export function NavigationBar() {
               variant="primary"
               size="sm"
               onClick={openModal}
-              className="!bg-text-primary !text-white !shadow-none hover:!opacity-80 hover:!translate-y-0 !rounded-full"
+              className={cn(
+                "!shadow-none hover:!opacity-80 hover:!translate-y-0 !rounded-full",
+                scrolled ? "!bg-text-primary !text-white" : "!bg-white !text-black"
+              )}
             >
               {CTA_LINK.label}
             </Button>
@@ -103,7 +112,10 @@ export function NavigationBar() {
 
           <motion.button
             type="button"
-            className="md:hidden text-text-muted hover:text-text-primary p-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30"
+            className={cn(
+              "md:hidden p-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30",
+              scrolled ? "text-text-muted hover:text-text-primary" : "text-white/80 hover:text-white"
+            )}
             onClick={() => setMobileOpen((v) => !v)}
             aria-label={mobileOpen ? 'Закрыть меню' : 'Открыть меню'}
             aria-expanded={mobileOpen}

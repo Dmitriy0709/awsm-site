@@ -38,7 +38,7 @@ export function PricingPreviewSection() {
   return (
     <section
       id="pricing"
-      className="section-padding bg-surface-mid relative"
+      className="section-padding bg-base relative"
       aria-labelledby="pricing-heading"
     >
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">

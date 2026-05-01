@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { HeroSection } from '@/components/sections/home/HeroSection'
 import { SocialProofBar } from '@/components/sections/home/SocialProofBar'
 import { VideoSection } from '@/components/sections/home/VideoSection'
-import { PricingPreviewSection } from '@/components/sections/home/PricingPreviewSection'
+import { PricingCards } from '@/components/ui'
 import { ProblemSolutionSection } from '@/components/sections/home/ProblemSolutionSection'
 import { AudienceSection } from '@/components/sections/home/AudienceSection'
 import { HowWeWorkSection } from '@/components/sections/home/HowWeWorkSection'
@@ -22,7 +22,7 @@ export default function HomePage() {
       <HeroSection />
       <SocialProofBar />
       <VideoSection />
-      <PricingPreviewSection />
+      <PricingCards />
       <ProblemSolutionSection />
       <AudienceSection />
       <HowWeWorkSection />

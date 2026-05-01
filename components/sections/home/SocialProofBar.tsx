@@ -78,7 +78,7 @@ export function SocialProofBar() {
   const reduceMotion = useReducedMotion() ?? false
 
   return (
-    <section aria-label="Ключевые результаты" className="bg-surface border-y border-border">
+    <section aria-label="Ключевые результаты" className="bg-base border-y border-border">
       <div className="container py-10 md:py-12">
         {/*
           gap-px + bg-border = тонкие разделители между ячейками.

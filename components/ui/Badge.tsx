@@ -9,25 +9,25 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default:
-          "border-transparent bg-black text-white hover:bg-black/90",
+          "border-transparent bg-primary text-primary-foreground hover:bg-primary/90",
         primary: 
-          "bg-black/5 text-black border-black/10",
+          "bg-primary/5 text-primary border-primary/10",
         secondary:
-          "bg-zinc-100 text-zinc-900 border-zinc-200",
+          "bg-surface-elevated text-text-primary border-border",
         destructive:
-          "border-transparent bg-black text-white hover:bg-black/90",
+          "border-transparent bg-primary text-primary-foreground hover:bg-primary/90",
         outline: 
-          "text-black border-zinc-200",
+          "text-text-primary border-border",
         cta: 
-          "bg-black text-white border-black",
+          "bg-primary text-primary-foreground border-primary",
         success: 
-          "bg-zinc-100 text-zinc-900 border-zinc-200",
+          "bg-surface-mid text-text-primary border-border",
         error: 
-          "bg-zinc-100 text-zinc-900 border-zinc-200",
+          "bg-surface-mid text-text-primary border-border",
         muted: 
-          "bg-zinc-50 text-zinc-500 border-zinc-100",
+          "bg-surface-mid text-text-muted border-border",
         technical:
-          "bg-zinc-100/50 text-zinc-600 border-zinc-200 font-mono uppercase tracking-wider text-[10px]",
+          "bg-surface-elevated/50 text-text-secondary border-border font-mono uppercase tracking-wider text-[10px]",
       },
       size: {
         sm: "px-2 py-0.5 text-[10px] gap-1",

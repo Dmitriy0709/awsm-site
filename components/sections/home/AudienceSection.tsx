@@ -73,8 +73,7 @@ function AudienceCard({ item }: AudienceCardProps) {
       className="card-glass p-6 sm:p-8 flex flex-col gap-8 cursor-default h-full relative overflow-hidden group/card transition-transform duration-300 hover:-translate-y-1"
     >
       <div
-        className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-        style={{ background: 'rgba(0,0,0,0.05)', border: '1px solid rgba(0,0,0,0.1)' }}
+        className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 bg-surface-elevated border border-border"
         aria-hidden="true"
       >
         <Icon size={24} className="text-text-primary" />

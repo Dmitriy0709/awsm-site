@@ -91,7 +91,7 @@ export function FloatingHeader() {
                 onClose={() => setOpen(false)}
               >
                 <div className="flex items-center gap-2 mb-8 mt-2">
-                  <p className="font-display text-xl font-bold">AWSM Geo</p>
+                  <p className="font-display text-xl font-bold text-text-primary">AWSM <span className="font-medium">Geo</span></p>
                 </div>
                 
                 <div className="grid gap-y-2 overflow-y-auto pb-5">

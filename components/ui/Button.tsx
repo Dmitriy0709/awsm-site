@@ -8,31 +8,26 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-body-s font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-xl text-body-s font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
-        default: "bg-black text-white hover:bg-black/90",
-        primary: "bg-black text-white hover:bg-black/90 hover:-translate-y-px active:translate-y-0 active:scale-[0.98]",
-        destructive:
-          "bg-zinc-800 text-white hover:bg-zinc-800/90",
-        danger: "bg-zinc-800 text-white hover:bg-zinc-800/90 hover:-translate-y-px active:translate-y-0 active:scale-[0.98]",
-        outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-        secondary:
-          "bg-zinc-100 text-zinc-900 hover:bg-zinc-200",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90 hover:-translate-y-px active:translate-y-0 active:scale-[0.98]",
+        destructive: "bg-primary text-primary-foreground hover:bg-primary/90",
+        outline: "border border-border bg-base text-text-primary hover:bg-surface-mid hover:border-border-strong",
+        secondary: "bg-surface-elevated text-text-primary hover:bg-surface-mid",
+        ghost: "hover:bg-surface-mid text-text-primary",
         link: "text-primary underline-offset-4 hover:underline",
-        ctaLight: "bg-white text-black border border-zinc-200 hover:bg-zinc-50 hover:-translate-y-px active:translate-y-0 active:scale-[0.98]",
+        ctaLight: "bg-base text-text-primary border border-border hover:bg-surface-mid hover:-translate-y-px active:translate-y-0 active:scale-[0.98]",
         ghostWhite: "border border-white/20 text-white/70 bg-transparent hover:text-white hover:border-white/40 active:scale-[0.98]",
       },
       size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
+        default: "h-11 px-5 py-2.5",
+        sm: "h-9 rounded-lg px-3.5",
+        lg: "h-13 rounded-2xl px-10",
         icon: "h-10 w-10",
-        md: "h-11 px-6 text-body-l rounded-lg",
-        xl: "h-14 px-9 text-body-l rounded-xl",
+        md: "h-11 px-6 text-body-l",
+        xl: "h-14 px-9 text-body-l",
       },
     },
     defaultVariants: {

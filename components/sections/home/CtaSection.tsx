@@ -103,7 +103,7 @@ export function CtaSection() {
                       type="text"
                       autoComplete="name"
                       placeholder="Ваше имя"
-                      className={`w-full h-11 px-4 rounded-lg border font-body text-body-l placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-white/20 transition-colors ${errors.name ? 'border-white/50 bg-white/5' : 'border-white/20 bg-white/5 text-white'}`}
+                      className={`w-full h-11 px-4 rounded-xl border font-body text-body-l placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-white/20 transition-colors ${errors.name ? 'border-white/50 bg-white/5' : 'border-white/20 bg-white/5 text-white'}`}
                       {...register('name', {
                         required: 'Введите имя',
                         minLength: { value: 2, message: 'Минимум 2 символа' },
@@ -129,7 +129,7 @@ export function CtaSection() {
                           type="tel"
                           autoComplete="tel"
                           placeholder="+7 (___) ___-__-__"
-                          className={`w-full h-11 px-4 rounded-lg border font-body text-body-l placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-white/20 transition-colors ${errors.phone ? 'border-white/50 bg-white/5' : 'border-white/20 bg-white/5 text-white'}`}
+                          className={`w-full h-11 px-4 rounded-xl border font-body text-body-l placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-white/20 transition-colors ${errors.phone ? 'border-white/50 bg-white/5' : 'border-white/20 bg-white/5 text-white'}`}
                           value={field.value ?? ''}
                           onChange={(e) => field.onChange(formatPhone(e.target.value))}
                           onBlur={field.onBlur}

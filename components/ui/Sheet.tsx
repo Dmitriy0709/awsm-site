@@ -57,7 +57,7 @@ export function SheetContent({
       exit={sideVariants[side]}
       transition={{ type: 'spring', damping: 25, stiffness: 200 }}
       className={cn(
-        'fixed top-0 bottom-0 z-[101] w-full max-w-sm bg-background p-6 shadow-2xl',
+        'fixed top-0 bottom-0 z-[101] w-full max-w-sm bg-surface p-6 shadow-2xl',
         side === 'left' ? 'left-0' : 'right-0',
         className
       )}

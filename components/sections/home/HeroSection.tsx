@@ -1,9 +1,8 @@
 'use client'
 
-import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Button, MagneticButton } from '@/components/ui'
-import { ButtonColorful } from '@/components/ui/ButtonColorful'
+import { ButtonZen } from '@/components/ui/ButtonZen'
 import { useLeadModal } from '@/hooks/useLeadModal'
 
 export function HeroSection() {
@@ -18,12 +17,7 @@ export function HeroSection() {
       <div className="container relative z-20">
         <h1
           id="hero-heading"
-          className="font-display font-bold text-text-primary mb-12"
-          style={{ 
-            fontSize: 'clamp(64px, 10vw, 140px)', 
-            lineHeight: '0.85', 
-            letterSpacing: '-0.04em' 
-          }}
+          className="font-display font-bold text-text-primary text-display-xl mb-12"
         >
           <motion.span
             className="block"
@@ -79,7 +73,7 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.52, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           <MagneticButton>
-            <ButtonColorful
+            <ButtonZen
               label="Получить экспресс-аудит бизнеса"
               onClick={openModal}
               variant="dark"

@@ -2,22 +2,19 @@ import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 
-interface ButtonColorfulProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonZenProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     label?: string;
-    variant?: 'dark' | 'light';
-    solid?: boolean;
 }
 
-export function ButtonColorful({
+export function ButtonZen({
     className,
     label = "Explore Components",
-    variant,
     ...props
-}: ButtonColorfulProps) {
+}: ButtonZenProps) {
     return (
         <Button
             className={cn(
-                "relative h-11 px-6 overflow-hidden !bg-black !text-white border-0 transition-all duration-300 group",
+                "relative h-12 px-8 overflow-hidden bg-primary text-primary-foreground border-0 transition-all duration-300 group rounded-xl",
                 className
             )}
             {...props}

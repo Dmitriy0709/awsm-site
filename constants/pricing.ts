@@ -1,57 +1,91 @@
-import type { PricingPlan } from '@/types/pricing'
+export interface PricingFeature {
+  text: string;
+}
+
+export interface PricingPlan {
+  id: string;
+  name: string;
+  description: string;
+  monthlyPrice: string;
+  yearlyPrice: string;
+  oldPrice?: string;
+  features: PricingFeature[];
+  button: {
+    text: string;
+    url: string;
+  };
+}
 
 export const PRICING_PLANS: PricingPlan[] = [
   {
-    id: 'packaging',
-    type: 'once',
-    name: 'Упаковка',
-    tagline: 'Для новых или пустых карточек',
-    price: 35500,
-    priceUnit: '₽ разово',
+    id: "packaging",
+    name: "Упаковка",
+    description: "Для новых или пустых карточек",
+    monthlyPrice: "36 000 ₽",
+    yearlyPrice: "36 000 ₽",
     features: [
-      'Полное заполнение профиля',
-      'SEO-оптимизация прайс-листа (до 20 позиций)',
-      'Загрузка фото с ключевыми словами',
-      'Визуальное оформление по брендбуку',
+      { text: "Полное заполнение профиля" },
+      { text: "SEO-оптимизация прайс-листа (до 20 позиций)" },
+      { text: "Загрузка фото с ключевыми словами" },
+      { text: "Визуальное оформление по брендбуку" },
     ],
-    ctaLabel: 'Оформить заявку',
+    button: {
+      text: "Оформить заявку",
+      url: "#",
+    },
   },
   {
-    id: 'yandex',
-    type: 'monthly',
-    name: 'Продвижение Яндекс',
-    tagline: 'Вывод в ТОП выдачи по району',
-    featured: true,
-    price: 27500,
-    priceUnit: '₽/мес',
+    id: "yandex",
+    name: "Продвижение Яндекс",
+    description: "Ежемесячное сопровождение",
+    monthlyPrice: "27 500 ₽",
+    yearlyPrice: "27 500 ₽",
     features: [
-      'Вывод в ТОП выдачи по району',
-      'Работа с семантикой и активность',
-      'Нейроконтент: новости и сторис',
-      'Развёрнутые ответы на отзывы',
-      'Ежемесячный отчёт',
+      { text: "Вывод в ТОП выдачи по району" },
+      { text: "Работа семантикой и развитие ядра (активность)" },
+      { text: "Публикация новостей и сторис (нейроконтент)" },
+      { text: "Развернутые ответы на отзывы с ключами" },
+      { text: "Ежемесячный отчет" },
     ],
-    ctaLabel: 'Начать работу',
+    button: {
+      text: "Начать работу",
+      url: "#",
+    },
   },
   {
-    id: 'max',
-    type: 'monthly',
-    name: 'Максимальный охват',
-    tagline: 'Яндекс + Google + 2GIS',
-    price: 57500,
-    priceUnit: '₽/мес',
+    id: "max",
+    name: "Максимальный охват",
+    description: "Яндекс + Google + 2GIS",
+    monthlyPrice: "57 500 ₽",
+    yearlyPrice: "57 500 ₽",
     features: [
-      'Все опции тарифа «Продвижение»',
-      'Синхронное ведение в 3 геосервисах',
-      'Максимальный захват локального трафика',
+      { text: "Все опции тарифа «Продвижение»" },
+      { text: "Синхронное ведение в 3 геосервисах" },
+      { text: "Максимальный захват локального трафика" },
     ],
-    ctaLabel: 'Начать работу',
+    button: {
+      text: "Начать работу",
+      url: "#",
+    },
   },
-]
-
-export const COMBO_OFFER = {
-  description: 'При оплате 3 месяцев поддержки — Упаковка в подарок',
-  price: 82500,
-  priceUnit: '₽',
-  saving: 'Экономия 35 500 ₽',
-}
+  {
+    id: "combo",
+    name: "Комплекс<br /><span class='whitespace-nowrap'>на 3 месяца</span>",
+    description: "Ежемесячное сопровождение",
+    monthlyPrice: "82 500 ₽",
+    oldPrice: "118 500 ₽",
+    yearlyPrice: "82 500 ₽",
+    features: [
+      { text: "Вывод в ТОП выдачи по району" },
+      { text: "Работа семантикой и развитие ядра (активность)" },
+      { text: "Публикация новостей и сторис (нейроконтент)" },
+      { text: "Развернутые ответы на отзывы с ключами" },
+      { text: "Ежемесячный отчет" },
+      { text: "Упаковка карточки в подарок" },
+    ],
+    button: {
+      text: "Начать работу",
+      url: "#",
+    },
+  },
+];

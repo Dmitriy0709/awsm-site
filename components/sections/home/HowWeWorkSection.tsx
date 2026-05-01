@@ -13,17 +13,20 @@ import { fixTypography } from '@/lib/utils'
 
 const STEP_ICONS = [MagnifyingGlass, Rocket, TrendUp, ShieldCheck] as const
 
-const STEP_COLORS = [
-  { bg: 'var(--bg-surface-elevated)', border: 'var(--bg-border)', icon: 'var(--text-primary)' },
-  { bg: 'var(--bg-surface-elevated)', border: 'var(--bg-border)', icon: 'var(--text-primary)' },
-  { bg: 'var(--bg-surface-elevated)', border: 'var(--bg-border)', icon: 'var(--text-primary)' },
-  { bg: 'var(--bg-surface-elevated)', border: 'var(--bg-border)', icon: 'var(--text-primary)' },
-] as const
+const STEP_COLORS = {
+  bg: 'var(--bg-surface-elevated)',
+  border: 'var(--bg-border)',
+  icon: 'var(--text-primary)'
+} as const
 
 export function HowWeWorkSection() {
   const sectionRef      = useRef<HTMLElement>(null)
   const progressFillRef = useRef<HTMLDivElement>(null)
   const dotRefs         = useRef<(HTMLDivElement | null)[]>([])
+
+  // Progress bar geometry
+  const paddingX = 12.5 // Percentage for one side padding (1/8)
+  const trackWidth = 100 - (paddingX * 2)
 
   useEffect(() => {
     const isMouseDevice = window.matchMedia('(pointer: fine)').matches
@@ -103,16 +106,16 @@ export function HowWeWorkSection() {
 
         {/* Progress track — desktop only */}
         <div className="hidden lg:block relative mb-0">
-          <div className="relative flex items-center mb-10 px-[calc(100%/8)]">
-            <div className="absolute inset-x-[calc(100%/8)] h-px bg-border-strong" aria-hidden="true" />
+          <div className="relative flex items-center mb-10 px-[12.5%]">
+            <div className="absolute inset-x-[12.5%] h-px bg-border-strong" aria-hidden="true" />
 
             {/* Fill bar — GSAP scrub */}
             <div
               ref={progressFillRef}
-              className="absolute left-[calc(100%/8)] h-px"
+              className="absolute left-[12.5%] h-px"
               style={{
-                background:      '#000000',
-                right:           'calc(100%/8)',
+                background:      'var(--text-primary)',
+                right:           '12.5%',
                 transform:       'scaleX(0)',
                 transformOrigin: 'left center',
               }}
@@ -126,14 +129,14 @@ export function HowWeWorkSection() {
                 ref={el => { dotRefs.current[i] = el }}
                 className="absolute flex flex-col items-center"
                 style={{
-                  left:      `calc(${(i / (STEPS.length - 1)) * 100}% * (1 - 2/8) + 100%/8)`,
+                  left:      `${paddingX + (i / (STEPS.length - 1)) * trackWidth}%`,
                   opacity:    0,
                   transform: 'scale(0)',
                 }}
                 aria-hidden="true"
               >
                 <div
-                  className="w-3 h-3 rounded-full border-2 bg-black border-black"
+                  className="w-3 h-3 rounded-full border-2 bg-primary border-primary"
                 />
               </div>
             ))}
@@ -144,13 +147,12 @@ export function HowWeWorkSection() {
         <div className="flex lg:grid overflow-x-auto lg:overflow-visible snap-x snap-mandatory lg:snap-none gap-6 pt-2 pb-12 lg:pb-0 -mx-4 px-4 lg:mx-0 lg:px-0 scrollbar-hide grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {STEPS.map((step, index) => {
             const Icon    = STEP_ICONS[index]
-            const color   = STEP_COLORS[index]
             const isBurst = index === 2
 
             return (
               <div
                 key={step.number}
-                className="min-w-[85%] sm:min-w-[45%] lg:min-w-[30%] lg:min-w-0 snap-center"
+                className="min-w-[85%] sm:min-w-[45%] lg:min-w-0 snap-center"
               >
                 <article
                   className="card-glass p-8 h-full flex flex-col gap-6 relative overflow-hidden group/card transition-transform duration-300 hover:-translate-y-1"
@@ -162,16 +164,16 @@ export function HowWeWorkSection() {
                   {/* Иконка — правый верхний угол */}
                   <div
                     className="absolute top-6 right-6 w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ background: color.bg, border: `1px solid ${color.border}` }}
+                    style={{ background: STEP_COLORS.bg, border: `1px solid ${STEP_COLORS.border}` }}
                     aria-hidden="true"
                   >
-                    <Icon size={24} color={color.icon} />
+                    <Icon size={24} color={STEP_COLORS.icon} />
                   </div>
 
                   <header className="flex items-center gap-4 -mb-2">
                     <span
                       className="font-display font-bold leading-none select-none"
-                      style={{ fontSize: 'clamp(44px,4.5vw,52px)', color: `${color.icon}`, opacity: 0.05 }}
+                      style={{ fontSize: 'clamp(44px,4.5vw,52px)', color: STEP_COLORS.icon, opacity: 0.05 }}
                       aria-label={`Шаг ${step.number}`}
                     >
                       {step.number}
@@ -179,7 +181,7 @@ export function HowWeWorkSection() {
                   </header>
 
                   <div className="flex flex-col gap-2 flex-1">
-                    <h3 className="font-display font-bold text-text-primary min-h-[2.2rem] flex items-center gap-3 tracking-tight" style={{ fontSize: '27px' }} dangerouslySetInnerHTML={{ __html: fixTypography(step.title) }} />
+                    <h3 className="font-display font-bold text-text-primary min-h-[2.2rem] flex items-center gap-3 tracking-tight text-title-m" dangerouslySetInnerHTML={{ __html: fixTypography(step.title) }} />
                     <p className="font-body text-body-s text-text-secondary leading-relaxed" dangerouslySetInnerHTML={{ __html: fixTypography(step.description) }} />
                   </div>
                 </article>
@@ -195,9 +197,9 @@ export function HowWeWorkSection() {
               <div
                 className="w-6 h-6 rounded-full flex items-center justify-center font-display text-[10px] font-bold"
                 style={{
-                  background:  STEP_COLORS[i].bg,
-                  border:      `1px solid ${STEP_COLORS[i].border}`,
-                  color:       STEP_COLORS[i].icon,
+                  background:  STEP_COLORS.bg,
+                  border:      `1px solid ${STEP_COLORS.border}`,
+                  color:       STEP_COLORS.icon,
                 }}
                 aria-hidden="true"
               >

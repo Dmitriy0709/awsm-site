@@ -7,17 +7,7 @@ import { fixTypography } from '@/lib/utils'
 import { motion } from 'framer-motion'
 import { XCircle, CheckCircle } from '@phosphor-icons/react'
 
-const problems: { text: string }[] = [
-  { text: 'Карточка на 10-м месте в выдаче' },
-  { text: 'Отзывы без грамотных ответов' },
-  { text: 'Яндекс считает бизнес «мёртвым»' },
-]
-
-const solutions: { text: string }[] = [
-  { text: 'ТОП-1 в районе по всем запросам' },
-  { text: 'Отзывы работают на доверие' },
-  { text: 'Бесплатный трафик из Карт и Поиска' },
-]
+import { PROBLEMS, SOLUTIONS } from '@/constants/sections'
 
 export function ProblemSolutionSection() {
   return (
@@ -58,9 +48,9 @@ export function ProblemSolutionSection() {
             </div>
 
             <ul className="flex flex-col gap-5" role="list">
-              {problems.map((item, i) => (
+              {PROBLEMS.map((item, i) => (
                 <li key={i} className="flex items-start gap-4">
-                  <XCircle size={22} className="text-zinc-400 shrink-0 mt-[1px]" />
+                  <XCircle size={22} className="text-text-muted shrink-0 mt-[1px]" />
                   <span className="font-body text-body-l text-text-secondary leading-tight">{fixTypography(item.text)}</span>
                 </li>
               ))}
@@ -82,9 +72,9 @@ export function ProblemSolutionSection() {
             </div>
 
             <ul className="flex flex-col gap-5" role="list">
-              {solutions.map((item, i) => (
+              {SOLUTIONS.map((item, i) => (
                 <li key={i} className="flex items-start gap-4">
-                  <CheckCircle size={22} className="text-zinc-900 shrink-0 mt-[1px]" />
+                  <CheckCircle size={22} className="text-text-primary shrink-0 mt-[1px]" />
                   <span className="font-body text-body-l text-text-secondary leading-tight">{fixTypography(item.text)}</span>
                 </li>
               ))}

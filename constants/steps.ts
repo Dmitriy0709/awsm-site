@@ -2,15 +2,13 @@ export interface Step {
   number: string
   title: string
   description: string
-  badge?: string
 }
 
 export const STEPS: Step[] = [
   {
     number: '01',
     title: 'Аудит',
-    badge: 'Бесплатно',
-    description: 'Анализируем текущую карточку: позиции, отзывы, конкуренты. Показываем точки роста и узкие места.',
+    description: 'Анализируем текущую карточку: позиции, отзывы, конкурентов. Показываем точки роста и узкие места.',
   },
   {
     number: '02',

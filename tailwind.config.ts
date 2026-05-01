@@ -12,6 +12,7 @@ const config: Config = {
         'display-xl': ['clamp(64px, 10vw, 140px)', { lineHeight: '0.85', letterSpacing: '-0.04em' }],
         'display-l':  ['clamp(32px, 6vw, 64px)',   { lineHeight: '0.95', letterSpacing: '-0.02em' }],
         'display-m':  ['clamp(28px, 4vw, 48px)',   { lineHeight: '1.05', letterSpacing: '-0.02em' }],
+        'heading-l':  ['clamp(24px, 4vw, 36px)',   { lineHeight: '1.20', letterSpacing: '-0.02em' }],
         'title-l':    ['clamp(24px, 3.5vw, 40px)', { lineHeight: '1.15', letterSpacing: '-0.01em' }],
         'title-m':    ['clamp(18px, 2vw, 24px)',   { lineHeight: '1.25', letterSpacing: '-0.01em' }],
         'body-xl':    ['20px',                    { lineHeight: '1.60' }],
@@ -49,16 +50,7 @@ const config: Config = {
         body:    ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
       },
 
-      fontSize: {
-        // High-Impact Typography System (Golden Ratio based)
-        'display-xl': ['clamp(80px, 16vw, 160px)', { lineHeight: '0.85', letterSpacing: '-0.05em' }],
-        'display-l':  ['clamp(40px, 8vw, 72px)',   { lineHeight: '1.00', letterSpacing: '-0.03em' }],
-        'heading-l':  ['clamp(24px, 4vw, 36px)',   { lineHeight: '1.20', letterSpacing: '-0.02em' }],
-        'body-l':     ['20px',                    { lineHeight: '1.60' }],
-        'body-s':     ['15px',                    { lineHeight: '1.50' }],
-        'label-sm':   ['12px',                    { lineHeight: '1.40', letterSpacing: '0.12em' }],
-        'metric-xl':  ['clamp(24px, 5vw, 42px)',   { lineHeight: '1.00', letterSpacing: '-0.02em' }],
-      },
+
 
       spacing: {
         1: '4px', 2: '8px', 3: '12px', 4: '16px',
@@ -132,39 +124,7 @@ const config: Config = {
           '0%, 100%': { opacity: '1' },
           '50%':      { opacity: '0.35' },
         },
-        moveHorizontal: {
-          "0%": {
-            transform: "translateX(-50%) translateY(-10%)",
-          },
-          "50%": {
-            transform: "translateX(50%) translateY(10%)",
-          },
-          "100%": {
-            transform: "translateX(-50%) translateY(-10%)",
-          },
-        },
-        moveInCircle: {
-          "0%": {
-            transform: "rotate(0deg)",
-          },
-          "50%": {
-            transform: "rotate(180deg)",
-          },
-          "100%": {
-            transform: "rotate(360deg)",
-          },
-        },
-        moveVertical: {
-          "0%": {
-            transform: "translateY(-50%)",
-          },
-          "50%": {
-            transform: "translateY(50%)",
-          },
-          "100%": {
-            transform: "translateY(-50%)",
-          },
-        },
+
       },
 
       animation: {
@@ -173,11 +133,7 @@ const config: Config = {
         'fade-up':      'fade-up 0.5s ease-out-expo forwards',
         'fade-in':      'fade-in 0.4s ease-out forwards',
         'live-dot':     'live-dot 2s ease-in-out infinite',
-        first: "moveVertical 30s ease infinite",
-        second: "moveInCircle 20s reverse infinite",
-        third: "moveInCircle 40s linear infinite",
-        fourth: "moveHorizontal 40s ease infinite",
-        fifth: "moveInCircle 20s ease infinite",
+
       },
     },
   },

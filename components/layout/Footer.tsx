@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { PLACEHOLDERS } from '@/constants/placeholders'
 import { NAV_LINKS } from '@/constants/navigation'
 import { useLeadModal } from '@/hooks/useLeadModal'
+import { fixTypography } from '@/lib/utils'
 
 const LEGAL_LINKS: any[] = []
 
@@ -20,10 +21,10 @@ export function Footer() {
                 AWSM
               </span>
             </Link>
-            <p className="text-text-muted text-body-s font-body leading-relaxed max-w-xs">
-              Агентство гео-продвижения локального бизнеса.
-              Выводим карточки в ТОП Яндекс.Карт, Google Maps и 2GIS.
-            </p>
+            <p
+              className="text-text-muted text-body-s font-body leading-relaxed max-w-xs"
+              dangerouslySetInnerHTML={{ __html: fixTypography('Агентство гео-продвижения локального бизнеса. Выводим карточки в ТОП Яндекс.Карт, Google Maps и 2GIS.') }}
+            />
           </div>
 
           {/* Navigation */}
@@ -60,13 +61,13 @@ export function Footer() {
               Контакты
             </p>
             <ul className="flex flex-col gap-3 text-body-s font-body text-text-secondary">
-              <li className="opacity-50 select-none" title="Контакт добавляется позже">
+              <li>
                 {PLACEHOLDERS.phone}
               </li>
-              <li className="opacity-50 select-none" title="Контакт добавляется позже">
+              <li>
                 {PLACEHOLDERS.telegram}
               </li>
-              <li className="opacity-50 select-none" title="Контакт добавляется позже">
+              <li>
                 {PLACEHOLDERS.email}
               </li>
               <li className="text-text-muted text-body-s pt-2">Пн–Пт 9:00–18:00 МСК</li>

@@ -124,7 +124,7 @@ function MetricCell({
       <p className="font-display font-bold leading-none mb-1 text-text-primary tracking-tight" style={{ fontSize: '28px' }}>
         {value}
       </p>
-      <p className="font-body text-[11px] text-text-muted leading-tight min-h-[2.5em] flex items-start" dangerouslySetInnerHTML={{ __html: fixTypography(label) }} />
+      <p className="font-body text-[12px] text-text-muted leading-tight min-h-[2.5em] flex items-start" dangerouslySetInnerHTML={{ __html: fixTypography(label) }} />
     </div>
   )
 }

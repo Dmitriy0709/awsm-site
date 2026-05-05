@@ -47,9 +47,9 @@ export function ProblemSolutionSection() {
               <p className="font-body text-body-s text-text-secondary leading-relaxed mb-6" dangerouslySetInnerHTML={{ __html: fixTypography('Загружают 5 фотографий, заполняют адрес — и смотрят, как клиенты проходят мимо.') }} />
             </div>
 
-            <ul className="flex flex-col gap-5" role="list">
+            <ul className="flex flex-col gap-6" role="list">
               {PROBLEMS.map((item, i) => (
-                <li key={i} className="flex items-start gap-4">
+                <li key={i} className="flex items-start gap-5">
                   <XCircle size={22} className="text-text-muted shrink-0 mt-[1px]" />
                   <span className="font-body text-body-l text-text-secondary leading-tight">{fixTypography(item.text)}</span>
                 </li>
@@ -71,9 +71,9 @@ export function ProblemSolutionSection() {
               <p className="font-body text-body-s text-text-secondary leading-relaxed mb-6" dangerouslySetInnerHTML={{ __html: fixTypography('Комплексный подход: «умная» активность, семантическое ядро, нейроконтент. Яндекс видит живой бизнес — и открывает кран с бесплатным трафиком.') }} />
             </div>
 
-            <ul className="flex flex-col gap-5" role="list">
+            <ul className="flex flex-col gap-6" role="list">
               {SOLUTIONS.map((item, i) => (
-                <li key={i} className="flex items-start gap-4">
+                <li key={i} className="flex items-start gap-5">
                   <CheckCircle size={22} className="text-text-primary shrink-0 mt-[1px]" />
                   <span className="font-body text-body-l text-text-secondary leading-tight">{fixTypography(item.text)}</span>
                 </li>

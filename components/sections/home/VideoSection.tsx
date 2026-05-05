@@ -76,7 +76,7 @@ function VideoPlaceholder({ reducedMotion = false }: { reducedMotion?: boolean }
       {/* Метка плашки внизу */}
       <div className="absolute bottom-4 inset-x-0 flex justify-center">
         <span className="font-body text-body-s text-text-muted/60 text-center px-4">
-          [ВИДЕО_ТИЗЕР] — демонстрация продукта, ~2 мин
+          Разбор алгоритмов геосервисов 2026, ~2 мин
         </span>
       </div>
     </div>
@@ -94,8 +94,8 @@ export function VideoSection() {
     offset: ['start end', 'end start'],
   })
 
-  const scale     = useTransform(scrollYProgress, [0, 0.35], reduceMotion ? [1, 1] : [0.94, 1])
-  const opacity   = useTransform(scrollYProgress, [0, 0.25], reduceMotion ? [1, 1] : [0, 1])
+  const scale      = useTransform(scrollYProgress, [0, 0.35], reduceMotion ? [1, 1] : [0.94, 1])
+  const opacity    = useTransform(scrollYProgress, [0, 0.25], reduceMotion ? [1, 1] : [0, 1])
   const translateY = useTransform(scrollYProgress, [0, 0.35], reduceMotion ? [0, 0] : [32, 0])
 
   return (
@@ -103,17 +103,20 @@ export function VideoSection() {
       <div className="container">
         {/* Заголовок */}
         <FadeIn className="text-center mb-4">
-          <h2 className="font-display font-bold text-display-l text-text-primary">
-            Почему ваш бизнес не виден для клиентов
-          </h2>
+          <h2
+            className="font-display font-bold text-display-l text-text-primary"
+            dangerouslySetInnerHTML={{ __html: fixTypography('Почему ваш бизнес не виден для клиентов') }}
+          />
         </FadeIn>
 
-        {/* Подзаголовок */}
+        {/* Подзаголовок — br-теги вынесены в JSX, fixTypography получает только текст */}
         <FadeIn delay={0.15} className="text-center mb-20">
           <p className="text-text-secondary font-body text-body-l max-w-[560px] mx-auto leading-relaxed">
-            Посмотрите двухминутное видео о том, как на&nbsp;самом<br className="hidden md:block" />
-            деле работают алгоритмы сервисов в&nbsp;2026&nbsp;году<br className="hidden md:block" />
-            и&nbsp;где вы&nbsp;теряете деньги.
+            <span dangerouslySetInnerHTML={{ __html: fixTypography('Посмотрите двухминутное видео о том, как на самом') }} />
+            <br className="hidden md:block" />
+            <span dangerouslySetInnerHTML={{ __html: fixTypography('деле работают алгоритмы сервисов в 2026 году') }} />
+            <br className="hidden md:block" />
+            <span dangerouslySetInnerHTML={{ __html: fixTypography('и где вы теряете деньги.') }} />
           </p>
         </FadeIn>
 

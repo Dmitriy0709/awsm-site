@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { Button, MagneticButton } from '@/components/ui'
 import { ButtonZen } from '@/components/ui/ButtonZen'
 import { useLeadModal } from '@/hooks/useLeadModal'
+import { fixTypography } from '@/lib/utils'
 
 export function HeroSection() {
   const reduceMotion = useReducedMotion() ?? false
@@ -32,9 +33,8 @@ export function HeroSection() {
             initial={{ opacity: 0, y: reduceMotion ? 0 : 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          >
-            в&nbsp;ваш локальный
-          </motion.span>
+            dangerouslySetInnerHTML={{ __html: fixTypography('в ваш локальный') }}
+          />
           <motion.span
             className="block"
             initial={{ opacity: 0, y: reduceMotion ? 0 : 40 }}
@@ -48,9 +48,9 @@ export function HeroSection() {
         {/* Marketing Takes */}
         <div className="space-y-3 mb-12">
           {[
-            "Заставим алгоритмы Яндекс.Карт работать на&nbsp;вас.",
-            "Выводим карточку предприятия в&nbsp;топ выдачи по&nbsp;району.",
-            "Гарантированный рост просмотров, звонков и&nbsp;построенных маршрутов."
+            'Заставим алгоритмы Яндекс.Карт работать на вас.',
+            'Выводим карточку предприятия в топ выдачи по району.',
+            'Гарантированный рост просмотров, звонков и построенных маршрутов.',
           ].map((text, i) => (
             <div
               key={i}
@@ -59,7 +59,7 @@ export function HeroSection() {
               <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" aria-hidden="true" />
               <p
                 className="text-body-l font-display font-medium text-text-secondary leading-tight"
-                dangerouslySetInnerHTML={{ __html: text }}
+                dangerouslySetInnerHTML={{ __html: fixTypography(text) }}
               />
             </div>
           ))}

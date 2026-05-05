@@ -27,7 +27,7 @@ export function AudienceSection() {
   return (
     <section
       id="audience"
-      className="section-padding bg-base relative"
+      className="pt-section pb-0 lg:pb-section bg-base relative"
       aria-labelledby="audience-heading"
     >
       <div className="container relative">
@@ -46,7 +46,7 @@ export function AudienceSection() {
           </p>
         </div>
 
-        <div className="flex lg:grid overflow-x-auto lg:overflow-visible snap-x snap-mandatory lg:snap-none gap-6 pt-2 pb-12 lg:pb-0 -mx-4 px-4 lg:mx-0 lg:px-0 scrollbar-hide grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="flex lg:grid overflow-x-auto lg:overflow-visible snap-x snap-mandatory lg:snap-none gap-6 pt-2 pb-8 lg:pb-0 -mx-4 px-4 lg:mx-0 lg:px-0 scrollbar-hide grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {AUDIENCE.map((item) => (
             <div
               key={item.id}

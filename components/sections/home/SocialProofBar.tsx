@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from 'react'
 import { useInView, useReducedMotion } from 'framer-motion'
 import { METRICS, type Metric } from '@/constants/metrics'
+import { fixTypography } from '@/lib/utils'
 
 // ─── Утилита форматирования (27500 → «27 500», с неразрывным пробелом) ────────
 
@@ -66,7 +67,7 @@ function AnimatedCounter({
         className="font-display font-bold"
         style={{ 
           color: metric.color,
-          fontSize: 'clamp(32px, 5vw, 52px)',
+          fontSize: 'clamp(28px, 8vw, 48px)',
           lineHeight: '1',
           letterSpacing: '-0.02em'
         }}
@@ -98,13 +99,15 @@ export function SocialProofBar() {
               />
 
               <div>
-                <p className="font-body text-body-s text-text-secondary leading-snug">
-                  {metric.label}
-                </p>
+                <p
+                  className="font-body text-body-s text-text-secondary leading-snug"
+                  dangerouslySetInnerHTML={{ __html: fixTypography(metric.label) }}
+                />
                 {metric.sublabel && (
-                  <p className="font-body text-body-s text-text-muted leading-snug mt-0.5">
-                    {metric.sublabel}
-                  </p>
+                  <p
+                    className="font-body text-body-s text-text-muted leading-snug mt-0.5"
+                    dangerouslySetInnerHTML={{ __html: fixTypography(metric.sublabel) }}
+                  />
                 )}
               </div>
             </div>

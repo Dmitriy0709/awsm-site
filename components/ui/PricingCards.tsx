@@ -49,19 +49,20 @@ const PricingCards = ({
               <Card className="card-glass rounded-[28px] flex w-full flex-col text-left h-full overflow-hidden border-border transition-transform duration-300 group-hover/card:-translate-y-1">
                 <div className="flex flex-col h-full p-6 sm:p-8">
                   {/* Title & Description — Force height for alignment */}
-                  <div className="min-h-[100px] sm:min-h-[120px] mb-4">
+                  <div className="min-h-[90px] sm:min-h-[110px] mb-4">
                     <div className="flex items-start justify-between mb-2">
-                      <CardTitle 
-                        className="font-bold text-text-primary pr-2 leading-[0.95] text-title-m sm:text-title-l tracking-tight"
+                      <CardTitle
+                        className="font-bold text-text-primary pr-2 leading-[1.25]"
+                        style={{ fontSize: 'clamp(20px, 2vw, 28px)', letterSpacing: '-0.015em' }}
                       >
                         <span dangerouslySetInnerHTML={{ __html: fixTypography(plan.name) }} />
                       </CardTitle>
                       <div className="flex-shrink-0 mt-0.5">
                         {plan.id === 'yandex' && (
-                          <Badge variant="cta" className="text-[9px] px-1.5 py-0.5" dot>Хит</Badge>
+                          <Badge variant="cta" className="text-[11px] px-1.5 py-0.5" dot>Хит</Badge>
                         )}
                         {plan.id === 'combo' && (
-                          <Badge variant="cta" className="text-[9px] px-1.5 py-0.5" dot>Выгодно</Badge>
+                          <Badge variant="cta" className="text-[11px] px-1.5 py-0.5" dot>Выгодно</Badge>
                         )}
                       </div>
                     </div>
@@ -71,17 +72,18 @@ const PricingCards = ({
                   </div>
 
                   {/* Price Area — Baseline Aligned */}
-                  <div className="mb-6 h-[60px] sm:h-[80px] flex flex-col justify-end">
+                  <div className="mb-6 h-[70px] sm:h-[90px] flex flex-col justify-end">
                     <div className="h-5 flex items-end">
                       {plan.oldPrice && (
-                        <span className="text-label-sm text-text-muted line-through opacity-50 leading-none mb-1">
+                        <span className="text-[18px] text-text-muted line-through opacity-50 leading-none mb-1">
                           {plan.oldPrice}
                         </span>
                       )}
                     </div>
                     <div className="flex items-baseline gap-1.5">
-                      <span 
-                        className="font-bold text-text-primary tracking-tight leading-none text-heading-l sm:text-metric-xl"
+                      <span
+                        className="font-bold text-text-primary leading-none whitespace-nowrap"
+                        style={{ fontSize: 'clamp(22px, 3vw, 36px)', letterSpacing: '-0.02em' }}
                       >
                         {plan.monthlyPrice}
                       </span>

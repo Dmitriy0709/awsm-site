@@ -7,12 +7,17 @@ export function cn(...inputs: ClassValue[]) {
 
 export function fixTypography(text: string): string {
   if (!text) return text
-  // Comprehensive list of Russian prepositions, conjunctions, and short particles
   const shortWords = [
-    'в', 'во', 'на', 'с', 'со', 'и', 'к', 'ко', 'у', 'о', 'об', 'за', 'от', 'до', 'из', 'по', 'над', 'под', 'а', 'но', 'да', 'же', 'ли', 'бы', 'что', 'как', 'где', 'кто', 'чем', 'при', 'тут', 'там', 'ваш', 'наш', 'все', 'всё', 'эта', 'это', 'эти', 'тот', 'та', 'те', 'для', 'без', 'через', 'между', 'перед', 'около', 'вокруг', 'не', 'ни'
+    'в', 'во', 'на', 'с', 'со', 'и', 'к', 'ко', 'у', 'о', 'об', 'за', 'от', 'до', 'из', 'по',
+    'над', 'под', 'а', 'но', 'да', 'же', 'ли', 'бы', 'что', 'как', 'где', 'кто', 'чем', 'при',
+    'тут', 'там', 'ваш', 'наш', 'все', 'всё', 'эта', 'это', 'эти', 'тот', 'та', 'те', 'для',
+    'без', 'через', 'между', 'перед', 'около', 'вокруг', 'не', 'ни',
   ]
-  // Bind short words followed by a space with a non-breaking space
-  // Also handle dashes (—) followed by space
-  const pattern = new RegExp(`(^|\\s|\\()(${shortWords.join('|')}|—)(\\s+)`, 'gi')
-  return text.replace(pattern, '$1$2\u00A0')
+  // Lookbehind не потребляет предшествующий символ, поэтому цепочки предлогов
+  // ("и в магазине") обрабатываются за один проход: "и в магазине".
+  const pattern = new RegExp(
+    `(?<![\\w\\u0400-\\u04FF])(${shortWords.join('|')}|—)\\s+`,
+    'giu'
+  )
+  return text.replace(pattern, (_, word) => word + ' ')
 }
